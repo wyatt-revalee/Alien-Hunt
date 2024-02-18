@@ -28,12 +28,12 @@ public class Bullet : MonoBehaviour
             enemy.Damage(bulletData.damage);
             if(enemy.health <= 0)
             {
-                pointsGained = enemy.enemyData.value;
+                pointsGained = enemy.pointValue;
             }
 
+            Destroy(gameObject);
+            crosshair.UpdateBulletInfo(enemyHit, pointsGained);
         }
-        crosshair.UpdateBulletInfo(enemyHit, pointsGained);
-        Destroy(gameObject);
     }
 
     public IEnumerator DecayAndDestroy()

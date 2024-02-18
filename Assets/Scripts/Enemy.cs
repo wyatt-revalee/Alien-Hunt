@@ -4,41 +4,30 @@ using System.Collections.Generic;
 using System.IO.Compression;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static EnemyData;
 
 public class Enemy : MonoBehaviour
 {
 
     public int health;
-    public int damage;
     public int speed;
-    public EnemyData enemyData;
+    public int pointValue;
     public Animator animator;
     public Canvas pointPopup;
 
+    public int horizontalDirection;
+    public int verticalDirection;
+    public bool isMoving = false;
+
+
     public void Start()
     {
-        SetStatsToLevel(1);
     }
 
-    public void SetStatsToLevel(int level)
+    public void FixedUpdate()
     {
-        foreach (KeyValuePair<string, int> stat in enemyData.UpdateStats())
+        if(isMoving)
         {
-            switch (stat.Key)
-            {
-                case "health":
-                    health = stat.Value * level;
-                    break;
-
-                case "damage":
-                    damage = stat.Value * level;
-                    break;
-
-                case "speed":
-                    speed = stat.Value * level;
-                    break;
-            }
+            MoveAcrossScreen();
         }
     }
 
@@ -48,16 +37,43 @@ public class Enemy : MonoBehaviour
 
         if(health <= 0)
         {
+            isMoving = false;
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             StartCoroutine(Death());
+        }
+        else
+        {
+            StartCoroutine(DamageFlash());
         }
     }
 
     public IEnumerator Death()
     {
         GetComponent<SpriteRenderer>().color = Color.red;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         var popup = Instantiate(pointPopup, transform.position, Quaternion.identity);
-        popup.GetComponent<PointPopup>().SetValue(enemyData.value);
+        popup.GetComponent<PointPopup>().SetValue(pointValue);
         Destroy(gameObject);
     }
+
+    public IEnumerator DamageFlash()
+    {
+        Color basecolor = GetComponent<SpriteRenderer>().color;
+        GetComponent<SpriteRenderer>().color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<SpriteRenderer>().color = basecolor;
+    }
+
+    public void SetMoveDirection(int hDir, int vDir)
+    {
+        horizontalDirection = hDir;
+        verticalDirection = vDir;
+        isMoving = true;
+    }
+
+    public void MoveAcrossScreen()
+    {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(speed * horizontalDirection, speed * verticalDirection);
+    }
+
 }

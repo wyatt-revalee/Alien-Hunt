@@ -32,6 +32,7 @@ public class StatTracker : MonoBehaviour
 
     private void Start()
     {
+        UpdateStatsUI();
         crosshair.OnEnemyKilled += EnemyDeathHandler;
         crosshair.OnShotFired += ShotFiredHandler;
     }
