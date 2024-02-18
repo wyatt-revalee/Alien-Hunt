@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class Crosshair : MonoBehaviour
 {
 
     public GameObject bullet;
+    public LayerMask enemyLayerMask;
+    public Collider2D enemy;
+
+    public event Action<bool> OnShotFired;
+    public event Action<int> OnEnemyKilled;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,16 +33,27 @@ public class Crosshair : MonoBehaviour
     public void OnMove(InputValue value)
     {
         // Convert mouse position to position within camera, set our crosshair to that position. Set mouse z location to 1, otherwise it is 0 and meshes with background.
-        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(value.Get<Vector2>().x, value.Get<Vector2>().y, 1) );
+        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(value.Get<Vector2>().x, value.Get<Vector2>().y, 10) );
     }
 
     public void OnShoot()
     {
         // Place new bullet
-        Instantiate(bullet, transform.position, Quaternion.identity);
+        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+        newBullet.GetComponent<Bullet>().crosshair = this;
+
         ShakeCrosshair(1);
         ShakeCamera(1);
 
+    }
+
+    public void UpdateBulletInfo(bool enemyHit, int pointsGained)
+    {
+        OnShotFired?.Invoke(enemyHit);
+        if (pointsGained > 0)
+        {
+            OnEnemyKilled?.Invoke(pointsGained);
+        }
     }
 
     public void ShakeCrosshair(int force)
@@ -49,15 +67,16 @@ public class Crosshair : MonoBehaviour
         // Get initial position
         float xpos = this.transform.position.x;
         float ypos = this.transform.position.y;
-        float zpos = this.transform.position.z;
 
         // Move up and right
-        this.transform.position = new Vector3(xpos + (0.01f * force), ypos + (0.01f * force), zpos);
+        this.transform.position = new Vector3(xpos + (0.01f * force), ypos + (0.01f * force), 0);
         yield return new WaitForSeconds(0.01f);
 
         // Move down and left
-        this.transform.position = new Vector3(xpos - (0.01f * force), ypos - (0.01f * force), zpos);
+        this.transform.position = new Vector3(xpos - (0.01f * force), ypos - (0.01f * force), 0);
         yield return new WaitForSeconds(0.01f);
+
+        this.transform.position = new Vector3(xpos, ypos, 0);
     }
 
     public void ShakeCamera(int force)
