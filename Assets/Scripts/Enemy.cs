@@ -5,7 +5,7 @@ using System.IO.Compression;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
 
     public int health;
@@ -20,18 +20,12 @@ public class Enemy : MonoBehaviour
     public bool isMoving = false;
 
     public event Action<bool> OnDeath;
-
-    public void FixedUpdate()
-    {
-        if(isMoving)
-        {
-            MoveAcrossScreen();
-        }
-    }
+    public MovementOverride movementOverride;
 
     public void Damage(int damage)
     {
         health -= damage;
+        Debug.Log("Took " + damage + " damage!");
 
         if(health <= 0)
         {
@@ -69,11 +63,6 @@ public class Enemy : MonoBehaviour
         horizontalDirection = hDir;
         verticalDirection = vDir;
         isMoving = true;
-    }
-
-    public void MoveAcrossScreen()
-    {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(speed * horizontalDirection, speed * verticalDirection);
     }
 
     public void HitKillZone()

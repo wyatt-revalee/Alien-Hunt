@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     public BulletData bulletData;
     public int pointsGained;
     public bool enemyHit;
-    public Crosshair crosshair;
+    public Weapon weapon;
 
     private void Start()
     {
@@ -24,17 +24,19 @@ public class Bullet : MonoBehaviour
         // If object is an enemy
         if(collider.transform.gameObject.layer == 6)
         {
-            enemyHit = true;
             Enemy enemy = collider.transform.gameObject.GetComponent<Enemy>();
-            enemy.Damage(bulletData.damage);
-            if(enemy.health <= 0)
+            if(enemy.health > 0)
             {
-                pointsGained = enemy.pointValue;
+                enemyHit = true;
+                enemy.Damage(bulletData.damage);
+                if(enemy.health <= 0)
+                {
+                    pointsGained = enemy.pointValue;
+                }
             }
-
             Destroy(gameObject);
-            crosshair.UpdateBulletInfo(enemyHit, pointsGained);
         }
+        weapon.UpdateBulletInfo(enemyHit, pointsGained);
     }
 
     public IEnumerator DecayAndDestroy()
@@ -42,7 +44,7 @@ public class Bullet : MonoBehaviour
         yield return new WaitForFixedUpdate();
         GetComponent<Collider2D>().enabled = false;
         yield return new WaitForSeconds(0.1f);
-        crosshair.UpdateBulletInfo(false, 0);
+        weapon.UpdateBulletInfo(false, 0);
         yield return new WaitForSeconds(0.1f);
         GetComponent<SpriteRenderer>().color = new Color(184, 180, 0);
         yield return new WaitForSeconds(0.1f);

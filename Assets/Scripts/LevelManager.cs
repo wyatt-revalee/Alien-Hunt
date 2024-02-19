@@ -8,21 +8,21 @@ using TMPro;
 public class LevelManager : MonoBehaviour
 {
     public int currentLevel;
-    public int typeCount;
     public List<EnemySpawner> enemySpawners;
-    public List<int> typesToUse;
     public int enemiesInWave;
     public int enemiesKilled;
     public int pointsEarned;
     public int enemiesLeft;
     public GameObject WaveMessenger;
-    public Crosshair crosshair;
+    public WeaponController weaponController;
+    private Weapon weapon;
     private bool waitingOnNewWave;
 
     // Start is called before the first frame update
     void Start()
     {
-        crosshair.OnEnemyKilled += AddToPointsEarned;
+        weapon = weaponController.currentWeaponScript;
+        weapon.OnEnemyKilled += AddToPointsEarned;
         WaveMessenger.SetActive(false);
         GetSpawners();
     }
@@ -48,21 +48,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void GenerateTypes()
-    {
-        typesToUse.Clear();
-        for(int i = 1; i <= typeCount; i++)
-        {
-            typesToUse.Add(i);
-        }
-        typesToUse = typesToUse.OrderBy(x => UnityEngine.Random.value).ToList();
-    }
-
     private void StartSpawners()
     {
-        for(int i = 0; i < enemySpawners.Count; i++)
+        foreach(EnemySpawner spawner in enemySpawners)
         {
-            enemySpawners[i].StartNewWave(typesToUse[i], currentLevel);
+            spawner.StartNewWave(currentLevel);
         }
     }
 
@@ -88,6 +78,7 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator StartNewWave()
     {
+        waitingOnNewWave = true;
         if(currentLevel != 0)
         {
             SetEndWaveText();
@@ -97,13 +88,11 @@ public class LevelManager : MonoBehaviour
         enemiesKilled = 0;
         enemiesInWave = 0;
         pointsEarned = 0;
-        waitingOnNewWave = true;
         yield return new WaitForSeconds(3f);
         WaveMessenger.SetActive(true);
         StartCoroutine(SetNewWaveText(3));
         yield return new WaitForSeconds(4f);
         WaveMessenger.SetActive(false);
-        GenerateTypes();
         StartSpawners();
         waitingOnNewWave = false;
     }

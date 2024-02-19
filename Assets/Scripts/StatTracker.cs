@@ -28,13 +28,16 @@ public class StatTracker : MonoBehaviour
 
     public TextMeshProUGUI accuracyText;
 
-    public Crosshair crosshair;
+    public WeaponController weaponController;
+    public Weapon weapon;
 
     private void Start()
     {
+        weapon = weaponController.currentWeaponScript;
         UpdateStatsUI();
-        crosshair.OnEnemyKilled += EnemyDeathHandler;
-        crosshair.OnShotFired += ShotFiredHandler;
+        weapon.OnEnemyKilled += EnemyDeathHandler;
+        weapon.OnShotFired += ShotFiredHandler;
+        weapon.OnEnemyHit += EnemyHitHandler;
     }
 
     private void EnemyDeathHandler(int points)
@@ -44,13 +47,15 @@ public class StatTracker : MonoBehaviour
         UpdateStatsUI();
     }
 
-    private void ShotFiredHandler(bool hit)
+    private void ShotFiredHandler()
     {
         totalShots.value++;
-        if (hit)
-        {
-            totalHits.value++;
-        }
+        UpdateStatsUI();
+    }
+
+    private void EnemyHitHandler()
+    {
+        totalHits.value++;
         UpdateStatsUI();
     }
 
