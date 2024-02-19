@@ -17,7 +17,6 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartNewWave(spawnerType, 1);
     }
 
     void FixedUpdate()
@@ -70,6 +69,8 @@ public class EnemySpawner : MonoBehaviour
         spawnerType = newType;
         currency = 10 * waveNum;
         GetEnemySpawnType();
+        spawnInterval = enemySpawnType.cost * 2;
+        spawnTimer = spawnInterval;
         GenerateEnemies();
     }
 

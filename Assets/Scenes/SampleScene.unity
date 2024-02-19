@@ -152,8 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfff15553f5fa7041847ba8b34324164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 0
+  currentLevel: 1
+  typeCount: 3
   enemySpawners: []
+  typesToUse: 
 --- !u!4 &170278809
 Transform:
   m_ObjectHideFlags: 0
