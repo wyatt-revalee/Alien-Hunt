@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1049832325358678108}
   - component: {fileID: 2444666717421684932}
   - component: {fileID: -2343188270371062240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SimpleBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,6 +105,7 @@ MonoBehaviour:
   bulletData: {fileID: 11400000, guid: c1d9234833d98fc4c926241af085db7b, type: 2}
   pointsGained: -1
   enemyHit: 0
+  weapon: {fileID: 0}
 --- !u!58 &2444666717421684932
 CircleCollider2D:
   m_ObjectHideFlags: 0

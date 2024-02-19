@@ -13,6 +13,7 @@ public abstract class Weapon : MonoBehaviour
     public int fireRate;
     public int magazineSize;
     public int bulletsPerShot;
+    public bool isAutomatic;
     public LayerMask enemyLayerMask;
     public event Action OnShotFired;
     public event Action OnEnemyHit;

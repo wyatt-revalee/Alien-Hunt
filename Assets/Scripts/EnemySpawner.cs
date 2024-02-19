@@ -65,7 +65,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartNewWave(int waveNum)
     {
-        currency = 1 * waveNum;
+        currency = 10 * waveNum;
         GenerateEnemies();
         spawnInterval = UnityEngine.Random.Range(1, Mathf.Max(2, enemyTypes.Count - (waveNum/2)));
         spawnTimer = spawnInterval;

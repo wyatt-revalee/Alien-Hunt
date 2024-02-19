@@ -33,11 +33,9 @@ public class StatTracker : MonoBehaviour
 
     private void Start()
     {
-        weapon = weaponController.currentWeaponScript;
+        weaponController.OnNewWeaponSet += NewWeaponSet;
+        NewWeaponSet();
         UpdateStatsUI();
-        weapon.OnEnemyKilled += EnemyDeathHandler;
-        weapon.OnShotFired += ShotFiredHandler;
-        weapon.OnEnemyHit += EnemyHitHandler;
     }
 
     private void EnemyDeathHandler(int points)
@@ -72,5 +70,13 @@ public class StatTracker : MonoBehaviour
     {
         float accuracy = totalShots.value > 0 ? (float)totalHits.value / totalShots.value : 0f;
         accuracyText.text = "Accuracy:\n" + accuracy.ToString("P0"); // Display as percentage
+    }
+
+    private void NewWeaponSet()
+    {
+        weapon = weaponController.currentWeaponScript;
+        weapon.OnEnemyKilled += EnemyDeathHandler;
+        weapon.OnShotFired += ShotFiredHandler;
+        weapon.OnEnemyHit += EnemyHitHandler;
     }
 }

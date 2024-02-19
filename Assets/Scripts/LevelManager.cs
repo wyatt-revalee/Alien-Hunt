@@ -21,8 +21,8 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        weapon = weaponController.currentWeaponScript;
-        weapon.OnEnemyKilled += AddToPointsEarned;
+        NewWeaponSet();
+        weaponController.OnNewWeaponSet += NewWeaponSet;
         WaveMessenger.SetActive(false);
         GetSpawners();
     }
@@ -118,6 +118,12 @@ public class LevelManager : MonoBehaviour
     {
         TextMeshProUGUI waveText = WaveMessenger.GetComponentInChildren<TextMeshProUGUI>();
         waveText.text = string.Format("Wave {0}\nEnemies Killed: {1}/{2}\nPoints Eanred: {3}", currentLevel, enemiesKilled, enemiesInWave, pointsEarned);
+    }
+
+    private void NewWeaponSet()
+    {
+        weapon = weaponController.currentWeaponScript;
+        weapon.OnEnemyKilled += AddToPointsEarned;
     }
 
 }

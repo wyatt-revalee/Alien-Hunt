@@ -14,4 +14,16 @@ public class Revolver : Weapon
         ShakeCamera(1);
     }
 
+    public override void UpdateBulletInfo(bool enemyHit, int pointsGained)
+    {
+        if (enemyHit)
+        {
+            EnemyHitEvent();
+        }
+        if (pointsGained > 0)
+        {
+            EnemyKilledEvent(pointsGained);
+        }
+    }
+
 }
