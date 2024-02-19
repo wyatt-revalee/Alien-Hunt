@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Profiling;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
@@ -38,6 +39,8 @@ public class Bullet : MonoBehaviour
 
     public IEnumerator DecayAndDestroy()
     {
+        yield return new WaitForFixedUpdate();
+        GetComponent<Collider2D>().enabled = false;
         yield return new WaitForSeconds(0.1f);
         crosshair.UpdateBulletInfo(false, 0);
         yield return new WaitForSeconds(0.1f);

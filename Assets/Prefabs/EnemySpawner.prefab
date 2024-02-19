@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2341224948407958973}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,17 +104,9 @@ MonoBehaviour:
   spawnInterval: 1
   spawnTimer: 1
   enemiesToSpawn: []
-  enemies:
-  - enemyPrefab: {fileID: 4748749452992644531, guid: 80cf40604286dd24eae24d00a9f9169f, type: 3}
-    cost: 1
-    type: 1
-  - enemyPrefab: {fileID: 6424624697821780852, guid: 91f65722e9d2a324bb2ed087c77ea398, type: 3}
-    cost: 2
-    type: 2
-  - enemyPrefab: {fileID: 1032709249610772877, guid: 13e061beb241f774c918b9eb4a9b3738, type: 3}
-    cost: 2
-    type: 3
-  enemySpawnType:
-    enemyPrefab: {fileID: 0}
-    cost: 0
-    type: 0
+  enemyTypes:
+  - {fileID: 4748749452992644531, guid: 80cf40604286dd24eae24d00a9f9169f, type: 3}
+  - {fileID: 6424624697821780852, guid: 91f65722e9d2a324bb2ed087c77ea398, type: 3}
+  - {fileID: 1032709249610772877, guid: 13e061beb241f774c918b9eb4a9b3738, type: 3}
+  - {fileID: 574292782163914097, guid: 17d0206fd14fbe54bb5c9cf62c974cf2, type: 3}
+  enemySpawnType: {fileID: 0}

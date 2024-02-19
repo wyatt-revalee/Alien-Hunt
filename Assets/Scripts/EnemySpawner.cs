@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Profiling;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using System;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -12,12 +14,12 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval;
     public float spawnTimer;
     public List<GameObject> enemiesToSpawn;
-    public List<EnemySpawn> enemies;
-    public EnemySpawn enemySpawnType;
+    public List<GameObject> enemyTypes;
+    public GameObject enemySpawnType;
     // Start is called before the first frame update
-    void Start()
-    {
-    }
+
+    public event Action OnEnemySpawned;
+    public event Action<bool> OnEnemyDeath;
 
     void FixedUpdate()
     {
@@ -28,6 +30,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 GameObject enemy = (GameObject)Instantiate(enemiesToSpawn[0], transform.position, Quaternion.identity); // spawn first enemy in our list
                 enemy.GetComponent<Enemy>().SetMoveDirection(horizontalDirection, verticalDirection);
+                enemy.GetComponent<Enemy>().OnDeath += NotifyEnemyDeath;
                 enemiesToSpawn.RemoveAt(0); // and remove it
                 spawnTimer = spawnInterval;
             }
@@ -44,10 +47,15 @@ public class EnemySpawner : MonoBehaviour
     {
         while (currency > 0)
         {
-            if (enemySpawnType.cost <= currency)
+            if (enemySpawnType.GetComponent<Enemy>().cost <= currency)
             {
-                currency -= enemySpawnType.cost;
-                enemiesToSpawn.Add(enemySpawnType.enemyPrefab);
+                currency -= enemySpawnType.GetComponent<Enemy>().cost;
+                enemiesToSpawn.Add(enemySpawnType);
+                OnEnemySpawned?.Invoke();
+            }
+            else
+            {
+                currency = 0;
             }
         }
     }
@@ -55,13 +63,7 @@ public class EnemySpawner : MonoBehaviour
     // Iterates through list of our enemy types, finds one that matches the type of our spawner and sets it as our enemy type to be spawned
     private void GetEnemySpawnType()
     {
-        foreach(EnemySpawn e in enemies)
-        {
-            if(e.type == spawnerType)
-            {
-                enemySpawnType = e;
-            }
-        }
+        enemySpawnType = enemyTypes[spawnerType-1];
     }
 
     public void StartNewWave(int newType, int waveNum)
@@ -69,19 +71,14 @@ public class EnemySpawner : MonoBehaviour
         spawnerType = newType;
         currency = 10 * waveNum;
         GetEnemySpawnType();
-        spawnInterval = enemySpawnType.cost * 2;
+        spawnInterval = enemySpawnType.GetComponent<Enemy>().cost * 2;
         spawnTimer = spawnInterval;
         GenerateEnemies();
     }
 
-
-
-    [System.Serializable]
-    public class EnemySpawn
+    private void NotifyEnemyDeath(bool playerKilled)
     {
-        public GameObject enemyPrefab;
-        public int cost;
-        public int type;
+        OnEnemyDeath?.Invoke(playerKilled);
     }
 
 }

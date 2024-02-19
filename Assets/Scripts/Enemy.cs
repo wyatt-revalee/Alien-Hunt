@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public int health;
     public int speed;
     public int pointValue;
+    public int cost;
     public Animator animator;
     public Canvas pointPopup;
 
@@ -18,10 +19,7 @@ public class Enemy : MonoBehaviour
     public int verticalDirection;
     public bool isMoving = false;
 
-
-    public void Start()
-    {
-    }
+    public event Action<bool> OnDeath;
 
     public void FixedUpdate()
     {
@@ -37,6 +35,7 @@ public class Enemy : MonoBehaviour
 
         if(health <= 0)
         {
+            GetComponent<Collider2D>().enabled = false;
             isMoving = false;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             StartCoroutine(Death());
@@ -53,6 +52,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         var popup = Instantiate(pointPopup, transform.position, Quaternion.identity);
         popup.GetComponent<PointPopup>().SetValue(pointValue);
+        OnDeath?.Invoke(true);
         Destroy(gameObject);
     }
 
@@ -74,6 +74,12 @@ public class Enemy : MonoBehaviour
     public void MoveAcrossScreen()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2(speed * horizontalDirection, speed * verticalDirection);
+    }
+
+    public void HitKillZone()
+    {
+        OnDeath?.Invoke(false);
+        Destroy(gameObject);
     }
 
 }
