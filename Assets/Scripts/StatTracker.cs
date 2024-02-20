@@ -33,8 +33,8 @@ public class StatTracker : MonoBehaviour
 
     private void Start()
     {
-        weaponController.OnNewWeaponSet += NewWeaponSet;
         UpdateStatsUI();
+        weaponController.OnNewWeaponSet += NewWeaponSet;
     }
 
     private void EnemyDeathHandler(int points)

@@ -80,14 +80,13 @@ public class LevelManager : MonoBehaviour
         waitingOnNewWave = true;
         if(currentLevel != 0)
         {
-            SetEndWaveText();
+            StartCoroutine(SetEndWaveText());
             WaveMessenger.SetActive(true);
         }
-        currentLevel++;
+        yield return new WaitForSeconds(5f);
         enemiesKilled = 0;
         enemiesInWave = 0;
         pointsEarned = 0;
-        yield return new WaitForSeconds(3f);
         WaveMessenger.SetActive(true);
         StartCoroutine(SetNewWaveText(3));
         yield return new WaitForSeconds(4f);
@@ -99,6 +98,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator SetNewWaveText(int secondsToStart)
     {
+        currentLevel++;
         TextMeshProUGUI waveText = WaveMessenger.GetComponentInChildren<TextMeshProUGUI>();
 
         while (secondsToStart > 0)
@@ -113,10 +113,15 @@ public class LevelManager : MonoBehaviour
         waveText.text = string.Format("Wave {0}\nStarting in...\nNow!", currentLevel);
     }
 
-    private void SetEndWaveText()
+    private IEnumerator SetEndWaveText()
     {
         TextMeshProUGUI waveText = WaveMessenger.GetComponentInChildren<TextMeshProUGUI>();
-        waveText.text = string.Format("Wave {0}\nEnemies Killed: {1}/{2}\nPoints Eanred: {3}", currentLevel, enemiesKilled, enemiesInWave, pointsEarned);
+        waveText.text = string.Format("Wave {0} Complete", currentLevel);
+        yield return new WaitForSeconds(1f);
+        waveText.text = string.Format("Wave {0} Complete\nEnemies Killed: {1}/{2}", currentLevel, enemiesKilled, enemiesInWave);
+        yield return new WaitForSeconds(1f);
+        waveText.text = string.Format("Wave {0} Complete\nEnemies Killed: {1}/{2}\nPoints Eanred: {3}", currentLevel, enemiesKilled, enemiesInWave, pointsEarned);
+
     }
 
     private void NewWeaponSet()

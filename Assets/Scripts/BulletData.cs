@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 
@@ -17,7 +16,6 @@ public class BulletData : ScriptableObject
 
     [Header("UI & Animations")]
     public Sprite sprite;
-    public AnimatorController AnimatorController;
 
     public Dictionary<string, int> UpdateStats()
     {

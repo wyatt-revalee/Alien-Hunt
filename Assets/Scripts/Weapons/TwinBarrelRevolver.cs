@@ -7,7 +7,7 @@ public class TwinBarrelRevolver : Weapon
 {
     public override void Shoot()
     {
-        float spread = 0.6f;
+        float spread = 0.3f;
 
         // Iterates through all bullets, spawning them with a spread. Ex: [1, -1, 2, -2,... n, -n]
         for (int bulletNum = 1; bulletNum <= bulletsPerShot; bulletNum++)
@@ -22,8 +22,6 @@ public class TwinBarrelRevolver : Weapon
             {
                 direction = ((bulletNum / 2)+1) *spread;
             }
-
-            Debug.Log(direction);
 
             GameObject newBullet = Instantiate(bullet, new Vector3(transform.position.x + direction, transform.position.y, transform.position.z), Quaternion.identity);
             newBullet.GetComponent<Bullet>().weapon = this;
