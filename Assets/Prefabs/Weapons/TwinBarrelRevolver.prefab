@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 504142529
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 158d744424f616b4bb1b47ec2801a2ae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f579d679f3545d4b8f76423a5e4dc4a, type: 3}
   m_Color: {r: 1, g: 0, b: 0.12164402, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,7 +101,8 @@ MonoBehaviour:
   reloadSpeed: 0
   fireRate: 0
   magazineSize: 0
-  bulletsPerShot: 2
+  bulletsPerShot: 4
+  isAutomatic: 0
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 0

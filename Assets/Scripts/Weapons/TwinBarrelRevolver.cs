@@ -1,34 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class TwinBarrelRevolver : Weapon
 {
     public override void Shoot()
     {
-        int direction = 1;
-        for(int i = 0; i < bulletsPerShot; i++)
+        float spread = 0.6f;
+
+        // Iterates through all bullets, spawning them with a spread. Ex: [1, -1, 2, -2,... n, -n]
+        for (int bulletNum = 1; bulletNum <= bulletsPerShot; bulletNum++)
         {
-            if(direction > 0)
+            float direction;
+
+            if(bulletNum % 2 == 0)
             {
-                direction *= -1;
+                direction = -(bulletNum/2) * spread;
             }
             else
             {
-                direction++;
+                direction = ((bulletNum / 2)+1) *spread;
             }
+
+            Debug.Log(direction);
 
             GameObject newBullet = Instantiate(bullet, new Vector3(transform.position.x + direction, transform.position.y, transform.position.z), Quaternion.identity);
             newBullet.GetComponent<Bullet>().weapon = this;
         }
         // Place new bullet
-        ShootWeaponEvent();
         ShakeCrosshair(1);
         ShakeCamera(1);
     }
 
     public override void UpdateBulletInfo(bool enemyHit, int pointsGained)
     {
+        ShootWeaponEvent();
         if (enemyHit)
         {
             EnemyHitEvent();

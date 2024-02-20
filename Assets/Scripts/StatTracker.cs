@@ -34,7 +34,6 @@ public class StatTracker : MonoBehaviour
     private void Start()
     {
         weaponController.OnNewWeaponSet += NewWeaponSet;
-        NewWeaponSet();
         UpdateStatsUI();
     }
 
