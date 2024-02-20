@@ -35,7 +35,6 @@ public class EnemySpawner : MonoBehaviour
                 enemy.GetComponent<Enemy>().SetMoveDirection(horizontalDirection, verticalDirection);
                 enemy.GetComponent<Enemy>().OnDeath += NotifyEnemyDeath;
                 enemiesToSpawn.RemoveAt(0); // and remove it
-                Debug.Log(enemiesToSpawn.Count);
                 spawnTimer = spawnInterval;
             }
         }

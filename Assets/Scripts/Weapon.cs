@@ -18,6 +18,7 @@ public abstract class Weapon : MonoBehaviour
     public event Action OnShotFired;
     public event Action OnEnemyHit;
     public event Action<int> OnEnemyKilled;
+    public event Action<int> OnBonusAdded;
 
     // Start is called before the first frame update
     void Start()
@@ -109,5 +110,10 @@ public abstract class Weapon : MonoBehaviour
     public void EnemyKilledEvent(int points)
     {
         OnEnemyKilled?.Invoke(points);
+    }
+
+    public void AddBonus(int bonusPoints)
+    {
+        OnBonusAdded?.Invoke(bonusPoints);
     }
 }

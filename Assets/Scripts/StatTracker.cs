@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -29,12 +30,13 @@ public class StatTracker : MonoBehaviour
     public TextMeshProUGUI accuracyText;
 
     public WeaponController weaponController;
-    public Weapon weapon;
+    private Weapon weapon;
 
     private void Start()
     {
-        UpdateStatsUI();
+        StartCoroutine(InitializeFirstWeapon());
         weaponController.OnNewWeaponSet += NewWeaponSet;
+        UpdateStatsUI();
     }
 
     private void EnemyDeathHandler(int points)
@@ -56,6 +58,12 @@ public class StatTracker : MonoBehaviour
         UpdateStatsUI();
     }
 
+    private void BonusAddedHandler(int bonusPoints)
+    {
+        totalPoints.value += bonusPoints;
+        UpdateStatsUI();
+    }
+
     private void UpdateStatsUI()
     {
         totalPoints.UpdateUI();
@@ -73,9 +81,17 @@ public class StatTracker : MonoBehaviour
 
     private void NewWeaponSet()
     {
+        if(weapon != null) return;
         weapon = weaponController.currentWeaponScript;
         weapon.OnEnemyKilled += EnemyDeathHandler;
         weapon.OnShotFired += ShotFiredHandler;
         weapon.OnEnemyHit += EnemyHitHandler;
+        weapon.OnBonusAdded += BonusAddedHandler;
+    }
+
+    public IEnumerator InitializeFirstWeapon()
+    {
+        yield return new WaitForSeconds(3f);
+        NewWeaponSet();
     }
 }

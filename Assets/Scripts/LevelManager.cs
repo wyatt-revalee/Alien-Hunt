@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting.Dependencies.Sqlite;
 
 public class LevelManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class LevelManager : MonoBehaviour
     public int enemiesInWave;
     public int enemiesKilled;
     public int pointsEarned;
+    public int shotsTaken;
+    public int shotsHit;
     public int enemiesLeft;
     public GameObject WaveMessenger;
     public WeaponController weaponController;
@@ -74,6 +77,15 @@ public class LevelManager : MonoBehaviour
         pointsEarned += points;
     }
 
+    private void AddToShotsTaken()
+    {
+        shotsTaken++;
+    }
+
+    private void AddToShotsHit()
+    {
+        shotsHit++;
+    }
 
     public IEnumerator StartNewWave()
     {
@@ -87,6 +99,8 @@ public class LevelManager : MonoBehaviour
         enemiesKilled = 0;
         enemiesInWave = 0;
         pointsEarned = 0;
+        shotsTaken = 0;
+        shotsHit = 0;
         WaveMessenger.SetActive(true);
         StartCoroutine(SetNewWaveText(3));
         yield return new WaitForSeconds(4f);
@@ -120,7 +134,16 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         waveText.text = string.Format("Wave {0} Complete\nEnemies Killed: {1}/{2}", currentLevel, enemiesKilled, enemiesInWave);
         yield return new WaitForSeconds(1f);
-        waveText.text = string.Format("Wave {0} Complete\nEnemies Killed: {1}/{2}\nPoints Eanred: {3}", currentLevel, enemiesKilled, enemiesInWave, pointsEarned);
+        waveText.text = string.Format("Wave {0} Complete\nEnemies Killed: {1}/{2}\nPoints Earned: {3}", currentLevel, enemiesKilled, enemiesInWave, pointsEarned);
+
+        float accuracy = GetWaveAccuracy();
+        Debug.Log(accuracy);
+        if (accuracy >= 70)
+        {
+            yield return new WaitForSeconds(1f);
+            waveText.text = string.Format("Wave {0} Complete\nEnemies Killed: {1}/{2}\nPoints Earned: {3}\nAccuracy Bonus: {4}", currentLevel, enemiesKilled, enemiesInWave, pointsEarned, (int)accuracy*10);
+            weapon.AddBonus((int)accuracy * 10);
+        }
 
     }
 
@@ -128,6 +151,13 @@ public class LevelManager : MonoBehaviour
     {
         weapon = weaponController.currentWeaponScript;
         weapon.OnEnemyKilled += AddToPointsEarned;
+        weapon.OnShotFired += AddToShotsTaken;
+        weapon.OnEnemyHit += AddToShotsHit;
+    }
+
+    private float GetWaveAccuracy()
+    {
+        return 100 * ((float)shotsHit / (float)shotsTaken);
     }
 
 }

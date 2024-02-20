@@ -25,8 +25,6 @@ public abstract class Enemy : MonoBehaviour
     public void Damage(int damage)
     {
         health -= damage;
-        Debug.Log("Took " + damage + " damage!");
-
         if(health <= 0)
         {
             GetComponent<Collider2D>().enabled = false;
