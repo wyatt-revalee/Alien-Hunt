@@ -1,3 +1,10 @@
+**INSTRUCTIONS**</br></br>
+Play locally
+- Download the folder labelled 'Alien Hunt - Demo' and run the executable within.
+
+Play online
+- Coming soon</br></br>
+
 **DESIGN / GAMEPLAY**
 </br></br>
 Idea: A point and click shooter, sort of like duck hunt or old arcade games. Players will control a crosshair to point and shoot at enemies to earn points.</br>
