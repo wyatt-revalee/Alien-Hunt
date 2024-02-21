@@ -25,9 +25,9 @@ public class Bullet : MonoBehaviour
         if(collider.transform.gameObject.layer == 6)
         {
             Enemy enemy = collider.transform.gameObject.GetComponent<Enemy>();
+            enemyHit = true;
             if(enemy.health > 0)
             {
-                enemyHit = true;
                 enemy.Damage(bulletData.damage);
                 if(enemy.health <= 0)
                 {
