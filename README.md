@@ -9,9 +9,8 @@ Style : TBD (Pixel Art - Old Arcade Aesthetic?)</br></br>
 **ABOUT**</br></br>
 This project is sort of a sidestep from my bigger project, Prismatic Depths.</br></br>
 I wanted to create a smaller, simpler game so I could see the full process from start to finish, as well as to just have a finished product under my belt.
-
-**TODO**</br></br>
-</br></br>
+</br></br></br>
+**TODO**</br>
 
 Artwork</br>
 - Would be great to have artwork for this game, but I'm not much of an artist. Something I would like to be better at in the future.
