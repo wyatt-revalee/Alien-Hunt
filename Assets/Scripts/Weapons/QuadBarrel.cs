@@ -17,7 +17,7 @@ public class QuadBarrel : Weapon
     {
         float spread = 0.3f;
 
-        // Iterates through all bullets, spawning them with a spread. Ex: [1, -1, 2, -2,... n, -n]
+        // Iterates through all bullets, spawning them with a spread as defined by bulletLocations
         for (int bulletNum = 1; bulletNum <= bulletsPerShot; bulletNum++)
         {
             Vector2 direction = bulletLocations[bulletNum-1];
