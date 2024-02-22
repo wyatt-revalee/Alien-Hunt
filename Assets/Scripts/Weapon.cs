@@ -8,12 +8,17 @@ using System;
 public abstract class Weapon : MonoBehaviour
 {
 
+    [Header("Bullet Settings")]
     public GameObject bullet;
+    public int bulletsPerShot;
+
+    [Header("Weapon Settings")]
     public int reloadSpeed;
     public int fireRate;
     public int magazineSize;
-    public int bulletsPerShot;
     public bool isAutomatic;
+
+    [Header("Target Settings")]
     public LayerMask enemyLayerMask;
     public event Action OnShotFired;
     public event Action OnEnemyHit;

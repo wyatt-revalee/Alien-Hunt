@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
 
     public event Action OnEnemySpawned;
     public event Action<bool> OnEnemyDeath;
+    public GameObject dropToAssign;
 
     void FixedUpdate()
     {
@@ -34,6 +35,15 @@ public class EnemySpawner : MonoBehaviour
                 GameObject enemy = (GameObject)Instantiate(enemiesToSpawn[0], transform.position, Quaternion.identity); // spawn first enemy in our list
                 enemy.GetComponent<Enemy>().SetMoveDirection(horizontalDirection, verticalDirection);
                 enemy.GetComponent<Enemy>().OnDeath += NotifyEnemyDeath;
+
+                // If spawn has a drop to assign, assign it to the enemy, then nullify it
+                if(dropToAssign != null)
+                {
+                    enemy.GetComponent<Enemy>().itemDrop = dropToAssign;
+                    enemy.GetComponent<SpriteRenderer>().color = new Color(200, 200, 200);
+                    dropToAssign = null;
+                }
+
                 enemiesToSpawn.RemoveAt(0); // and remove it
                 spawnTimer = spawnInterval;
             }

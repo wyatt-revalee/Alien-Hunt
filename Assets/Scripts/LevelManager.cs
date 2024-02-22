@@ -8,6 +8,7 @@ using Unity.VisualScripting.Dependencies.Sqlite;
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("Level Settings")]
     public int currentLevel;
     public List<EnemySpawner> enemySpawners;
     public int enemiesInWave;
@@ -16,16 +17,39 @@ public class LevelManager : MonoBehaviour
     public int shotsTaken;
     public int shotsHit;
     public int enemiesLeft;
+    public bool healthPickupAssigned;
+
+    [Header("Game Objects")]
     public GameObject WaveMessenger;
     public WeaponController weaponController;
     private Weapon weapon;
     private bool waitingOnNewWave;
+    public Player player;
+
+    [Header("Pickup Settings")]
+    [SerializeField]
+    public List<PickupSpawn> pickupInitializers;
+    public Transform pickupSpawn;
+    public Dictionary<string, GameObject> pickups = new Dictionary<string, GameObject>();
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        // Convert list to dict for accessing via name easier
+        foreach(PickupSpawn pickupSpawn in pickupInitializers)
+        {
+            pickups.Add(pickupSpawn.name, pickupSpawn.prefab);
+        }
+        
+        // Add listener for new weapons being set
         weaponController.OnNewWeaponSet += NewWeaponSet;
+
+        // Add listener for player health
+        player.OnHealthChange += PlayerHealthListener;
+
         WaveMessenger.SetActive(false);
+
+        // Grab all spawners
         GetSpawners();
     }
 
@@ -38,6 +62,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    // Looks for all spawners in scene by tag, adds them to list and adds listeners to their events
     private void GetSpawners()
     {
         GameObject[] spawnerObjects = GameObject.FindGameObjectsWithTag("Spawner");
@@ -50,6 +75,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    // Tells spawners to start new wave
     private void StartSpawners()
     {
         foreach(EnemySpawner spawner in enemySpawners)
@@ -58,12 +84,14 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    // Event listener, tracks total enemies in wave
     private void AddEnemyToCount()
     {
         enemiesLeft++;
         enemiesInWave++;
     }
 
+    //Keeps track of kills and how many enemies are left
     private void RemoveEnemyFromCount(bool killedByPlayer)
     {
         enemiesLeft--;
@@ -85,6 +113,18 @@ public class LevelManager : MonoBehaviour
     private void AddToShotsHit()
     {
         shotsHit++;
+    }
+
+    private void PlayerHealthListener(int health)
+    {
+        if(health <= player.maxHealth/3 && !healthPickupAssigned)
+        {
+            AssignHealthPickup();
+        }
+        if(health > player.maxHealth/3 && healthPickupAssigned)
+        {
+            healthPickupAssigned = false;
+        }
     }
 
     public IEnumerator StartNewWave()
@@ -137,7 +177,6 @@ public class LevelManager : MonoBehaviour
         waveText.text = string.Format("Wave {0} Complete\nEnemies Killed: {1}/{2}\nPoints Earned: {3}", currentLevel, enemiesKilled, enemiesInWave, pointsEarned);
 
         float accuracy = GetWaveAccuracy();
-        Debug.Log(accuracy);
         if (accuracy >= 70)
         {
             yield return new WaitForSeconds(1f);
@@ -145,6 +184,20 @@ public class LevelManager : MonoBehaviour
             weapon.AddBonus((int)accuracy * 10);
         }
 
+    }
+
+    public void AssignHealthPickup()
+    {
+        int random = UnityEngine.Random.Range(0, enemySpawners.Count);
+        enemySpawners[random].dropToAssign = pickups["Health"];
+        healthPickupAssigned = true;
+    }
+
+    public void AssignMissedPickup(GameObject missedPickup)
+    {
+        Debug.Log("Assigning missed pickup");
+        int random = UnityEngine.Random.Range(0, enemySpawners.Count);
+        enemySpawners[random].dropToAssign = missedPickup;
     }
 
     private void NewWeaponSet()
@@ -155,9 +208,17 @@ public class LevelManager : MonoBehaviour
         weapon.OnEnemyHit += AddToShotsHit;
     }
 
+    // Returns player's accuracy for each wave
     private float GetWaveAccuracy()
     {
         return 100 * ((float)shotsHit / (float)shotsTaken);
+    }
+
+[Serializable]
+    public class PickupSpawn
+    {
+        public string name;
+        public GameObject prefab;
     }
 
 }

@@ -8,19 +8,23 @@ using UnityEngine.InputSystem;
 public abstract class Enemy : MonoBehaviour
 {
 
+    [Header("Enemy Stats")]
     public int health;
     public int speed;
     public int pointValue;
     public int cost;
+
+    [Header("Enemy Components")]
     public Animator animator;
     public Canvas pointPopup;
 
+    [Header("Enemy Movement")]
     public int horizontalDirection;
     public int verticalDirection;
     public bool isMoving = false;
 
+    public GameObject itemDrop;
     public event Action<bool> OnDeath;
-    public MovementOverride movementOverride;
 
     public void Damage(int damage)
     {
@@ -42,6 +46,12 @@ public abstract class Enemy : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(0.5f);
+
+        if(itemDrop != null)
+        {
+            Instantiate(itemDrop, transform.position, Quaternion.identity);
+        }
+
         var popup = Instantiate(pointPopup, transform.position, Quaternion.identity);
         popup.GetComponent<PointPopup>().SetValue(pointValue);
         OnDeath?.Invoke(true);
