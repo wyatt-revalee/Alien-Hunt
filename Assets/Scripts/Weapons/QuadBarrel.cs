@@ -15,7 +15,13 @@ public class QuadBarrel : Weapon
     };
     public override void Shoot()
     {
+<<<<<<< HEAD
         // Iterates through all bullets, spawning them with a spread. Ex: [1, -1, 2, -2,... n, -n]
+=======
+        float spread = 0.3f;
+
+        // Iterates through all bullets, spawning them with a spread as defined by bulletLocations
+>>>>>>> 53e097c255374bc501f4297fd3243fece0263a31
         for (int bulletNum = 1; bulletNum <= bulletsPerShot; bulletNum++)
         {
             Vector2 direction = bulletLocations[bulletNum-1];
