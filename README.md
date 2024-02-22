@@ -26,7 +26,7 @@ Gameplay
 - Add magazines and reloading
   - Would add extra depth to gameplay and make different weapons feel more unique.
 - Add a way to lose
-  - Perhaps enemies can attack, or drop bombs that will explode and hurt the player unless destroyed, or even just make the player take damage for each enemy that gets off screen
+  - Perhaps enemies can attack, or drop bombs that will explode and hurt the player unless destroyed, ~~or even just make the player take damage for each enemy that gets off screen~~ Done
 - Weapon Pickups
   - Weapon pickups asset already exists and is function, need to work it into the gameplay somehow. Perhaps a random drop once a wave, or from an enemy?
   - Should these be permanent, temporary, or a mix? Either they have unlimited ammo, limited ammo that needs to be replenished, or set amount of ammo, and disappear after they are out.
