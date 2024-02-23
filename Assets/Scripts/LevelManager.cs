@@ -263,11 +263,15 @@ public class LevelManager : MonoBehaviour
     }
 
     public void ShowEndGameStats(Scene scene, LoadSceneMode mode)
-    {
-        GameObject gameOverMenu = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
-        if (gameOverMenu != null)
+    {   
+        if(scene.buildIndex == 1)
         {
-            gameOverMenu.GetComponent<GameOverMenu>().ShowStats(playerStats);
+            GameObject gameOverMenu = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+            if (gameOverMenu != null)
+            {
+                gameOverMenu.GetComponent<GameOverMenu>().ShowStats(playerStats);
+                Destroy(gameObject);
+            }
         }
     }
 
