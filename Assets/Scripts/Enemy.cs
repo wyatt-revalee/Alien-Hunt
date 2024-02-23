@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour
     public int speed;
     public int pointValue;
     public int cost;
+    public int introWave;
 
     [Header("Enemy Components")]
     public Animator animator;

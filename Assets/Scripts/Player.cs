@@ -42,8 +42,8 @@ public class Player : MonoBehaviour
 
     public IEnumerator GameOver()
     {
-        OnGameOver?.Invoke();
         yield return new WaitForSeconds(5f);
+        OnGameOver?.Invoke();
     }
 
     IEnumerator ShakeScreen(int force)

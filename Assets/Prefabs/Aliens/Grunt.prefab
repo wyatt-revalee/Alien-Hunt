@@ -176,6 +176,7 @@ MonoBehaviour:
   speed: 2
   pointValue: 100
   cost: 1
+  introWave: 1
   animator: {fileID: 0}
   pointPopup: {fileID: 4459850512478384173, guid: 4cf423d76f1c1994f8f83c9a8d0e44d1, type: 3}
   horizontalDirection: 0

@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 4242624897227732910, guid: 9baca4ed239d4744fa93edd4bccb6a16, type: 3}
   bulletsPerShot: 4
-  damage: 0
+  damage: 1
   reloadSpeed: 2
   fireRate: 0
   magazineSize: 32

@@ -5,11 +5,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public class Bullet : MonoBehaviour
+public abstract class Bullet : MonoBehaviour
 {
 
     public LayerMask enemyMask;
-    public BulletData bulletData;
     public int pointsGained;
     public bool enemyHit;
     public Weapon weapon;
@@ -29,7 +28,7 @@ public class Bullet : MonoBehaviour
             enemyHit = true;
             if(enemy.health > 0)
             {
-                enemy.Damage(bulletData.damage + weapon.damage);
+                enemy.Damage(weapon.damage);
                 if(enemy.health <= 0)
                 {
                     pointsGained = enemy.pointValue;

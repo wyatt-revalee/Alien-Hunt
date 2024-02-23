@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -31,7 +32,21 @@ public class LevelManager : MonoBehaviour
     public Transform pickupSpawn;
     public Dictionary<string, GameObject> pickups = new Dictionary<string, GameObject>();
 
-    // Start is called before the first frame update
+    public event Action<int> OnNewWaveStart;
+    public event Action<int> OnEnemyDeath;
+
+    private void Awake()
+    {
+        // Add listener for new weapons being set
+        weaponController.OnNewWeaponSet += NewWeaponSet;
+
+        // Add listener for player health
+        player.OnHealthChange += PlayerHealthListener;
+
+        // Add listener for game over
+        player.OnGameOver += EndGameHandler;
+    }
+
     void Start()
     {   
         // Convert list to dict for accessing via name easier
@@ -40,12 +55,6 @@ public class LevelManager : MonoBehaviour
             pickups.Add(pickupSpawn.name, pickupSpawn.prefab);
         }
         
-        // Add listener for new weapons being set
-        weaponController.OnNewWeaponSet += NewWeaponSet;
-
-        // Add listener for player health
-        player.OnHealthChange += PlayerHealthListener;
-
         WaveMessenger.SetActive(false);
 
         // Grab all spawners
@@ -84,10 +93,11 @@ public class LevelManager : MonoBehaviour
     }
 
     // Event listener, tracks total enemies in wave
-    private void AddEnemyToCount()
+    private void AddEnemyToCount(int enemiesSpawned)
     {
-        enemiesLeft++;
-        enemiesInWave++;
+        enemiesLeft += enemiesSpawned;
+        enemiesInWave += enemiesSpawned;
+        OnNewWaveStart?.Invoke(enemiesInWave);
     }
 
     //Keeps track of kills and how many enemies are left
@@ -98,6 +108,7 @@ public class LevelManager : MonoBehaviour
         {
             enemiesKilled++;
         }
+        OnEnemyDeath?.Invoke(enemiesLeft);
     }
     private void AddToPointsEarned(int points)
     {
@@ -211,6 +222,12 @@ public class LevelManager : MonoBehaviour
     private float GetWaveAccuracy()
     {
         return 100 * ((float)shotsHit / (float)shotsTaken);
+    }
+
+    private void EndGameHandler()
+    {
+        Cursor.visible = true;
+        SceneManager.LoadScene(1);
     }
 
 [Serializable]

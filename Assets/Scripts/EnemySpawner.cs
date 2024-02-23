@@ -13,11 +13,12 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval;
     public float spawnTimer;
     private bool generatingEnemies;
+    public int currentWave;
     public List<GameObject> enemiesToSpawn;
     public List<GameObject> enemyTypes;
     // Start is called before the first frame update
 
-    public event Action OnEnemySpawned;
+    public event Action<int> OnEnemySpawned;
     public event Action<bool> OnEnemyDeath;
     public GameObject dropToAssign;
 
@@ -62,19 +63,20 @@ public class EnemySpawner : MonoBehaviour
         while (currency > 0)
         {
             GameObject randomEnemy = enemyTypes[UnityEngine.Random.Range(0, enemyTypes.Count)];
-            if (randomEnemy.GetComponent<Enemy>().cost <= currency)
+            if (randomEnemy.GetComponent<Enemy>().cost <= currency && randomEnemy.GetComponent<Enemy>().introWave <= currentWave)
             {
                 currency -= randomEnemy.GetComponent<Enemy>().cost;
                 enemiesToSpawn.Add(randomEnemy);
-                OnEnemySpawned?.Invoke();
             }
         }
+        OnEnemySpawned?.Invoke(enemiesToSpawn.Count);
         generatingEnemies = false;
     }
 
     public void StartNewWave(int waveNum)
     {
         currency = 10 * waveNum;
+        currentWave = waveNum;
         GenerateEnemies();
         spawnInterval = UnityEngine.Random.Range(1, Mathf.Max(2, enemyTypes.Count - (waveNum/2)));
         spawnTimer = spawnInterval;

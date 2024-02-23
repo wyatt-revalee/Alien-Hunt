@@ -38,13 +38,22 @@ public class WeaponController : MonoBehaviour
 
     public void OnShoot()
     {
-        //If there are bullets in the magazine, shoot. If not, reload.
-        if(currentWeaponScript.bulletsInMagazine > 0)
+        // If there are bullets in the magazine, shoot. If not, reload.
+        if (currentWeaponScript.bulletsInMagazine > 0)
         {
-            currentWeaponScript.Shoot();
-            OnWeaponFired?.Invoke();
+            if (currentWeaponScript.isAutomatic)
+            {
+                // If the weapon is automatic, start a coroutine that repeatedly calls Shoot
+                StartCoroutine(AutomaticFire());
+            }
+            else
+            {
+                // If the weapon is not automatic, just call Shoot once
+                currentWeaponScript.Shoot();
+                OnWeaponFired?.Invoke();
+            }
 
-            if(currentWeaponScript.bulletsInMagazine == 0)
+            if (currentWeaponScript.bulletsInMagazine == 0)
             {
                 currentWeaponScript.Reload();
                 StartCoroutine(DoReload());
@@ -52,14 +61,32 @@ public class WeaponController : MonoBehaviour
         }
         else
         {
-            if(currentWeaponScript.isReloading)
+            if (currentWeaponScript.isReloading)
             {
                 return;
             }
             currentWeaponScript.Reload();
             StartCoroutine(DoReload());
         }
+    }
 
+    private IEnumerator AutomaticFire()
+    {
+        while (GetComponent<PlayerInput>().actions["Shoot"].IsPressed())
+        {
+            if(currentWeaponScript.bulletsInMagazine > 0)
+            {
+                currentWeaponScript.Shoot();
+                OnWeaponFired?.Invoke();
+                yield return new WaitForSeconds(1f / currentWeaponScript.fireRate);
+            }
+            else
+            {
+                currentWeaponScript.Reload();
+                StartCoroutine(DoReload());
+                break;
+            }
+        }
     }
 
     public void OnReload()

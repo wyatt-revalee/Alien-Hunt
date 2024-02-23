@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class StatTracker : MonoBehaviour
@@ -10,13 +11,21 @@ public class StatTracker : MonoBehaviour
     {
         public int value;
         public string text;
+        public bool useNewline;
         public TextMeshProUGUI textField;
 
         public void UpdateUI()
         {
             if (textField != null)
             {
-                textField.text = text + '\n' +  value.ToString();
+                if(useNewline)
+                {
+                    textField.text = text + '\n' + value.ToString();
+                }
+                else
+                {
+                    textField.text = text + value.ToString();
+                }
             }
         }
     }
@@ -26,15 +35,19 @@ public class StatTracker : MonoBehaviour
     public StatisticData totalKills;
     public StatisticData totalShots;
     public StatisticData totalHits;
+    public StatisticData enemiesLeft;
 
     public TextMeshProUGUI accuracyText;
 
+    public LevelManager levelManager;
     public WeaponController weaponController;
     private Weapon weapon;
 
     private void Awake()
     {
         weaponController.OnNewWeaponSet += NewWeaponSet;
+        levelManager.OnNewWaveStart += EnemiesLeftHandler;
+        levelManager.OnEnemyDeath += EnemiesLeftHandler;
     }
     private void Start()
     {
@@ -66,12 +79,19 @@ public class StatTracker : MonoBehaviour
         UpdateStatsUI();
     }
 
+    private void EnemiesLeftHandler(int enemies)
+    {
+        enemiesLeft.value = enemies;
+        UpdateStatsUI();
+    }
+
     private void UpdateStatsUI()
     {
         totalPoints.UpdateUI();
         totalKills.UpdateUI();
         totalShots.UpdateUI();
         totalHits.UpdateUI();
+        enemiesLeft.UpdateUI();
         UpdateAccuracyUI();
     }
 

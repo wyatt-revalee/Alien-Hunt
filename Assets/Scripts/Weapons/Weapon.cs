@@ -112,20 +112,15 @@ public abstract class Weapon : MonoBehaviour
     IEnumerator DoCameraShake(int force)
     {
 
-        // Get initial position
-        float xpos = Camera.main.transform.position.x;
-        float ypos = Camera.main.transform.position.y;
-        float zpos = Camera.main.transform.position.z;
-
         // Move up and right
-        Camera.main.transform.position = new Vector3(xpos + (0.01f * force), ypos + (0.01f * force), zpos);
+        Camera.main.transform.position = new Vector3(0 + (0.01f * force), 0 + (0.01f * force), -10);
         yield return new WaitForSeconds(0.01f);
 
         // Move down and left
-        Camera.main.transform.position = new Vector3(xpos - (0.01f * force), ypos - (0.01f * force), zpos);
+        Camera.main.transform.position = new Vector3(0 - (0.01f * force), 0 - (0.01f * force), -10);
         yield return new WaitForSeconds(0.01f);
 
-        Camera.main.transform.position = new Vector3(xpos, ypos, zpos);
+        Camera.main.transform.position = new Vector3(0, 0, -10);
 
     }
 
