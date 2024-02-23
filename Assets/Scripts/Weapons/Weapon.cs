@@ -143,4 +143,9 @@ public abstract class Weapon : MonoBehaviour
     {
         OnBonusAdded?.Invoke(bonusPoints);
     }
+
+    public void ChangeCrosshairColor(Color color)
+    {
+        GetComponent<SpriteRenderer>().color = color;
+    }
 }

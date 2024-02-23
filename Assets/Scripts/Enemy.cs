@@ -40,7 +40,6 @@ public abstract class Enemy : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
-            GetComponent<Collider2D>().enabled = false;
             isMoving = false;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             StartCoroutine(Death());

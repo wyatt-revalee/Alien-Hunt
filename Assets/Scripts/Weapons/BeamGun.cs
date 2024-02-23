@@ -11,7 +11,6 @@ public class BeamGun : Weapon
         GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
         newBullet.GetComponent<Bullet>().weapon = this;
         ShootWeaponEvent();
-        ShakeCrosshair(1);
         ShakeCamera(1);
     }
 

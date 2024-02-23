@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class LevelManager : MonoBehaviour
 {
@@ -18,12 +19,15 @@ public class LevelManager : MonoBehaviour
     public int shotsHit;
     public int enemiesLeft;
     public bool healthPickupAssigned;
+    public bool isGameOver;
+    public Dictionary<string, int> playerStats = new Dictionary<string, int>();
 
     [Header("Game Objects")]
     public GameObject WaveMessenger;
     public WeaponController weaponController;
     private Weapon weapon;
     private bool waitingOnNewWave;
+    public StatTracker statTracker;
     public Player player;
 
     [Header("Pickup Settings")]
@@ -34,9 +38,20 @@ public class LevelManager : MonoBehaviour
 
     public event Action<int> OnNewWaveStart;
     public event Action<int> OnEnemyDeath;
+    public static LevelManager instance;
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         // Add listener for new weapons being set
         weaponController.OnNewWeaponSet += NewWeaponSet;
 
@@ -45,6 +60,7 @@ public class LevelManager : MonoBehaviour
 
         // Add listener for game over
         player.OnGameOver += EndGameHandler;
+
     }
 
     void Start()
@@ -64,6 +80,10 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isGameOver)
+        {
+            return;
+        }
         if(enemiesLeft == 0 && !waitingOnNewWave)
         {
             StartCoroutine(StartNewWave());
@@ -227,10 +247,31 @@ public class LevelManager : MonoBehaviour
     private void EndGameHandler()
     {
         Cursor.visible = true;
+        isGameOver = true;
+        GetStats();
+        SceneManager.sceneLoaded += ShowEndGameStats;
         SceneManager.LoadScene(1);
     }
 
-[Serializable]
+    private void GetStats()
+    {
+        playerStats.Add("Enemies Killed", statTracker.totalKills.value);
+        playerStats.Add("Points Earned", statTracker.totalPoints.value);
+        playerStats.Add("Shots Taken", statTracker.totalShots.value);
+        playerStats.Add("Shots Hit", statTracker.totalHits.value);
+        playerStats.Add("Waves Complete", currentLevel-1);
+    }
+
+    public void ShowEndGameStats(Scene scene, LoadSceneMode mode)
+    {
+        GameObject gameOverMenu = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+        if (gameOverMenu != null)
+        {
+            gameOverMenu.GetComponent<GameOverMenu>().ShowStats(playerStats);
+        }
+    }
+
+    [Serializable]
     public class PickupSpawn
     {
         public string name;

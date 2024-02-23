@@ -30,6 +30,10 @@ public class Player : MonoBehaviour
 
     public void Damage(int damage)
     {
+        if(health <= 0)
+        {
+            return;
+        }
         health -= damage;
         healthBar.SetHealth(health);
         if(health <= 0)
@@ -42,7 +46,7 @@ public class Player : MonoBehaviour
 
     public IEnumerator GameOver()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
         OnGameOver?.Invoke();
     }
 

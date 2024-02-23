@@ -11,6 +11,10 @@ public class WeaponController : MonoBehaviour
     public GameObject currentWeapon;
     public Weapon currentWeaponScript;
     public GameObject weaponInstance;
+    public GameObject pauseMenu;
+    public GameObject settingsMenu;
+    public Color crosshairColor;
+    public bool isPaused;
 
     public event Action OnNewWeaponSet;
     public event Action OnWeaponFired;
@@ -25,7 +29,7 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Cursor.visible)
+        if (Cursor.visible && !isPaused)
         {
             Cursor.visible = false;
         }
@@ -33,11 +37,18 @@ public class WeaponController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        currentWeaponScript.Move(value);
+        if(!isPaused)
+        {
+            currentWeaponScript.Move(value);
+        }
     }
 
     public void OnShoot()
     {
+        if(isPaused)
+        {
+            return;
+        }
         // If there are bullets in the magazine, shoot. If not, reload.
         if (currentWeaponScript.bulletsInMagazine > 0)
         {
@@ -117,7 +128,31 @@ public class WeaponController : MonoBehaviour
         weaponInstance = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         weaponInstance.transform.parent = gameObject.transform;
         currentWeaponScript = weaponInstance.GetComponent<Weapon>();
+        currentWeaponScript.ChangeCrosshairColor(crosshairColor);
         OnNewWeaponSet?.Invoke();
+    }
+
+    private void OnPause()
+    {
+        PauseGame();
+    }
+
+    public void PauseGame()
+    {
+        if(settingsMenu.activeSelf)
+        {
+            settingsMenu.SetActive(false);
+            pauseMenu.SetActive(true);
+        }
+        else
+        {
+            isPaused = !isPaused;
+            pauseMenu.SetActive(isPaused);
+            transform.GetChild(0).gameObject.SetActive(!isPaused);
+            Cursor.visible = isPaused;
+
+            Time.timeScale = isPaused ? 0 : 1;
+        }
     }
 
 }
