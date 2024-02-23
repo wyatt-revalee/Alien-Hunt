@@ -10,7 +10,7 @@ public class Magazine : MonoBehaviour
     public Sprite bulletSprite;
     public WeaponController weaponController;
 
-    public void Start()
+    private void Awake()
     {
         weaponController.OnWeaponFired += UseBullet;
         weaponController.OnWeaponReloaded += Reload;

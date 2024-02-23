@@ -70,7 +70,10 @@ public abstract class Enemy : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().color = Color.white;
         yield return new WaitForSeconds(0.2f);
-        GetComponent<SpriteRenderer>().color = baseColor;
+        if(health > 0)
+        {
+            GetComponent<SpriteRenderer>().color = baseColor;
+        }
     }
 
     public void SetMoveDirection(int hDir, int vDir)
