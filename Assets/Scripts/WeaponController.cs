@@ -13,6 +13,8 @@ public class WeaponController : MonoBehaviour
     public GameObject weaponInstance;
 
     public event Action OnNewWeaponSet;
+    public event Action<int> OnWeaponFired;
+    public event Action OnWeaponReloaded;
 
     void Start()
     {
@@ -36,8 +38,41 @@ public class WeaponController : MonoBehaviour
 
     public void OnShoot()
     {
-        currentWeaponScript.Shoot();
-        
+        //If there are bullets in the magazine, shoot. If not, reload.
+        if(currentWeaponScript.bulletsInMagazine > 0)
+        {
+            currentWeaponScript.Shoot();
+            OnWeaponFired?.Invoke(currentWeaponScript.bulletsPerShot);
+
+            if(currentWeaponScript.bulletsInMagazine == 0)
+            {
+                currentWeaponScript.Reload();
+                StartCoroutine(DoReload());
+            }
+        }
+        else
+        {
+            if(currentWeaponScript.isReloading)
+            {
+                return;
+            }
+            currentWeaponScript.Reload();
+            StartCoroutine(DoReload());
+        }
+
+    }
+
+    public void OnReload()
+    {
+        currentWeaponScript.bulletsInMagazine = 0;
+        currentWeaponScript.Reload();
+        StartCoroutine(DoReload());
+    }
+
+    IEnumerator DoReload()
+    {
+        yield return new WaitForSeconds(currentWeaponScript.reloadSpeed);
+        OnWeaponReloaded?.Invoke();
     }
 
     public void SetNewWeapon(GameObject newWeapon)

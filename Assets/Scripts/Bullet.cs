@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     public int pointsGained;
     public bool enemyHit;
     public Weapon weapon;
+    public Sprite magazineSprite;
 
     private void Start()
     {

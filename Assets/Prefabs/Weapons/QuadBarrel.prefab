@@ -98,11 +98,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 4242624897227732910, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
-  reloadSpeed: 0
-  fireRate: 0
-  magazineSize: 0
   bulletsPerShot: 4
+  reloadSpeed: 2
+  fireRate: 0
+  magazineSize: 32
   isAutomatic: 0
+  bulletsInMagazine: 32
+  isReloading: 0
+  reloadingCrosshair: {fileID: 21300000, guid: a9f58bf8354bf8846b8ec5e3180c7d1d, type: 3}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 0

@@ -17,6 +17,9 @@ public abstract class Weapon : MonoBehaviour
     public int fireRate;
     public int magazineSize;
     public bool isAutomatic;
+    public int bulletsInMagazine;
+    public bool isReloading;
+    public Sprite reloadingCrosshair;
 
     [Header("Target Settings")]
     public LayerMask enemyLayerMask;
@@ -48,6 +51,29 @@ public abstract class Weapon : MonoBehaviour
 
     public virtual void Shoot()
     {
+    }
+
+    public virtual void Reload()
+    {
+        if(isReloading)
+        {
+            return;
+        }
+        else
+        {
+            isReloading = true;
+            StartCoroutine(DoReload());
+        }
+    }
+
+    IEnumerator DoReload()
+    {
+        Sprite crosshair = GetComponent<SpriteRenderer>().sprite;
+        GetComponent<SpriteRenderer>().sprite = reloadingCrosshair;
+        yield return new WaitForSeconds(reloadSpeed);
+        GetComponent<SpriteRenderer>().sprite = crosshair;
+        bulletsInMagazine = magazineSize;
+        isReloading = false;
     }
 
     public virtual void UpdateBulletInfo(bool enemyHit, int pointsGained)

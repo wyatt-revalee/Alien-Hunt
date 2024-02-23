@@ -6,6 +6,7 @@ public class Revolver : Weapon
 {
     public override void Shoot()
     {
+        bulletsInMagazine--;
         // Place new bullet
         GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
         newBullet.GetComponent<Bullet>().weapon = this;
