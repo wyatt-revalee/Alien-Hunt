@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public int health;
     public HealthBar healthBar;
     public event Action<int> OnHealthChange;
+    public event Action OnGameOver;
 
     private void Start()
     {
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+        OnGameOver?.Invoke();
         yield return new WaitForSeconds(5f);
     }
 

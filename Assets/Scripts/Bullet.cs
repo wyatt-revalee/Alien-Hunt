@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
             enemyHit = true;
             if(enemy.health > 0)
             {
-                enemy.Damage(bulletData.damage);
+                enemy.Damage(bulletData.damage + weapon.damage);
                 if(enemy.health <= 0)
                 {
                     pointsGained = enemy.pointValue;

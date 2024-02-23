@@ -26,20 +26,20 @@ public class Magazine : MonoBehaviour
         }
     }
 
-    public void UseBullet(int bulletsUsed)
+    public void UseBullet()
     {
-        for(int i = 0; i < bulletsUsed; i++)
-        {
-            bulletsInMagazine--;
-            transform.GetChild(bulletsInMagazine).gameObject.GetComponent<Image>().color = new Color(0, 0, 0);
-        }
+        bulletsInMagazine--;
+        transform.GetChild(bulletsInMagazine).gameObject.GetComponent<Image>().color = new Color(0, 0, 0);
     }
 
     public void SetNewWeapon()
     {
-        Debug.Log("Setting new weapon");
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
         bulletSprite = weaponController.currentWeaponScript.bullet.GetComponent<Bullet>().magazineSprite;
-        magazineSize = weaponController.currentWeaponScript.magazineSize;
+        magazineSize = weaponController.currentWeaponScript.magazineSize / weaponController.currentWeaponScript.bulletsPerShot;
         bulletsInMagazine = magazineSize;
         for (int i = 0; i < magazineSize; i++)
         {

@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc4074897f4db50488cc42878aed4784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 1
   health: 1
   speed: 2
   pointValue: 100
@@ -180,4 +181,4 @@ MonoBehaviour:
   horizontalDirection: 0
   verticalDirection: 0
   isMoving: 0
-  movementOverride: {fileID: 0}
+  itemDrop: {fileID: 0}

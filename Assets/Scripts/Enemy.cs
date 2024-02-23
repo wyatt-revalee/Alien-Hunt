@@ -9,6 +9,7 @@ public abstract class Enemy : MonoBehaviour
 {
 
     [Header("Enemy Stats")]
+    public int maxHealth;
     public int health;
     public int speed;
     public int pointValue;
@@ -17,6 +18,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Components")]
     public Animator animator;
     public Canvas pointPopup;
+    private Color baseColor;
 
     [Header("Enemy Movement")]
     public int horizontalDirection;
@@ -25,6 +27,12 @@ public abstract class Enemy : MonoBehaviour
 
     public GameObject itemDrop;
     public event Action<bool> OnDeath;
+
+    public virtual void Awake()
+    {
+        baseColor = GetComponent<SpriteRenderer>().color;
+        health = maxHealth;
+    }
 
     public void Damage(int damage)
     {
@@ -60,10 +68,9 @@ public abstract class Enemy : MonoBehaviour
 
     public IEnumerator DamageFlash()
     {
-        Color basecolor = GetComponent<SpriteRenderer>().color;
         GetComponent<SpriteRenderer>().color = Color.white;
-        yield return new WaitForSeconds(0.5f);
-        GetComponent<SpriteRenderer>().color = basecolor;
+        yield return new WaitForSeconds(0.2f);
+        GetComponent<SpriteRenderer>().color = baseColor;
     }
 
     public void SetMoveDirection(int hDir, int vDir)

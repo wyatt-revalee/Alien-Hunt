@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour
     public GameObject weaponInstance;
 
     public event Action OnNewWeaponSet;
-    public event Action<int> OnWeaponFired;
+    public event Action OnWeaponFired;
     public event Action OnWeaponReloaded;
 
     void Start()
@@ -42,7 +42,7 @@ public class WeaponController : MonoBehaviour
         if(currentWeaponScript.bulletsInMagazine > 0)
         {
             currentWeaponScript.Shoot();
-            OnWeaponFired?.Invoke(currentWeaponScript.bulletsPerShot);
+            OnWeaponFired?.Invoke();
 
             if(currentWeaponScript.bulletsInMagazine == 0)
             {

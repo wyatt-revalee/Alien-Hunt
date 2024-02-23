@@ -32,10 +32,12 @@ public class StatTracker : MonoBehaviour
     public WeaponController weaponController;
     private Weapon weapon;
 
+    private void Awake()
+    {
+        weaponController.OnNewWeaponSet += NewWeaponSet;
+    }
     private void Start()
     {
-        StartCoroutine(InitializeFirstWeapon());
-        weaponController.OnNewWeaponSet += NewWeaponSet;
         UpdateStatsUI();
     }
 
@@ -81,7 +83,6 @@ public class StatTracker : MonoBehaviour
 
     private void NewWeaponSet()
     {
-        if(weapon != null) return;
         weapon = weaponController.currentWeaponScript;
         weapon.OnEnemyKilled += EnemyDeathHandler;
         weapon.OnShotFired += ShotFiredHandler;

@@ -11,12 +11,13 @@ public class Killzone : MonoBehaviour
         // If object is an enemy, destroy it
         if (collider.transform.gameObject.layer == 6)
         {
-            collider.transform.gameObject.GetComponent<Enemy>().HitKillZone();
-            if(collider.transform.gameObject.GetComponent<Enemy>().itemDrop != null)
+            Enemy enemy = collider.transform.gameObject.GetComponent<Enemy>();
+            enemy.HitKillZone();
+            if(enemy.itemDrop != null)
             {
-                levelManager.AssignMissedPickup(collider.transform.gameObject.GetComponent<Enemy>().itemDrop);
+                levelManager.AssignMissedPickup(enemy.itemDrop);
             }
-            player.Damage(1);
+            player.Damage(enemy.maxHealth);
         }
 
         if (collider.transform.gameObject.layer == 9)
