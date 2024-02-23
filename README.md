@@ -23,8 +23,8 @@ I wanted to create a smaller, simpler game so I could see the full process from 
 
 
 Gameplay
-- Add magazines and reloading
-  - Would add extra depth to gameplay and make different weapons feel more unique.
+- ~~Add magazines and reloading~~
+  - ~~Would add extra depth to gameplay and make different weapons feel more unique.~~ Done! Needs polishing.
 - Add a way to lose
   - Perhaps enemies can attack, or drop bombs that will explode and hurt the player unless destroyed, ~~or even just make the player take damage for each enemy that gets off screen~~ Done
 - Weapon Pickups
