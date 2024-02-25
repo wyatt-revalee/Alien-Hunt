@@ -171,6 +171,7 @@ public class LevelManager : MonoBehaviour
             Cursor.visible = true;
             weaponController.SetShopping(true);
             shop.SetActive(true);
+            shop.GetComponent<Shop>().RefreshShop();
             isShopping = true;
             yield return new WaitUntil(() => !isShopping);
             weaponController.SetShopping(false);
@@ -212,11 +213,14 @@ public class LevelManager : MonoBehaviour
         TextMeshProUGUI waveText = WaveMessenger.GetComponentInChildren<TextMeshProUGUI>();
         waveText.text = string.Format("Wave {0} Complete", currentLevel);
         yield return new WaitForSeconds(1f);
-        waveText.text = string.Format("Wave {0} Complete\nEnemies Killed: {1}/{2}", currentLevel, enemiesKilled, enemiesInWave);
+        waveText.text += string.Format("\nEnemies Killed: {0}/{1}", enemiesKilled, enemiesInWave);
         yield return new WaitForSeconds(1f);
-        waveText.text = string.Format("Wave {0} Complete\nEnemies Killed: {1}/{2}\nPoints Earned: {3}", currentLevel, enemiesKilled, enemiesInWave, pointsEarned);
-
+        waveText.text += string.Format("\nPoints Earned: {0}",pointsEarned);
+        yield return new WaitForSeconds(1f);
         float accuracy = GetWaveAccuracy();
+        waveText.text += string.Format("\nCoins Awarded: {0}", pointsEarned/1000 + (int)accuracy/1000);
+        player.AddCoins(pointsEarned/1000 + (int)accuracy/1000);
+
         if (accuracy >= 70)
         {
             yield return new WaitForSeconds(1f);

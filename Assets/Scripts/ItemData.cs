@@ -12,4 +12,5 @@ public class ItemData : ScriptableObject
     public string description;
     public string upgradeType;
     public float upgradeValue;
+    public GameObject weapon;
 }

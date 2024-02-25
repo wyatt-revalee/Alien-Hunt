@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -18,11 +19,13 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
     public event Action<int> OnHealthChange;
     public event Action OnGameOver;
+    public event Action<int> OnCoinChange;
 
     private void Start()
     {
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        AddCoins(0);
     }
 
     public void Heal(int heal)
@@ -81,11 +84,13 @@ public class Player : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
+        OnCoinChange?.Invoke(coins);
     }
 
     public void RemoveCoins(int amount)
     {
         coins -= amount;
+        OnCoinChange?.Invoke(coins);
     }
 
     public void AddUpgrade(string upgrade, float value)

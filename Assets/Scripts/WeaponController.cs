@@ -34,6 +34,11 @@ public class WeaponController : MonoBehaviour
         {
             Cursor.visible = false;
         }
+        else if (isPaused)
+        {
+            Cursor.visible = true;
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     public void OnMove(InputValue value)
@@ -130,9 +135,14 @@ public class WeaponController : MonoBehaviour
         weaponInstance.transform.parent = gameObject.transform;
         currentWeaponScript = weaponInstance.GetComponent<Weapon>();
         currentWeaponScript.player = player;
-        Debug.Log(currentWeaponScript.player);
         currentWeaponScript.ChangeCrosshairColor(crosshairColor);
         OnNewWeaponSet?.Invoke();
+
+        if(isPaused)
+        {
+            Cursor.visible = true;
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     private void OnPause()

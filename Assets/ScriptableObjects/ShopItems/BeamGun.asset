@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1e36d53b507a804b812a4004af4e381, type: 3}
-  m_Name: BulletSizeIncrease
+  m_Name: BeamGun
   m_EditorClassIdentifier: 
-  itemName: Bullet Size Increase
-  type: Upgrade
-  image: {fileID: 21300000, guid: d6b3a1587750ded49ab35c8e31f87de4, type: 3}
-  cost: 3
-  description: Increase size of all bullets by 10%
-  upgradeType: BulletSize
-  upgradeValue: 0.1
+  itemName: Beam Gun
+  type: Weapon
+  image: {fileID: 0}
+  cost: 5
+  description: Automatic weapon with low damage and high fire rate.
+  upgradeType: 
+  upgradeValue: 0
   weapon: {fileID: 6330520074738032548, guid: 0ea88772ae15c2c49b5a2f464f697aa2, type: 3}

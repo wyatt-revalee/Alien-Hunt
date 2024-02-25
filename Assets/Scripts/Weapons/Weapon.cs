@@ -31,12 +31,6 @@ public abstract class Weapon : MonoBehaviour
     public event Action<int> OnEnemyKilled;
     public event Action<int> OnBonusAdded;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Cursor.visible = false;
-    }
-
     public void Move(InputValue value)
     {
         // Convert mouse position to position within camera, set our crosshair to that position. Set mouse z location to 1, otherwise it is 0 and meshes with background.
