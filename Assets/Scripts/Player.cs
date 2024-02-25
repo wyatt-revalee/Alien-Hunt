@@ -1,12 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Stats")]
     public int maxHealth;
     public int health;
+    public float bulletSizeModifer;
+    public int fireRateModifier;
+    public int reloadSpeedModifier;
+
+
+    public int coins;
     public HealthBar healthBar;
     public event Action<int> OnHealthChange;
     public event Action OnGameOver;
@@ -68,5 +76,31 @@ public class Player : MonoBehaviour
 
         Camera.main.transform.position = new Vector3(xpos, ypos, zpos);
 
+    }
+
+    public void AddCoins(int amount)
+    {
+        coins += amount;
+    }
+
+    public void RemoveCoins(int amount)
+    {
+        coins -= amount;
+    }
+
+    public void AddUpgrade(string upgrade, float value)
+    {
+        switch(upgrade)
+        {
+            case "BulletSize":
+                bulletSizeModifer += value;
+                break;
+            case "FireRate":
+                fireRateModifier++;
+                break;
+            case "ReloadSpeed":
+                reloadSpeedModifier++;
+                break;
+        }
     }
 }

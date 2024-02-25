@@ -15,6 +15,10 @@ public class GameOverMenu : MonoBehaviour
 
     public void ShowStats(Dictionary<string, int> stats)
     {
+        foreach (Transform child in statPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
         foreach (KeyValuePair<string, int> stat in stats)
         {
             GameObject newStat = Instantiate(exampleStat, statPanel.transform);

@@ -24,6 +24,8 @@ public abstract class Weapon : MonoBehaviour
 
     [Header("Target Settings")]
     public LayerMask enemyLayerMask;
+
+    public Player player;
     public event Action OnShotFired;
     public event Action OnEnemyHit;
     public event Action<int> OnEnemyKilled;
@@ -33,15 +35,6 @@ public abstract class Weapon : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if(Cursor.visible)
-        {
-            Cursor.visible = false;
-        }
     }
 
     public void Move(InputValue value)
@@ -65,6 +58,14 @@ public abstract class Weapon : MonoBehaviour
             isReloading = true;
             StartCoroutine(DoReload());
         }
+    }
+
+    public void SpawnBullet(Vector3 location)
+    {
+        GameObject bulletInstance = Instantiate(bullet, location, Quaternion.identity);
+        Bullet bulletScript = bulletInstance.GetComponent<Bullet>();
+        bulletScript.weapon = this;
+        bulletInstance.transform.localScale = new Vector3(bullet.transform.localScale.x * player.bulletSizeModifer, bullet.transform.localScale.y * player.bulletSizeModifer, 1);
     }
 
     IEnumerator DoReload()

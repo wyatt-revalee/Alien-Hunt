@@ -19,8 +19,8 @@ public class QuadBarrel : Weapon
         for (int bulletNum = 1; bulletNum <= bulletsPerShot; bulletNum++)
         {
             Vector2 direction = bulletLocations[bulletNum-1];
-            GameObject newBullet = Instantiate(bullet, new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z), Quaternion.identity);
-            newBullet.GetComponent<Bullet>().weapon = this;
+            Vector3 location = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z);
+            SpawnBullet(location);
         }
         // Place new bullet
         ShakeCrosshair(1);

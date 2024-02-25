@@ -20,9 +20,11 @@ public class LevelManager : MonoBehaviour
     public int enemiesLeft;
     public bool healthPickupAssigned;
     public bool isGameOver;
+    public bool isShopping;
     public Dictionary<string, int> playerStats = new Dictionary<string, int>();
 
     [Header("Game Objects")]
+    public GameObject shop;
     public GameObject WaveMessenger;
     public WeaponController weaponController;
     private Weapon weapon;
@@ -164,8 +166,16 @@ public class LevelManager : MonoBehaviour
         {
             StartCoroutine(SetEndWaveText());
             WaveMessenger.SetActive(true);
+            yield return new WaitForSeconds(5f);
+            WaveMessenger.SetActive(false);
+            Cursor.visible = true;
+            weaponController.SetShopping(true);
+            shop.SetActive(true);
+            isShopping = true;
+            yield return new WaitUntil(() => !isShopping);
+            weaponController.SetShopping(false);
+            Cursor.visible = false;
         }
-        yield return new WaitForSeconds(5f);
         enemiesKilled = 0;
         enemiesInWave = 0;
         pointsEarned = 0;
@@ -270,7 +280,7 @@ public class LevelManager : MonoBehaviour
             if (gameOverMenu != null)
             {
                 gameOverMenu.GetComponent<GameOverMenu>().ShowStats(playerStats);
-                Destroy(gameObject);
+                Destroy(this);
             }
         }
     }

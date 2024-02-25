@@ -24,10 +24,11 @@ public class DoubleBarrel : Weapon
                 direction = ((bulletNum / 2)+1) *spread;
             }
 
-            GameObject newBullet = Instantiate(bullet, new Vector3(transform.position.x + direction, transform.position.y, transform.position.z), Quaternion.identity);
-            newBullet.GetComponent<Bullet>().weapon = this;
+            Vector3 location = new Vector3(transform.position.x + direction, transform.position.y, transform.position.z);
+
+            // Place new bullet
+            SpawnBullet(location);
         }
-        // Place new bullet
         ShakeCrosshair(1);
         ShakeCamera(1);
     }

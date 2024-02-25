@@ -9,10 +9,11 @@ public class WeaponController : MonoBehaviour
 {
     //This scripts exists to hold the weapon data and swap it out easily
     public GameObject currentWeapon;
-    public Weapon currentWeaponScript;
     public GameObject weaponInstance;
     public GameObject pauseMenu;
     public GameObject settingsMenu;
+    public Player player;
+    public Weapon currentWeaponScript;
     public Color crosshairColor;
     public bool isPaused;
 
@@ -89,7 +90,7 @@ public class WeaponController : MonoBehaviour
             {
                 currentWeaponScript.Shoot();
                 OnWeaponFired?.Invoke();
-                yield return new WaitForSeconds(1f / currentWeaponScript.fireRate);
+                yield return new WaitForSeconds(1f / (currentWeaponScript.fireRate * player.fireRateModifier));
             }
             else
             {
@@ -109,7 +110,7 @@ public class WeaponController : MonoBehaviour
 
     IEnumerator DoReload()
     {
-        yield return new WaitForSeconds(currentWeaponScript.reloadSpeed);
+        yield return new WaitForSeconds(currentWeaponScript.reloadSpeed / player.reloadSpeedModifier);
         OnWeaponReloaded?.Invoke();
     }
 
@@ -128,6 +129,8 @@ public class WeaponController : MonoBehaviour
         weaponInstance = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         weaponInstance.transform.parent = gameObject.transform;
         currentWeaponScript = weaponInstance.GetComponent<Weapon>();
+        currentWeaponScript.player = player;
+        Debug.Log(currentWeaponScript.player);
         currentWeaponScript.ChangeCrosshairColor(crosshairColor);
         OnNewWeaponSet?.Invoke();
     }
@@ -153,6 +156,13 @@ public class WeaponController : MonoBehaviour
 
             Time.timeScale = isPaused ? 0 : 1;
         }
+    }
+
+    public void SetShopping(bool isShopping)
+    {
+        isPaused = isShopping;
+        Cursor.visible = isShopping;
+        transform.GetChild(0).gameObject.SetActive(!isShopping);
     }
 
 }

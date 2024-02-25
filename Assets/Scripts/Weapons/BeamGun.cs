@@ -8,8 +8,7 @@ public class BeamGun : Weapon
     {
         bulletsInMagazine--;
         // Place new bullet
-        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-        newBullet.GetComponent<Bullet>().weapon = this;
+        SpawnBullet(transform.position);
         ShootWeaponEvent();
         ShakeCamera(1);
     }
