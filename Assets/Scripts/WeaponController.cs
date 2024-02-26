@@ -173,6 +173,7 @@ public class WeaponController : MonoBehaviour
         isPaused = isShopping;
         Cursor.visible = isShopping;
         transform.GetChild(0).gameObject.SetActive(!isShopping);
+        currentWeaponScript.isReloading = isShopping;
     }
 
 }

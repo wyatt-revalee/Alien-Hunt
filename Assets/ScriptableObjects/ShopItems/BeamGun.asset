@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Beam Gun
   type: Weapon
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 1e246044d1f21d74c95ceb303e6e97bd, type: 3}
   cost: 5
   description: Automatic weapon with low damage and high fire rate.
   upgradeType: 

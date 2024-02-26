@@ -107,9 +107,11 @@ MonoBehaviour:
   bulletsInMagazine: 32
   isReloading: 0
   reloadingCrosshair: {fileID: 21300000, guid: a9f58bf8354bf8846b8ec5e3180c7d1d, type: 3}
+  weaponSprite: {fileID: 21300000, guid: 346b861c3605a4548bc7a9bb3d45e730, type: 3}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  player: {fileID: 0}
   bulletLocations:
   - {x: 0.3, y: 0.3}
   - {x: -0.3, y: 0.3}

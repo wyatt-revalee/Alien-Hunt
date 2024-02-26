@@ -37,8 +37,8 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             return;
         }
-        Destroy(gameObject);
-        Destroy(this);
+        // Destroy(gameObject);
+        // Destroy(this);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

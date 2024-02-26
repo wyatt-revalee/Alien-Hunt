@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public int maxHealth;
     public int health;
     public float bulletSizeModifer;
-    public int fireRateModifier;
+    public float fireRateModifier;
     public int reloadSpeedModifier;
 
 
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
                 bulletSizeModifer += value;
                 break;
             case "FireRate":
-                fireRateModifier++;
+                fireRateModifier += value;
                 break;
             case "ReloadSpeed":
                 reloadSpeedModifier++;

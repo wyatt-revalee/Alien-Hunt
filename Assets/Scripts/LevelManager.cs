@@ -218,15 +218,17 @@ public class LevelManager : MonoBehaviour
         waveText.text += string.Format("\nPoints Earned: {0}",pointsEarned);
         yield return new WaitForSeconds(1f);
         float accuracy = GetWaveAccuracy();
-        waveText.text += string.Format("\nCoins Awarded: {0}", pointsEarned/1000 + (int)accuracy/1000);
-        player.AddCoins(pointsEarned/1000 + (int)accuracy/1000);
 
         if (accuracy >= 70)
         {
             yield return new WaitForSeconds(1f);
-            waveText.text = string.Format("Wave {0} Complete\nEnemies Killed: {1}/{2}\nPoints Earned: {3}\nAccuracy Bonus: {4}", currentLevel, enemiesKilled, enemiesInWave, pointsEarned, (int)accuracy*10);
+            waveText.text += string.Format("\nAccuracy Bonus: {0}", (int)accuracy*10);
             weapon.AddBonus((int)accuracy * 10);
         }
+        yield return new WaitForSeconds(1f);
+        int coinsEarned = pointsEarned/1000 + (int)accuracy/1000 >= 1? pointsEarned/1000 + (int)accuracy/1000 : 0;
+        waveText.text += string.Format("\nCoins Awarded: {0}", coinsEarned);
+        player.AddCoins(coinsEarned);
 
     }
 

@@ -21,6 +21,7 @@ public abstract class Weapon : MonoBehaviour
     public int bulletsInMagazine;
     public bool isReloading;
     public Sprite reloadingCrosshair;
+    public Sprite weaponSprite;
 
     [Header("Target Settings")]
     public LayerMask enemyLayerMask;
