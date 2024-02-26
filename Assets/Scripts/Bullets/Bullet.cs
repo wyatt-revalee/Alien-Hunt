@@ -28,7 +28,7 @@ public abstract class Bullet : MonoBehaviour
             enemyHit = true;
             if(enemy.health > 0)
             {
-                enemy.Damage(weapon.damage);
+                enemy.Damage((int)((weapon.damage + weapon.player.damageModiferFlat) * weapon.player.damageModifierPercentage));
                 if(enemy.health <= 0)
                 {
                     pointsGained = enemy.pointValue;

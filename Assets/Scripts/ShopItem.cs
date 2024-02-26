@@ -21,6 +21,7 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {2, new Color(0.5f, 1f, 0.5f, 0.2f)}, // Uncommon, green
         {3, new Color(0.5f, 0.5f, 1f, 0.2f)}, // Rare, blue
         {4, new Color(1f, 0.5f, 1f, 0.2f)}, // Very Rare, pink
+        {5, new Color(1f, 1f, 0f, 0.2f)}, // Legendary, yellow
     };
 
     public void Awake()

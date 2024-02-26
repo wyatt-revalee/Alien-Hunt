@@ -166,7 +166,7 @@ public class LevelManager : MonoBehaviour
         {
             StartCoroutine(SetEndWaveText());
             WaveMessenger.SetActive(true);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(6f);
             WaveMessenger.SetActive(false);
             Cursor.visible = true;
             weaponController.SetShopping(true);

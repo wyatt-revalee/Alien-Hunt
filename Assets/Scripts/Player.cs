@@ -13,11 +13,15 @@ public class Player : MonoBehaviour
     public float bulletSizeModifer;
     public float fireRateModifier;
     public float reloadSpeedModifier;
+    public float magazineSizeModifier;
+    public float damageModifierPercentage;
+    public int damageModiferFlat;
 
 
     public int coins;
     public HealthBar healthBar;
     public event Action<int> OnHealthChange;
+    public event Action OnMagazineSizeChange;
     public event Action OnGameOver;
     public event Action<int> OnCoinChange;
 
@@ -104,7 +108,17 @@ public class Player : MonoBehaviour
                 fireRateModifier += value;
                 break;
             case "ReloadSpeed":
-                reloadSpeedModifier++;
+                reloadSpeedModifier -= value;
+                break;
+            case "MagazineSize":
+                magazineSizeModifier += value;
+                OnMagazineSizeChange?.Invoke();
+                break;
+            case "DamageFlat":
+                damageModiferFlat += (int)value;
+                break;
+            case "DamagePercentage":
+                damageModifierPercentage += value;
                 break;
             case "Health":
                 maxHealth += (int)value;

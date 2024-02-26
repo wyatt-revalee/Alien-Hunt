@@ -115,7 +115,7 @@ public class WeaponController : MonoBehaviour
 
     IEnumerator DoReload()
     {
-        yield return new WaitForSeconds(currentWeaponScript.reloadSpeed / player.reloadSpeedModifier);
+        yield return new WaitForSeconds(currentWeaponScript.reloadSpeed * player.reloadSpeedModifier);
         OnWeaponReloaded?.Invoke();
     }
 

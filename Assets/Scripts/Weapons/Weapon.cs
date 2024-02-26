@@ -67,9 +67,9 @@ public abstract class Weapon : MonoBehaviour
     {
         Sprite crosshair = GetComponent<SpriteRenderer>().sprite;
         GetComponent<SpriteRenderer>().sprite = reloadingCrosshair;
-        yield return new WaitForSeconds(reloadSpeed);
+        yield return new WaitForSeconds(reloadSpeed * player.reloadSpeedModifier);
         GetComponent<SpriteRenderer>().sprite = crosshair;
-        bulletsInMagazine = magazineSize;
+        bulletsInMagazine = (int)(magazineSize * player.magazineSizeModifier);
         isReloading = false;
     }
 
