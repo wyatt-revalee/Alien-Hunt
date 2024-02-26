@@ -27,13 +27,13 @@ Gameplay
   - ~~Would add extra depth to gameplay and make different weapons feel more unique.~~ Done! Needs polishing.
 - Add a way to lose
   - Perhaps enemies can attack, or drop bombs that will explode and hurt the player unless destroyed, ~~or even just make the player take damage for each enemy that gets off screen~~ Done
-- Weapon Pickups
-  - Weapon pickups asset already exists and is function, need to work it into the gameplay somehow. Perhaps a random drop once a wave, or from an enemy?
-  - Should these be permanent, temporary, or a mix? Either they have unlimited ammo, limited ammo that needs to be replenished, or set amount of ammo, and disappear after they are out.
-      - Favoring the inbetween option.
+- ~~Weapon Pickups~~ Opted to do a shop system instead.
+  - ~~Weapon pickups asset already exists and is function, need to work it into the gameplay somehow. Perhaps a random drop once a wave, or from an enemy?~~
+  - ~~Should these be permanent, temporary, or a mix? Either they have unlimited ammo, limited ammo that needs to be replenished, or set amount of ammo, and disappear after they are out.~~
+      - ~~Favoring the inbetween option.~~
 - Power ups
   - Maybe things like exploding bullets, or bottomless magazine. These would be similar to pickups but they would only last for a certain time
-- Health pickups
+- ~~Health pickups
   - ~~Add health pickups for players to recover health that they've lost~~ Done. A random enemy is assigned a health restoration that drops upon death. If enemy is missed, it is reassigned to a new enemy until player is healed.
   - Needs to be randomized. Player shouldn't just be guaranteed a health drop every time they are low.
 - New enemy types
@@ -47,13 +47,15 @@ Gameplay
   - Electric - Enemy is hit, nearby enemies are shocked
     
 - Gameplay Loop Redesign
-  - Introduce more Rogue-Like elements? Perhaps a shop every wave/waves that allow players to upgrade weapons and skills, and purchase new items
+  - ~~Introduce more Rogue-Like elements? Perhaps a shop every wave/waves that allow players to upgrade weapons and skills, and purchase new items~~ Done. Shop added.
+  - Add perma-unlocks after hitting milestones
+  - Perhaps add an 'ending' (final boss?)
 
  UI / Accessibility
  - Add start/pause/settings menus
   - Allow players to change color settings
     - Themes for UI / Background
-    - Color sliders for crosshair
+    - ~~Color sliders for crosshair~~ Done!
     - Colorblind mode
 
 Artwork & Animation</br>
