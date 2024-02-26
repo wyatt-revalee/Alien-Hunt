@@ -7,6 +7,7 @@ public class ItemData : ScriptableObject
 {
     public string itemName;
     public string type;
+    public int rarity;
     public Sprite image;
     public int cost;
     public string description;

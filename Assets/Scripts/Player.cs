@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public int health;
     public float bulletSizeModifer;
     public float fireRateModifier;
-    public int reloadSpeedModifier;
+    public float reloadSpeedModifier;
 
 
     public int coins;
@@ -105,6 +105,13 @@ public class Player : MonoBehaviour
                 break;
             case "ReloadSpeed":
                 reloadSpeedModifier++;
+                break;
+            case "Health":
+                maxHealth += (int)value;
+                health = maxHealth;
+                healthBar.SetMaxHealth(maxHealth);
+                healthBar.SetHealth(health);
+                OnHealthChange?.Invoke(health);
                 break;
         }
     }

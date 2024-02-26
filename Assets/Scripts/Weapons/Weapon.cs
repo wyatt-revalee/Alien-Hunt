@@ -14,7 +14,7 @@ public abstract class Weapon : MonoBehaviour
 
     [Header("Weapon Settings")]
     public int damage;
-    public int reloadSpeed;
+    public float reloadSpeed;
     public int fireRate;
     public int magazineSize;
     public bool isAutomatic;

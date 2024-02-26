@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1e36d53b507a804b812a4004af4e381, type: 3}
-  m_Name: BulletSizeIncrease
+  m_Name: HealthUp
   m_EditorClassIdentifier: 
-  itemName: Bullet Size +
+  itemName: Health +
   type: Upgrade
-  rarity: 1
-  image: {fileID: 21300000, guid: d6b3a1587750ded49ab35c8e31f87de4, type: 3}
-  cost: 3
-  description: Increase size of all bullets by 10%
-  upgradeType: BulletSize
-  upgradeValue: 0.1
+  rarity: 2
+  image: {fileID: 21300000, guid: 76a8e9c25da217b41b6950459d3a309e, type: 3}
+  cost: 5
+  description: Increase max health by 5.
+  upgradeType: Health
+  upgradeValue: 5
   weapon: {fileID: 0}
