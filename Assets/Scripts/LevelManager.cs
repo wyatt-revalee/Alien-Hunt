@@ -161,6 +161,7 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator StartNewWave()
     {
+        player.Heal(player.maxHealth);
         waitingOnNewWave = true;
         if(currentLevel != 0)
         {

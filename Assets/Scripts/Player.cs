@@ -16,6 +16,17 @@ public class Player : MonoBehaviour
     public float magazineSizeModifier;
     public float damageModifierPercentage;
     public int damageModiferFlat;
+    public Dictionary<ItemData, int> inventory = new Dictionary<ItemData, int>();
+    public Dictionary<string, float> stats = new Dictionary<string, float>
+    {
+        { "BulletSize", 1 },
+        { "FireRate", 1 },
+        { "ReloadSpeed", 1 },
+        { "MagazineSize", 1 },
+        { "DamagePercent", 1 },
+        { "DamageFlat", 1 },
+        { "Health", 20 }
+    };
 
 
     public int coins;
@@ -24,6 +35,7 @@ public class Player : MonoBehaviour
     public event Action OnMagazineSizeChange;
     public event Action OnGameOver;
     public event Action<int> OnCoinChange;
+    public event Action OnUpgradeAdded;
 
     private void Start()
     {
@@ -97,36 +109,85 @@ public class Player : MonoBehaviour
         OnCoinChange?.Invoke(coins);
     }
 
-    public void AddUpgrade(string upgrade, float value)
+    public void AddUpgrade(ItemData upgrade)
     {
-        switch(upgrade)
+        if(!inventory.ContainsKey(upgrade))
+        {
+            inventory.Add(upgrade, 0);
+        }
+        inventory[upgrade]++;
+        stats[upgrade.upgradeType] += upgrade.upgradeValue;
+        OnUpgradeAdded?.Invoke();
+
+        switch(upgrade.upgradeType)
         {
             case "BulletSize":
-                bulletSizeModifer += value;
+                bulletSizeModifer += upgrade.upgradeValue;
                 break;
             case "FireRate":
-                fireRateModifier += value;
+                fireRateModifier += upgrade.upgradeValue;
                 break;
             case "ReloadSpeed":
-                reloadSpeedModifier -= value;
+                reloadSpeedModifier -= upgrade.upgradeValue;
                 break;
             case "MagazineSize":
-                magazineSizeModifier += value;
+                magazineSizeModifier += upgrade.upgradeValue;
                 OnMagazineSizeChange?.Invoke();
                 break;
             case "DamageFlat":
-                damageModiferFlat += (int)value;
+                damageModiferFlat += (int)upgrade.upgradeValue;
                 break;
-            case "DamagePercentage":
-                damageModifierPercentage += value;
+            case "DamagePercent":
+                damageModifierPercentage += upgrade.upgradeValue;
                 break;
             case "Health":
-                maxHealth += (int)value;
+                maxHealth += (int)upgrade.upgradeValue;
                 health = maxHealth;
                 healthBar.SetMaxHealth(maxHealth);
                 healthBar.SetHealth(health);
                 OnHealthChange?.Invoke(health);
                 break;
+        }
+    }
+
+    public void RemoveUpgrade(ItemData upgrade)
+    {
+        if(inventory.ContainsKey(upgrade))
+        {
+            inventory[upgrade]--;
+            if(inventory[upgrade] == 0)
+            {
+                inventory.Remove(upgrade);
+            }
+            switch(upgrade.name)
+            {
+                case "BulletSize":
+                    bulletSizeModifer -= upgrade.upgradeValue;
+                    break;
+                case "FireRate":
+                    fireRateModifier -= upgrade.upgradeValue;
+                    break;
+                case "ReloadSpeed":
+                    reloadSpeedModifier += upgrade.upgradeValue;
+                    break;
+                case "MagazineSize":
+                    magazineSizeModifier -= upgrade.upgradeValue;
+                    OnMagazineSizeChange?.Invoke();
+                    break;
+                case "DamageFlat":
+                    damageModiferFlat -= (int)upgrade.upgradeValue;
+                    break;
+                case "DamagePercentage":
+                    damageModifierPercentage -= upgrade.upgradeValue;
+                    break;
+                case "Health":
+                    maxHealth -= (int)upgrade.upgradeValue;
+                    health = maxHealth;
+                    healthBar.SetMaxHealth(maxHealth);
+                    healthBar.SetHealth(health);
+                    OnHealthChange?.Invoke(health);
+                    break;
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ public class WeaponController : MonoBehaviour
     public GameObject weaponInstance;
     public GameObject pauseMenu;
     public GameObject settingsMenu;
+    public GameObject inventoryMenu;
     public Player player;
     public Weapon currentWeaponScript;
     public Color crosshairColor;
@@ -174,6 +175,17 @@ public class WeaponController : MonoBehaviour
         Cursor.visible = isShopping;
         transform.GetChild(0).gameObject.SetActive(!isShopping);
         currentWeaponScript.isReloading = isShopping;
+    }
+
+    public void OnInventory()
+    {
+        if(pauseMenu.activeSelf || settingsMenu.activeSelf)
+        {
+            return;
+        }
+        inventoryMenu.SetActive(!inventoryMenu.activeSelf);
+        PauseGame();
+        pauseMenu.SetActive(false);
     }
 
 }

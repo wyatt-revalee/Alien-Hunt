@@ -52,6 +52,7 @@ public class Magazine : MonoBehaviour
             newBullet.transform.localPosition = new Vector3(0, 0, 0);
             newBullet.transform.localScale = new Vector3(1, 1, 1);
         }
+        weaponController.currentWeaponScript.bulletsInMagazine = bulletsInMagazine;
     }
 
 }

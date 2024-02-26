@@ -78,7 +78,7 @@ public class Shop : MonoBehaviour
             switch (item.itemData.type)
             {
                 case "Upgrade":
-                    player.AddUpgrade(item.itemData.upgradeType, item.itemData.upgradeValue);
+                    player.AddUpgrade(item.itemData);
                     break;
                 case "Weapon":
                     weaponController.SetNewWeapon(item.itemData.weapon);

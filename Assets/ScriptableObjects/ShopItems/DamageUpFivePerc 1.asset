@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e36d53b507a804b812a4004af4e381, type: 3}
+  m_Name: DamageUpFivePerc 1
+  m_EditorClassIdentifier: 
+  itemName: Silver Bullets
+  type: Upgrade
+  rarity: 2
+  image: {fileID: 21300000, guid: b8ab8fc4367b777419f0a5ca0ae98b09, type: 3}
+  cost: 5
+  description: Increase damage by 5%.
+  upgradeType: DamagePercent
+  upgradeValue: 0.05
+  weapon: {fileID: 0}
