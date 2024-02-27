@@ -60,16 +60,16 @@ public abstract class Weapon : MonoBehaviour
         GameObject bulletInstance = Instantiate(bullet, location, Quaternion.identity);
         Bullet bulletScript = bulletInstance.GetComponent<Bullet>();
         bulletScript.weapon = this;
-        bulletInstance.transform.localScale = new Vector3(bullet.transform.localScale.x * player.bulletSizeModifer, bullet.transform.localScale.y * player.bulletSizeModifer, 1);
+        bulletInstance.transform.localScale = new Vector3(bullet.transform.localScale.x * player.bulletSizeModifer.value, bullet.transform.localScale.y * player.bulletSizeModifer.value, 1);
     }
 
     IEnumerator DoReload()
     {
         Sprite crosshair = GetComponent<SpriteRenderer>().sprite;
         GetComponent<SpriteRenderer>().sprite = reloadingCrosshair;
-        yield return new WaitForSeconds(reloadSpeed * player.reloadSpeedModifier);
+        yield return new WaitForSeconds(reloadSpeed * player.reloadSpeedModifier.value);
         GetComponent<SpriteRenderer>().sprite = crosshair;
-        bulletsInMagazine = (int)(magazineSize * player.magazineSizeModifier);
+        bulletsInMagazine = (int)(magazineSize * player.magazineSizeModifier.value);
         isReloading = false;
     }
 

@@ -1940,14 +1940,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ce6e0b3f196434fb12226eea3ca3c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth:
+    name: Health
+    value: 20
+    sprite: {fileID: 21300000, guid: 76a8e9c25da217b41b6950459d3a309e, type: 3}
   health: 0
-  bulletSizeModifer: 1
-  fireRateModifier: 1
-  reloadSpeedModifier: 1
-  magazineSizeModifier: 1
-  damageModifierPercentage: 1
-  damageModiferFlat: 1
+  bulletSizeModifer:
+    name: Bullet Size
+    value: 1
+    sprite: {fileID: 21300000, guid: d6b3a1587750ded49ab35c8e31f87de4, type: 3}
+  fireRateModifier:
+    name: Fire Rate
+    value: 1
+    sprite: {fileID: 21300000, guid: b05223351f537804ab63192e99d40ead, type: 3}
+  reloadSpeedModifier:
+    name: Reload Speed
+    value: 1
+    sprite: {fileID: 21300000, guid: b8ab8fc4367b777419f0a5ca0ae98b09, type: 3}
+  magazineSizeModifier:
+    name: Magazine Size
+    value: 1
+    sprite: {fileID: 0}
+  damageModifierPercentage:
+    name: Damage Modifier
+    value: 1
+    sprite: {fileID: 0}
+  damageModiferFlat:
+    name: Damage Increase
+    value: 0
+    sprite: {fileID: 0}
   coins: 1000
   healthBar: {fileID: 489177869}
 --- !u!1 &2111273528

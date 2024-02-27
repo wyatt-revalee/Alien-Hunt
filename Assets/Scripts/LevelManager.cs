@@ -6,6 +6,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.IO;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class LevelManager : MonoBehaviour
 {
@@ -149,11 +150,11 @@ public class LevelManager : MonoBehaviour
 
     private void PlayerHealthListener(int health)
     {
-        if(health <= player.maxHealth/3 && !healthPickupAssigned)
+        if(health <= player.maxHealth.value / 3 && !healthPickupAssigned)
         {
             AssignHealthPickup();
         }
-        if(health > player.maxHealth/3 && healthPickupAssigned)
+        if(health > player.maxHealth.value / 3 && healthPickupAssigned)
         {
             healthPickupAssigned = false;
         }
@@ -161,7 +162,7 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator StartNewWave()
     {
-        player.Heal(player.maxHealth);
+        player.Heal((int)player.maxHealth.value);
         waitingOnNewWave = true;
         if(currentLevel != 0)
         {

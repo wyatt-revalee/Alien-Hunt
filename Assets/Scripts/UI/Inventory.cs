@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -30,11 +31,11 @@ public class Inventory : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        foreach (KeyValuePair<string, float> kvp in player.stats)
+        foreach (KeyValuePair<string, Stat> kvp in player.stats)
         {
-            Debug.Log(kvp.Key + " " + kvp.Value);
             GameObject playerStatInstance = Instantiate(playerStat, transform);
-            playerStatInstance.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("{0}: {1}", kvp.Key, kvp.Value);
+            playerStatInstance.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = string.Format("{0}: {1}", kvp.Value.name, kvp.Value.value);
+            playerStatInstance.transform.GetChild(1).GetComponent<Image>().sprite = kvp.Value.sprite;
             playerStatInstance.transform.SetParent(transform.GetChild(2).transform.GetChild(1));
         }
     }
@@ -49,7 +50,8 @@ public class Inventory : MonoBehaviour
 
     public void UpdateWeapon()
     {
-
+        Debug.Log("Updating Weapon Image");
+        transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = weaponController.currentWeaponScript.weaponSprite;
     }
 
 }

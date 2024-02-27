@@ -96,7 +96,7 @@ public class WeaponController : MonoBehaviour
             {
                 currentWeaponScript.Shoot();
                 OnWeaponFired?.Invoke();
-                yield return new WaitForSeconds(1f / (currentWeaponScript.fireRate * player.fireRateModifier));
+                yield return new WaitForSeconds(1f / (currentWeaponScript.fireRate * player.fireRateModifier.value));
             }
             else
             {
@@ -116,7 +116,7 @@ public class WeaponController : MonoBehaviour
 
     IEnumerator DoReload()
     {
-        yield return new WaitForSeconds(currentWeaponScript.reloadSpeed * player.reloadSpeedModifier);
+        yield return new WaitForSeconds(currentWeaponScript.reloadSpeed * player.reloadSpeedModifier.value);
         OnWeaponReloaded?.Invoke();
     }
 
@@ -179,7 +179,7 @@ public class WeaponController : MonoBehaviour
 
     public void OnInventory()
     {
-        if(pauseMenu.activeSelf || settingsMenu.activeSelf)
+        if(isPaused && !inventoryMenu.activeSelf)
         {
             return;
         }

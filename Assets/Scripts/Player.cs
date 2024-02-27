@@ -4,31 +4,21 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     [Header("Stats")]
-    public int maxHealth;
+    public Stat maxHealth;
     public int health;
-    public float bulletSizeModifer;
-    public float fireRateModifier;
-    public float reloadSpeedModifier;
-    public float magazineSizeModifier;
-    public float damageModifierPercentage;
-    public int damageModiferFlat;
+    public Stat bulletSizeModifer;
+    public Stat fireRateModifier;
+    public Stat reloadSpeedModifier;
+    public Stat magazineSizeModifier;
+    public Stat damageModifierPercentage;
+    public Stat damageModiferFlat;
     public Dictionary<ItemData, int> inventory = new Dictionary<ItemData, int>();
-    public Dictionary<string, float> stats = new Dictionary<string, float>
-    {
-        { "BulletSize", 1 },
-        { "FireRate", 1 },
-        { "ReloadSpeed", 1 },
-        { "MagazineSize", 1 },
-        { "DamagePercent", 1 },
-        { "DamageFlat", 1 },
-        { "Health", 20 }
-    };
-
-
+    public Dictionary<string, Stat> stats = new Dictionary<string, Stat>();
     public int coins;
     public HealthBar healthBar;
     public event Action<int> OnHealthChange;
@@ -39,17 +29,18 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        health = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        health = (int)maxHealth.value;
+        healthBar.SetMaxHealth(maxHealth.value);
         AddCoins(0);
+        InitializeStats();
     }
 
     public void Heal(int heal)
     {
         health += heal;
-        if(health > maxHealth)
+        if(health > maxHealth.value)
         {
-            health = maxHealth;
+            health = (int)maxHealth.value;
         }
         healthBar.SetHealth(health);
         OnHealthChange?.Invoke(health);
@@ -97,6 +88,13 @@ public class Player : MonoBehaviour
 
     }
 
+    public void UpdateHealth()
+    {
+        health = (int)maxHealth.value;
+        healthBar.SetMaxHealth(maxHealth.value);
+        healthBar.SetHealth(health);
+    }
+
     public void AddCoins(int amount)
     {
         coins += amount;
@@ -116,38 +114,10 @@ public class Player : MonoBehaviour
             inventory.Add(upgrade, 0);
         }
         inventory[upgrade]++;
-        stats[upgrade.upgradeType] += upgrade.upgradeValue;
+        stats[upgrade.upgradeType].value += upgrade.upgradeValue;
         OnUpgradeAdded?.Invoke();
-
-        switch(upgrade.upgradeType)
-        {
-            case "BulletSize":
-                bulletSizeModifer += upgrade.upgradeValue;
-                break;
-            case "FireRate":
-                fireRateModifier += upgrade.upgradeValue;
-                break;
-            case "ReloadSpeed":
-                reloadSpeedModifier -= upgrade.upgradeValue;
-                break;
-            case "MagazineSize":
-                magazineSizeModifier += upgrade.upgradeValue;
-                OnMagazineSizeChange?.Invoke();
-                break;
-            case "DamageFlat":
-                damageModiferFlat += (int)upgrade.upgradeValue;
-                break;
-            case "DamagePercent":
-                damageModifierPercentage += upgrade.upgradeValue;
-                break;
-            case "Health":
-                maxHealth += (int)upgrade.upgradeValue;
-                health = maxHealth;
-                healthBar.SetMaxHealth(maxHealth);
-                healthBar.SetHealth(health);
-                OnHealthChange?.Invoke(health);
-                break;
-        }
+        OnHealthChange?.Invoke(health);
+        OnMagazineSizeChange?.Invoke();
     }
 
     public void RemoveUpgrade(ItemData upgrade)
@@ -162,32 +132,53 @@ public class Player : MonoBehaviour
             switch(upgrade.name)
             {
                 case "BulletSize":
-                    bulletSizeModifer -= upgrade.upgradeValue;
+                    bulletSizeModifer.value -= upgrade.upgradeValue;
                     break;
                 case "FireRate":
-                    fireRateModifier -= upgrade.upgradeValue;
+                    fireRateModifier.value -= upgrade.upgradeValue;
                     break;
                 case "ReloadSpeed":
-                    reloadSpeedModifier += upgrade.upgradeValue;
+                    reloadSpeedModifier.value += upgrade.upgradeValue;
                     break;
                 case "MagazineSize":
-                    magazineSizeModifier -= upgrade.upgradeValue;
+                    magazineSizeModifier.value -= upgrade.upgradeValue;
                     OnMagazineSizeChange?.Invoke();
                     break;
                 case "DamageFlat":
-                    damageModiferFlat -= (int)upgrade.upgradeValue;
+                    damageModiferFlat.value -= (int)upgrade.upgradeValue;
                     break;
-                case "DamagePercentage":
-                    damageModifierPercentage -= upgrade.upgradeValue;
+                case "DamagePercent":
+                    damageModifierPercentage.value -= upgrade.upgradeValue;
                     break;
                 case "Health":
-                    maxHealth -= (int)upgrade.upgradeValue;
-                    health = maxHealth;
-                    healthBar.SetMaxHealth(maxHealth);
+                    maxHealth.value -= (int)upgrade.upgradeValue;
+                    health = (int)maxHealth.value;
+                    healthBar.SetMaxHealth(maxHealth.value);
                     healthBar.SetHealth(health);
                     OnHealthChange?.Invoke(health);
                     break;
             }
         }
     }
+
+    private void InitializeStats()
+    {
+        stats.Add("BulletSize", bulletSizeModifer);
+        stats.Add("FireRate", fireRateModifier);
+        stats.Add("ReloadSpeed", reloadSpeedModifier);
+        stats.Add("MagazineSize", magazineSizeModifier);
+        stats.Add("DamageFlat", damageModiferFlat);
+        stats.Add("DamagePercent", damageModifierPercentage);
+        stats.Add("Health", maxHealth);
+        OnUpgradeAdded?.Invoke();
+    
+    }
+}
+
+[System.Serializable]
+public class Stat
+{
+    public string name;
+    public float value;
+    public Sprite sprite;
 }

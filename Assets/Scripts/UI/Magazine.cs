@@ -41,7 +41,7 @@ public class Magazine : MonoBehaviour
             Destroy(child.gameObject);
         }
         bulletSprite = weaponController.currentWeaponScript.bullet.GetComponent<Bullet>().magazineSprite;
-        magazineSize = (int)(weaponController.currentWeaponScript.magazineSize * player.magazineSizeModifier) / weaponController.currentWeaponScript.bulletsPerShot;
+        magazineSize = (int)(weaponController.currentWeaponScript.magazineSize * player.magazineSizeModifier.value) / weaponController.currentWeaponScript.bulletsPerShot;
         bulletsInMagazine = magazineSize;
         for (int i = 0; i < magazineSize; i++)
         {
