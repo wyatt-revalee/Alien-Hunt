@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour
     public Player player;
     public WeaponController weaponController;
     public GameObject playerStat;
+    public GameObject inventoryItem;
 
     private void Awake()
     {
@@ -42,9 +43,19 @@ public class Inventory : MonoBehaviour
 
     public void RefreshItemDisplay()
     {
+        foreach (Transform child in transform.GetChild(1).transform.GetChild(1))
+        {
+            Destroy(child.gameObject);
+        }
         foreach (KeyValuePair<ItemData, int> kvp in player.inventory)
         {
-
+            GameObject inventoryItemInstance = Instantiate(inventoryItem, transform);
+            inventoryItemInstance.transform.GetChild(0).GetComponent<Image>().sprite = kvp.Key.image;
+            inventoryItemInstance.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = string.Format(kvp.Value.ToString());
+            inventoryItemInstance.transform.SetParent(transform.GetChild(1).transform.GetChild(1));
+            inventoryItemInstance.GetComponent<InventoryItem>().itemName = kvp.Key.itemName;
+            inventoryItemInstance.GetComponent<InventoryItem>().itemDescription = kvp.Key.description;
+            inventoryItemInstance.GetComponent<InventoryItem>().SetItemText();
         }
     }
 

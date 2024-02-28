@@ -19,5 +19,5 @@ MonoBehaviour:
   cost: 5
   description: Decrease reload speed by 5%.
   upgradeType: ReloadSpeed
-  upgradeValue: 0.05
+  upgradeValue: -0.05
   weapon: {fileID: 0}
