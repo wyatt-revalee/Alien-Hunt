@@ -102,6 +102,7 @@ MonoBehaviour:
   currency: 5
   spawnInterval: 1
   spawnTimer: 1
+  currentWave: 0
   enemiesToSpawn: []
   enemyTypes:
   - {fileID: 4748749452992644531, guid: 80cf40604286dd24eae24d00a9f9169f, type: 3}
@@ -110,3 +111,6 @@ MonoBehaviour:
   - {fileID: 6424624697821780852, guid: 91f65722e9d2a324bb2ed087c77ea398, type: 3}
   - {fileID: 3078002243372668031, guid: 47af938abb709a04f9d7e3ad30761938, type: 3}
   - {fileID: 574292782163914097, guid: 17d0206fd14fbe54bb5c9cf62c974cf2, type: 3}
+  - {fileID: 1176574073200448071, guid: a9dbbf245d554d24e96e614c50b7d24b, type: 3}
+  - {fileID: 6706751906734277856, guid: fcb34b458e17c6340947116347d0dff5, type: 3}
+  dropToAssign: {fileID: 0}

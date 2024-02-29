@@ -88,6 +88,14 @@ public class Player : MonoBehaviour
 
     }
 
+    public void SetMaxHealth(int amount)
+    {
+        maxHealth.value = amount;
+        health = (int)maxHealth.value;
+        healthBar.SetMaxHealth(maxHealth.value);
+        OnHealthChange?.Invoke(health);
+    }
+
     public void UpdateHealth()
     {
         health = (int)maxHealth.value;

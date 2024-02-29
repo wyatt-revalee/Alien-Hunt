@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
-using System.IO;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class LevelManager : MonoBehaviour
 {
@@ -109,9 +106,10 @@ public class LevelManager : MonoBehaviour
     // Tells spawners to start new wave
     private void StartSpawners()
     {
-        foreach(EnemySpawner spawner in enemySpawners)
+        int spawnInterval = UnityEngine.Random.Range(1, Mathf.Max(2, 5 - (currentLevel / 2)));
+        foreach (EnemySpawner spawner in enemySpawners)
         {
-            spawner.StartNewWave(currentLevel);
+            spawner.StartNewWave(currentLevel, spawnInterval);
         }
     }
 
@@ -173,6 +171,7 @@ public class LevelManager : MonoBehaviour
             Cursor.visible = true;
             weaponController.SetShopping(true);
             shop.SetActive(true);
+            player.SetMaxHealth(currentLevel * 20);
             shop.GetComponent<Shop>().RefreshShop();
             isShopping = true;
             yield return new WaitUntil(() => !isShopping);

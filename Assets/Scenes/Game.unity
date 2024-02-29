@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfff15553f5fa7041847ba8b34324164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 1
+  currentLevel: 0
   enemySpawners: []
   enemiesInWave: 0
   enemiesKilled: 0
@@ -1896,7 +1896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f71cccf678fadb4d89f8781b599f51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 7015263237284249957, guid: 71529f670daf4ce47ac42c60ca4cbfa1, type: 3}
+  currentWeapon: {fileID: 9192830826129681717, guid: ba6aca7e229a4ff40892838d70ed0c09, type: 3}
   weaponInstance: {fileID: 0}
   pauseMenu: {fileID: 1180113746}
   settingsMenu: {fileID: 331209989}
@@ -1976,7 +1976,7 @@ MonoBehaviour:
     name: Damage Increase
     value: 0
     sprite: {fileID: 0}
-  coins: 1000
+  coins: 0
   healthBar: {fileID: 489177869}
 --- !u!1 &2111273528
 GameObject:
@@ -2160,7 +2160,7 @@ PrefabInstance:
       objectReference: {fileID: 2094888222}
     - target: {fileID: 1823539750332849510, guid: e4d418ef05f035c448eebf568c343d78, type: 3}
       propertyPath: shopItems.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1823539750332849510, guid: e4d418ef05f035c448eebf568c343d78, type: 3}
       propertyPath: shopItems.Array.data[6]
@@ -2178,6 +2178,10 @@ PrefabInstance:
       propertyPath: shopItems.Array.data[9]
       value: 
       objectReference: {fileID: 11400000, guid: beff8afb563f23949a3458e3c3528a43, type: 2}
+    - target: {fileID: 1823539750332849510, guid: e4d418ef05f035c448eebf568c343d78, type: 3}
+      propertyPath: shopItems.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: d348bb93e1a7eac40b8a6c9692464bd8, type: 2}
     - target: {fileID: 2490085761200471928, guid: e4d418ef05f035c448eebf568c343d78, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2516,6 +2520,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 309837144}
     m_Modifications:
+    - target: {fileID: 54659441031373624, guid: 84e63e1006fb4544faeacc9aa70c060c, type: 3}
+      propertyPath: m_fontSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 54659441031373624, guid: 84e63e1006fb4544faeacc9aa70c060c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4330726955838220942, guid: 84e63e1006fb4544faeacc9aa70c060c, type: 3}
       propertyPath: m_Name
       value: InventoryItem

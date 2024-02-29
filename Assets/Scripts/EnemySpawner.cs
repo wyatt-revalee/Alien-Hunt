@@ -73,12 +73,12 @@ public class EnemySpawner : MonoBehaviour
         generatingEnemies = false;
     }
 
-    public void StartNewWave(int waveNum)
+    public void StartNewWave(int waveNum, int newInterval)
     {
         currency = 10 * waveNum;
         currentWave = waveNum;
         GenerateEnemies();
-        spawnInterval = UnityEngine.Random.Range(1, Mathf.Max(2, enemyTypes.Count - (waveNum/2)));
+        spawnInterval = newInterval;
         spawnTimer = spawnInterval;
     }
 
