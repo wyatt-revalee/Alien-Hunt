@@ -34,6 +34,7 @@ public class EnemySpawner : MonoBehaviour
             if (enemiesToSpawn.Count > 0)
             {
                 GameObject enemy = (GameObject)Instantiate(enemiesToSpawn[0], transform.position, Quaternion.identity); // spawn first enemy in our list
+                enemy.GetComponent<Enemy>().parentSpawner = gameObject;
                 enemy.GetComponent<Enemy>().SetMoveDirection(horizontalDirection, verticalDirection);
                 enemy.GetComponent<Enemy>().OnDeath += NotifyEnemyDeath;
 
@@ -57,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
 
     // Until we run out of currency, generate random enemy
     // Subtract cost from currency
-    private void GenerateEnemies()
+    public void GenerateEnemies()
     {
         generatingEnemies = true;
         while (currency > 0)
@@ -71,6 +72,12 @@ public class EnemySpawner : MonoBehaviour
         }
         OnEnemySpawned?.Invoke(enemiesToSpawn.Count);
         generatingEnemies = false;
+    }
+
+    public void RespawnEnemy(string name)
+    {
+        GameObject enemy = enemyTypes.Find(x => x.name == name);
+        enemiesToSpawn.Add(enemy);
     }
 
     public void StartNewWave(int waveNum, int newInterval)

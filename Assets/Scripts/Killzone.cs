@@ -6,22 +6,21 @@ public class Killzone : MonoBehaviour
 {
     public Player player;
     public LevelManager levelManager;
+
+    // Destory enemies that leave the screen, send their currency back to spawner and have it spawn a new enemy
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        // If object is an enemy, destroy it
         if (collider.transform.gameObject.layer == 6)
         {
             Enemy enemy = collider.transform.gameObject.GetComponent<Enemy>();
-            enemy.HitKillZone();
-            if(enemy.itemDrop != null)
+            if (enemy.itemDrop != null)
             {
                 levelManager.AssignMissedPickup(enemy.itemDrop);
             }
-        }
+            Debug.Log(enemy.gameObject.name + " has left the screen");
+            enemy.parentSpawner.GetComponent<EnemySpawner>().RespawnEnemy(enemy.gameObject.name.Substring(0, enemy.gameObject.name.Length - 7));
 
-        if (collider.transform.gameObject.layer == 9)
-        {
-            levelManager.AssignMissedPickup(collider.transform.gameObject);
+            Destroy(collider.transform.gameObject);
         }
     }
 }

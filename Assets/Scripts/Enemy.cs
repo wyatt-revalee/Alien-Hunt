@@ -22,6 +22,7 @@ public abstract class Enemy : MonoBehaviour
     public Animator animator;
     public Canvas pointPopup;
     public EnemyBullet bullet;
+    public GameObject parentSpawner;
     private Color baseColor;
 
     [Header("Enemy Movement")]

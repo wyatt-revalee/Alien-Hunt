@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfff15553f5fa7041847ba8b34324164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 1
+  currentLevel: 0
   enemySpawners: []
   enemiesInWave: 0
   enemiesKilled: 0
@@ -2095,7 +2095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285ea7f3752f6e546afe27f800a090f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 7015263237284249957, guid: 71529f670daf4ce47ac42c60ca4cbfa1, type: 3}
+  currentWeapon: {fileID: 6330520074738032548, guid: 0ea88772ae15c2c49b5a2f464f697aa2, type: 3}
   weaponInstance: {fileID: 0}
   pauseMenu: {fileID: 1180113746}
   settingsMenu: {fileID: 331209989}
