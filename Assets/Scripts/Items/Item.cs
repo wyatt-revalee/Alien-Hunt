@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class Item
+public abstract class Item : MonoBehaviour
 {
 
+    public ItemData itemData;
     public abstract string GiveName();
     public abstract string GiveId();
     public virtual void UpdatePlayer(Player player, int stacks)
@@ -34,61 +35,3 @@ public abstract class Item
 
 }
 
-public class Coin : Item
-{
-    public override string GiveName()
-    {
-        return "Coin";
-    }
-    public override string GiveId()
-    {
-        return "coin";
-    }
-}
-
-public class HealingItem : Item
-{
-    public override string GiveName()
-    {
-        return "Healing Item";
-    }
-    public override string GiveId()
-    {
-        return "healing_item";
-    }
-
-    public override void UpdatePlayer(Player player, int stacks)
-    {
-        player.health += 1 * stacks;
-        player.healthBar.SetHealth(player.health);
-    }
-}
-
-public class FireDamageItem : Item
-{
-
-    public override bool IsBuff()
-    {
-        return true;
-    }
-
-    public override int GiveBuffTime()
-    {
-        return 2;
-    }
-    public override string GiveName()
-    {
-        return "Fire Damage Item";
-    }
-
-    public override string GiveId()
-    {
-        return "fire_damage_item";
-    }
-
-    public override void UpdateEnemy(IDamageable enemy, int stacks)
-    {
-        enemy.Damage(1 * stacks);
-    }
-
-}

@@ -21,7 +21,6 @@ public class Inventory : MonoBehaviour
 
     public void RefreshInventory()
     {
-        Debug.Log("Refreshing Inventory");
         RefreshStats();
         RefreshItemDisplay();
     }
@@ -47,14 +46,14 @@ public class Inventory : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        foreach (KeyValuePair<ItemData, int> kvp in player.inventory)
+        foreach (KeyValuePair<Item, int> kvp in player.inventory)
         {
             GameObject inventoryItemInstance = Instantiate(inventoryItem, transform);
-            inventoryItemInstance.transform.GetChild(0).GetComponent<Image>().sprite = kvp.Key.image;
+            inventoryItemInstance.transform.GetChild(0).GetComponent<Image>().sprite = kvp.Key.itemData.image;
             inventoryItemInstance.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = string.Format(kvp.Value.ToString());
             inventoryItemInstance.transform.SetParent(transform.GetChild(1).transform.GetChild(1));
-            inventoryItemInstance.GetComponent<InventoryItem>().itemName = kvp.Key.itemName;
-            inventoryItemInstance.GetComponent<InventoryItem>().itemDescription = kvp.Key.description;
+            inventoryItemInstance.GetComponent<InventoryItem>().itemName = kvp.Key.itemData.itemName;
+            inventoryItemInstance.GetComponent<InventoryItem>().itemDescription = kvp.Key.itemData.description;
             inventoryItemInstance.GetComponent<InventoryItem>().SetItemText();
         }
     }

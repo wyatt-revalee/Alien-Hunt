@@ -5,11 +5,11 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject settingsMenu;
-    public WeaponController weaponController;
+    public PlayerController playerController;
 
     public void Resume()
     {
-        weaponController.PauseGame();
+        playerController.PauseGame();
     }
 
     public void Quit()

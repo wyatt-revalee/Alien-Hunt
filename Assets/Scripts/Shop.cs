@@ -14,7 +14,7 @@ public class Shop : MonoBehaviour
     public TextMeshProUGUI refreshCostText;
     public WeaponController weaponController;
     public LevelManager levelManager;
-    public List<ItemData> shopItems;
+    public List<GameObject> shopItems;
     public GameObject shopItemPrefab;
 
     Dictionary<int, double> rarityChances = new Dictionary<int, double>
@@ -44,16 +44,16 @@ public class Shop : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        List<ItemData> currentItemsInShop = new List<ItemData>();
+        List<Item> currentItemsInShop = new List<Item>();
 
         for(int i = 0; i < itemsInShop; i++)
         {
             int rarity = GetRarity();
-            ItemData item;
+            Item item;
             while (true)
             {
-                item = shopItems[Random.Range(0, shopItems.Count)];
-                if (item.rarity == rarity && !currentItemsInShop.Contains(item))
+                item = shopItems[Random.Range(0, shopItems.Count)].GetComponent<Item>();
+                if (item.itemData.rarity == rarity && !currentItemsInShop.Contains(item))
                 {
                     break;
                 }
@@ -69,7 +69,7 @@ public class Shop : MonoBehaviour
 
     }
 
-    public void PurchaseItem(ShopItem item)
+    public void PurchaseItem(Item item)
     {
         if(player.coins >= item.itemData.cost)
         {
@@ -78,7 +78,7 @@ public class Shop : MonoBehaviour
             switch (item.itemData.type)
             {
                 case "Upgrade":
-                    player.AddUpgrade(item.itemData);
+                    player.AddItemToInventory(item);
                     break;
                 case "Weapon":
                     weaponController.SetNewWeapon(item.itemData.weapon);

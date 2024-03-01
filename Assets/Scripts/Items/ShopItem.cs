@@ -13,6 +13,7 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Player player;
     public ItemData itemData;
     public Shop shop;
+    public Item item;
 
     public Dictionary<int, Color> rarityColors = new Dictionary<int, Color>()
     {
@@ -28,9 +29,10 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         GetComponent<Button>().onClick.AddListener(OnClick);
     }
     
-    public void UpdateItemInfo(ItemData newItemData)
+    public void UpdateItemInfo(Item newItem)
     {
-        itemData = newItemData;
+        item = newItem;
+        itemData = newItem.itemData;
         // Update the UI with the item's information
         transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = itemData.description;
         transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemData.itemName;
@@ -41,7 +43,6 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void SetItemPurchased()
     {
-        Debug.Log(player.coins + " " + itemData.cost);
         if(player.coins < itemData.cost)
         {
             return;
@@ -70,7 +71,7 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnClick()
     {
-        shop.PurchaseItem(this);
+        shop.PurchaseItem(item);
     }
 
 }

@@ -10,6 +10,7 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     [Header("Stats")]
+    public CharacterStats baseStats;
     public Stat maxHealth;
     public int health;
     public Stat speed;
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour
     public Stat magazineSizeModifier;
     public Stat damageModifierPercentage;
     public Stat damageModiferFlat;
-    public Dictionary<ItemData, int> inventory = new Dictionary<ItemData, int>();
+    public Dictionary<Item, int> inventory = new Dictionary<Item, int>();
     public Dictionary<string, Stat> stats = new Dictionary<string, Stat>();
     public int coins;
     public HealthBar healthBar;
@@ -30,12 +31,16 @@ public class Player : MonoBehaviour
     public event Action<int> OnCoinChange;
     public event Action OnUpgradeAdded;
 
-    private void Start()
+    private void Awake()
     {
+        InitializeStats();
         health = (int)maxHealth.value;
         healthBar.SetMaxHealth(maxHealth.value);
         AddCoins(0);
-        InitializeStats();
+    }
+    private void Start()
+    {
+        StartCoroutine(UpdateStats());
     }
 
     public void Heal(int heal)
@@ -118,20 +123,17 @@ public class Player : MonoBehaviour
         OnCoinChange?.Invoke(coins);
     }
 
-    public void AddUpgrade(ItemData upgrade)
+    public void AddItemToInventory(Item upgrade)
     {
         if(!inventory.ContainsKey(upgrade))
         {
             inventory.Add(upgrade, 0);
         }
         inventory[upgrade]++;
-        stats[upgrade.upgradeType].value += upgrade.upgradeValue;
-        OnUpgradeAdded?.Invoke();
-        OnHealthChange?.Invoke(health);
-        OnMagazineSizeChange?.Invoke();
+        StartCoroutine(UpdateMagazineSize());
     }
 
-    public void RemoveUpgrade(ItemData upgrade)
+    public void RemoveItemFromInventory(Item upgrade)
     {
         if(inventory.ContainsKey(upgrade))
         {
@@ -140,40 +142,46 @@ public class Player : MonoBehaviour
             {
                 inventory.Remove(upgrade);
             }
-            switch(upgrade.name)
+        }
+        StartCoroutine(UpdateMagazineSize());
+    }
+
+    // Calls an update to the player's magazine size a second after the player has gotten/lost an item
+    public IEnumerator UpdateMagazineSize()
+    {
+        yield return new WaitForSeconds(1f);
+        OnMagazineSizeChange?.Invoke();
+    }
+
+    // Updates players stats based on the items in their inventory, every second
+    public IEnumerator UpdateStats()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            foreach (var item in inventory)
             {
-                case "BulletSize":
-                    bulletSizeModifer.value -= upgrade.upgradeValue;
-                    break;
-                case "FireRate":
-                    fireRateModifier.value -= upgrade.upgradeValue;
-                    break;
-                case "ReloadSpeed":
-                    reloadSpeedModifier.value += upgrade.upgradeValue;
-                    break;
-                case "MagazineSize":
-                    magazineSizeModifier.value -= upgrade.upgradeValue;
-                    OnMagazineSizeChange?.Invoke();
-                    break;
-                case "DamageFlat":
-                    damageModiferFlat.value -= (int)upgrade.upgradeValue;
-                    break;
-                case "DamagePercent":
-                    damageModifierPercentage.value -= upgrade.upgradeValue;
-                    break;
-                case "Health":
-                    maxHealth.value -= (int)upgrade.upgradeValue;
-                    health = (int)maxHealth.value;
-                    healthBar.SetMaxHealth(maxHealth.value);
-                    healthBar.SetHealth(health);
-                    OnHealthChange?.Invoke(health);
-                    break;
+                item.Key.UpdatePlayer(this, item.Value);
             }
+            OnUpgradeAdded?.Invoke();
+            OnHealthChange?.Invoke(health);
         }
     }
 
     private void InitializeStats()
     {
+        SetBaseStatValue(maxHealth, baseStats.maxHealth);
+        SetBaseStatValue(bulletSpeedModifier, baseStats.bulletSpeedModifier);
+        SetBaseStatValue(bulletSizeModifer, baseStats.bulletSizeModifer);
+        SetBaseStatValue(fireRateModifier, baseStats.fireRateModifier);
+        SetBaseStatValue(reloadSpeedModifier, baseStats.reloadSpeedModifier);
+        SetBaseStatValue(magazineSizeModifier, baseStats.magazineSizeModifier);
+        SetBaseStatValue(damageModiferFlat, baseStats.damageModiferFlat);
+        SetBaseStatValue(damageModifierPercentage, baseStats.damageModifierPercentage);
+        SetBaseStatValue(speed, baseStats.movementSpeed);
+
+        stats.Add("Speed", speed);
+        stats.Add("BulletSpeed", bulletSpeedModifier);
         stats.Add("BulletSize", bulletSizeModifer);
         stats.Add("FireRate", fireRateModifier);
         stats.Add("ReloadSpeed", reloadSpeedModifier);
@@ -182,11 +190,17 @@ public class Player : MonoBehaviour
         stats.Add("DamagePercent", damageModifierPercentage);
         stats.Add("Health", maxHealth);
         OnUpgradeAdded?.Invoke();
-    
+    }
+
+    private void SetBaseStatValue(Stat playerStat, Stat baseStat)
+    {
+        playerStat.value = baseStat.value;
+        playerStat.name = baseStat.name;
+        playerStat.sprite = baseStat.sprite;
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class Stat
 {
     public string name;

@@ -43,7 +43,6 @@ public abstract class Bullet : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Bullet moving");
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1 *(weapon.bulletSpeed * weapon.player.bulletSpeedModifier.value));
             yield return new WaitForSeconds(0.01f);
         }

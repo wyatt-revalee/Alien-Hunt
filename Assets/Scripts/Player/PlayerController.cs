@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPaused)
         {
-            Debug.Log(value.Get<Vector2>());
             rb.velocity = value.Get<Vector2>() * player.speed.value;
         }
     }
