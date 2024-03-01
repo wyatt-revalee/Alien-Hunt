@@ -174,11 +174,14 @@ MonoBehaviour:
   maxHealth: 4
   health: 2
   speed: 3
+  damageModifier: 1
+  bulletSpeedModifier: 1
   pointValue: 200
   cost: 2
   introWave: 2
   animator: {fileID: 0}
   pointPopup: {fileID: 4459850512478384173, guid: 4cf423d76f1c1994f8f83c9a8d0e44d1, type: 3}
+  bullet: {fileID: 8436040867709383906, guid: 4271df0f9661a6e40b977d01a59b689d, type: 3}
   horizontalDirection: 0
   verticalDirection: 0
   isMoving: 0

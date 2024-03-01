@@ -12,6 +12,8 @@ public abstract class Enemy : MonoBehaviour
     public int maxHealth;
     public int health;
     public int speed;
+    public float damageModifier;
+    public float bulletSpeedModifier;
     public int pointValue;
     public int cost;
     public int introWave;
@@ -19,6 +21,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Components")]
     public Animator animator;
     public Canvas pointPopup;
+    public EnemyBullet bullet;
     private Color baseColor;
 
     [Header("Enemy Movement")]
@@ -33,6 +36,8 @@ public abstract class Enemy : MonoBehaviour
     {
         baseColor = GetComponent<SpriteRenderer>().color;
         health = maxHealth;
+        StartCoroutine(Shoot());
+
     }
 
     public void Damage(int damage)
@@ -53,6 +58,7 @@ public abstract class Enemy : MonoBehaviour
     public IEnumerator Death()
     {
         GetComponent<SpriteRenderer>().color = Color.red;
+        GetComponent<Collider2D>().enabled = false;
         yield return new WaitForSeconds(0.5f);
 
         if(itemDrop != null)
@@ -73,6 +79,16 @@ public abstract class Enemy : MonoBehaviour
         if(health > 0)
         {
             GetComponent<SpriteRenderer>().color = baseColor;
+        }
+    }
+
+    public IEnumerator Shoot()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            GameObject newBullet = Instantiate(bullet.gameObject, transform.position, Quaternion.identity);
+            newBullet.GetComponent<EnemyBullet>().enemy = this;
         }
     }
 

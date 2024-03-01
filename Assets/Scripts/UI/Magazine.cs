@@ -42,7 +42,7 @@ public class Magazine : MonoBehaviour
         }
         bulletSprite = playerController.currentWeaponScript.bullet.GetComponent<Bullet>().magazineSprite;
         magazineSize = (int)(playerController.currentWeaponScript.magazineSize * player.magazineSizeModifier.value) / playerController.currentWeaponScript.bulletsPerShot;
-        bulletsInMagazine = playerController.currentWeaponScript.bulletsInMagazine;
+        bulletsInMagazine = magazineSize;
         for (int i = 0; i < magazineSize; i++)
         {
             GameObject newBullet = new GameObject();

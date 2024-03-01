@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPaused)
         {
-            rb.velocity = value.Get<Vector2>() * player.speed.value;
+            rb.velocity = value.Get<Vector2>() * (player.movementSpeed * player.movementSpeedModifer.value);
         }
     }
 
@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
         weaponInstance.transform.parent = gameObject.transform;
         currentWeaponScript = weaponInstance.GetComponent<Weapon>();
         currentWeaponScript.player = player;
+        weaponInstance.GetComponent<SpriteRenderer>().enabled = false;
         OnNewWeaponSet?.Invoke();
 
         if (isPaused)
@@ -149,7 +150,6 @@ public class PlayerController : MonoBehaviour
             pauseMenu.SetActive(isPaused);
             transform.GetChild(0).gameObject.SetActive(!isPaused);
             Cursor.visible = isPaused;
-
             Time.timeScale = isPaused ? 0 : 1;
         }
     }
@@ -160,6 +160,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = isShopping;
         transform.GetChild(0).gameObject.SetActive(!isShopping);
         currentWeaponScript.isReloading = isShopping;
+        rb.velocity = Vector2.zero;
     }
 
     public void OnInventory()

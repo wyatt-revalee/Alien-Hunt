@@ -12,7 +12,7 @@ public class Shop : MonoBehaviour
     public int itemsInShop;
     public int refreshCost = 0;
     public TextMeshProUGUI refreshCostText;
-    public WeaponController weaponController;
+    public PlayerController playerController;
     public LevelManager levelManager;
     public List<GameObject> shopItems;
     public GameObject shopItemPrefab;
@@ -81,7 +81,7 @@ public class Shop : MonoBehaviour
                     player.AddItemToInventory(item);
                     break;
                 case "Weapon":
-                    weaponController.SetNewWeapon(item.itemData.weapon);
+                    playerController.SetNewWeapon(item.itemData.weapon);
                     break;
             }
         }

@@ -18,33 +18,33 @@ MonoBehaviour:
     sprite: {fileID: 0}
   movementSpeed:
     name: MovementSpeed
-    value: 10
+    value: 1
     sprite: {fileID: 0}
   bulletSpeedModifier:
     name: BulletSpeed
-    value: 10
+    value: 1
     sprite: {fileID: 0}
   bulletSizeModifer:
     name: BulletSize
-    value: 10
+    value: 1
     sprite: {fileID: 0}
   fireRateModifier:
     name: FireRate
-    value: 10
+    value: 1
     sprite: {fileID: 0}
   reloadSpeedModifier:
     name: ReloadSpeed
-    value: 10
+    value: 1
     sprite: {fileID: 0}
   magazineSizeModifier:
     name: MagazineSize
-    value: 10
+    value: 1
     sprite: {fileID: 0}
   damageModifierPercentage:
     name: DamagePercent
-    value: 10
+    value: 1
     sprite: {fileID: 0}
   damageModiferFlat:
     name: DamageFlat
-    value: 10
+    value: 1
     sprite: {fileID: 0}

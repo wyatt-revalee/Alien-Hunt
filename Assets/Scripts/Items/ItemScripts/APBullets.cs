@@ -16,6 +16,6 @@ public class APRounds : Item
 
     public override void UpdatePlayer(Player player, int stacks)
     {
-        player.stats["DamageFlat"].value = 1 + (1 * stacks);
+        player.stats["DamageFlat"].value = player.baseStats.damageModiferFlat.value + (1 * stacks);
     }
 }

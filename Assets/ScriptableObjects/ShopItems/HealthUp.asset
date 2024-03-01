@@ -18,6 +18,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 76a8e9c25da217b41b6950459d3a309e, type: 3}
   cost: 5
   description: Increase max health by 5.
-  upgradeType: Health
+  upgradeType: MaxHealth
   upgradeValue: 5
   weapon: {fileID: 0}
+  item: {fileID: 0}

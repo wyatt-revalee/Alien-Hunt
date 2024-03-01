@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     public CharacterStats baseStats;
     public Stat maxHealth;
     public int health;
-    public Stat speed;
+    public float movementSpeed;
+    public Stat movementSpeedModifer;
     public Stat bulletSpeedModifier;
     public Stat bulletSizeModifer;
     public Stat fireRateModifier;
@@ -178,9 +179,9 @@ public class Player : MonoBehaviour
         SetBaseStatValue(magazineSizeModifier, baseStats.magazineSizeModifier);
         SetBaseStatValue(damageModiferFlat, baseStats.damageModiferFlat);
         SetBaseStatValue(damageModifierPercentage, baseStats.damageModifierPercentage);
-        SetBaseStatValue(speed, baseStats.movementSpeed);
+        SetBaseStatValue(movementSpeedModifer, baseStats.movementSpeed);
 
-        stats.Add("Speed", speed);
+        stats.Add("Speed", movementSpeedModifer);
         stats.Add("BulletSpeed", bulletSpeedModifier);
         stats.Add("BulletSize", bulletSizeModifer);
         stats.Add("FireRate", fireRateModifier);
@@ -188,7 +189,7 @@ public class Player : MonoBehaviour
         stats.Add("MagazineSize", magazineSizeModifier);
         stats.Add("DamageFlat", damageModiferFlat);
         stats.Add("DamagePercent", damageModifierPercentage);
-        stats.Add("Health", maxHealth);
+        stats.Add("MaxHealth", maxHealth);
         OnUpgradeAdded?.Invoke();
     }
 

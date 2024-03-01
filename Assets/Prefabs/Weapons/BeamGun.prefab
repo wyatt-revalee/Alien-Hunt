@@ -106,6 +106,7 @@ MonoBehaviour:
   isAutomatic: 1
   bulletsInMagazine: 80
   isReloading: 0
+  bulletSpeed: 15
   reloadingCrosshair: {fileID: 21300000, guid: a9f58bf8354bf8846b8ec5e3180c7d1d, type: 3}
   weaponSprite: {fileID: 21300000, guid: 1e246044d1f21d74c95ceb303e6e97bd, type: 3}
   enemyLayerMask:

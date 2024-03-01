@@ -17,7 +17,6 @@ public class Killzone : MonoBehaviour
             {
                 levelManager.AssignMissedPickup(enemy.itemDrop);
             }
-            player.Damage(enemy.maxHealth);
         }
 
         if (collider.transform.gameObject.layer == 9)
