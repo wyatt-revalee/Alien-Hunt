@@ -20,6 +20,7 @@ public abstract class Weapon : MonoBehaviour
     public bool isAutomatic;
     public int bulletsInMagazine;
     public bool isReloading;
+    public int bulletSpeed;
     public Sprite reloadingCrosshair;
     public Sprite weaponSprite;
 
@@ -65,39 +66,13 @@ public abstract class Weapon : MonoBehaviour
 
     IEnumerator DoReload()
     {
-        Sprite crosshair = GetComponent<SpriteRenderer>().sprite;
-        GetComponent<SpriteRenderer>().sprite = reloadingCrosshair;
         yield return new WaitForSeconds(reloadSpeed * player.reloadSpeedModifier.value);
-        GetComponent<SpriteRenderer>().sprite = crosshair;
         bulletsInMagazine = (int)(magazineSize * player.magazineSizeModifier.value);
         isReloading = false;
     }
 
     public virtual void UpdateBulletInfo(bool enemyHit, int pointsGained)
     {
-    }
-
-    public void ShakeCrosshair(int force)
-    {
-        StartCoroutine(DoCrosshairShake(force));
-    }
-
-    IEnumerator DoCrosshairShake(int force)
-    {
-
-        // Get initial position
-        float xpos = this.transform.position.x;
-        float ypos = this.transform.position.y;
-
-        // Move up and right
-        this.transform.position = new Vector3(xpos + (0.01f * force), ypos + (0.01f * force), 0);
-        yield return new WaitForSeconds(0.01f);
-
-        // Move down and left
-        this.transform.position = new Vector3(xpos - (0.01f * force), ypos - (0.01f * force), 0);
-        yield return new WaitForSeconds(0.01f);
-
-        this.transform.position = new Vector3(xpos, ypos, 0);
     }
 
     public void ShakeCamera(int force)

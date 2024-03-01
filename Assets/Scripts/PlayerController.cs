@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-public class WeaponController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     //This scripts exists to hold the weapon data and swap it out easily
     public GameObject currentWeapon;
@@ -14,8 +14,8 @@ public class WeaponController : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject inventoryMenu;
     public Player player;
+    public Rigidbody2D rb;
     public Weapon currentWeaponScript;
-    public Color crosshairColor;
     public bool isPaused;
 
     public event Action OnNewWeaponSet;
@@ -28,32 +28,18 @@ public class WeaponController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (Cursor.visible && !isPaused)
-        {
-            Cursor.visible = false;
-        }
-        else if (isPaused)
-        {
-            Cursor.visible = true;
-            transform.GetChild(0).gameObject.SetActive(false);
-        }
-    }
-
     public void OnMove(InputValue value)
     {
-        if(!isPaused)
+        if (!isPaused)
         {
             Debug.Log(value.Get<Vector2>());
-            currentWeaponScript.Move(value);
+            rb.velocity = value.Get<Vector2>() * player.speed.value;
         }
     }
 
     public void OnShoot()
     {
-        if(isPaused)
+        if (isPaused)
         {
             return;
         }
@@ -93,7 +79,7 @@ public class WeaponController : MonoBehaviour
     {
         while (GetComponent<PlayerInput>().actions["Shoot"].IsPressed())
         {
-            if(currentWeaponScript.bulletsInMagazine > 0)
+            if (currentWeaponScript.bulletsInMagazine > 0)
             {
                 currentWeaponScript.Shoot();
                 OnWeaponFired?.Invoke();
@@ -129,7 +115,7 @@ public class WeaponController : MonoBehaviour
 
     private void CreateWeapon()
     {
-        if(weaponInstance != null)
+        if (weaponInstance != null)
         {
             Destroy(weaponInstance);
         }
@@ -137,10 +123,9 @@ public class WeaponController : MonoBehaviour
         weaponInstance.transform.parent = gameObject.transform;
         currentWeaponScript = weaponInstance.GetComponent<Weapon>();
         currentWeaponScript.player = player;
-        currentWeaponScript.ChangeCrosshairColor(crosshairColor);
         OnNewWeaponSet?.Invoke();
 
-        if(isPaused)
+        if (isPaused)
         {
             Cursor.visible = true;
             transform.GetChild(0).gameObject.SetActive(false);
@@ -154,7 +139,7 @@ public class WeaponController : MonoBehaviour
 
     public void PauseGame()
     {
-        if(settingsMenu.activeSelf)
+        if (settingsMenu.activeSelf)
         {
             settingsMenu.SetActive(false);
             pauseMenu.SetActive(true);
@@ -180,7 +165,7 @@ public class WeaponController : MonoBehaviour
 
     public void OnInventory()
     {
-        if(isPaused && !inventoryMenu.activeSelf)
+        if (isPaused && !inventoryMenu.activeSelf)
         {
             return;
         }

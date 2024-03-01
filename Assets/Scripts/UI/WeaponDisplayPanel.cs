@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class WeaponDisplayPanel : MonoBehaviour
 {
-    public WeaponController weaponController;
+    public PlayerController playerController;
     private void Awake()
     {
-        weaponController.OnNewWeaponSet += NewWeaponSet;
+        playerController.OnNewWeaponSet += NewWeaponSet;
     }
 
     private void NewWeaponSet()
     {
         // Set the weapon display panel to the current weapon's sprite
-        transform.GetChild(1).GetComponent<Image>().sprite = weaponController.currentWeaponScript.weaponSprite;
+        transform.GetChild(1).GetComponent<Image>().sprite = playerController.currentWeaponScript.weaponSprite;
     }
 }

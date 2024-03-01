@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
     [Header("Game Objects")]
     public GameObject shop;
     public GameObject WaveMessenger;
-    public WeaponController weaponController;
+    public PlayerController playerController;
     private Weapon weapon;
     private bool waitingOnNewWave;
     public StatTracker statTracker;
@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Add listener for new weapons being set
-        weaponController.OnNewWeaponSet += NewWeaponSet;
+        playerController.OnNewWeaponSet += NewWeaponSet;
 
         // Add listener for player health
         player.OnHealthChange += PlayerHealthListener;
@@ -169,13 +169,13 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(6f);
             WaveMessenger.SetActive(false);
             Cursor.visible = true;
-            weaponController.SetShopping(true);
+            playerController.SetShopping(true);
             shop.SetActive(true);
             player.SetMaxHealth(currentLevel * 20);
             shop.GetComponent<Shop>().RefreshShop();
             isShopping = true;
             yield return new WaitUntil(() => !isShopping);
-            weaponController.SetShopping(false);
+            playerController.SetShopping(false);
             Cursor.visible = false;
         }
         enemiesKilled = 0;
@@ -249,7 +249,7 @@ public class LevelManager : MonoBehaviour
 
     private void NewWeaponSet()
     {
-        weapon = weaponController.currentWeaponScript;
+        weapon = playerController.currentWeaponScript;
         weapon.OnEnemyKilled += AddToPointsEarned;
         weapon.OnShotFired += AddToShotsTaken;
         weapon.OnEnemyHit += AddToShotsHit;

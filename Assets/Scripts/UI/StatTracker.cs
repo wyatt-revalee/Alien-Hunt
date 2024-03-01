@@ -40,12 +40,12 @@ public class StatTracker : MonoBehaviour
     public TextMeshProUGUI accuracyText;
 
     public LevelManager levelManager;
-    public WeaponController weaponController;
+    public PlayerController playerController;
     private Weapon weapon;
 
     private void Awake()
     {
-        weaponController.OnNewWeaponSet += NewWeaponSet;
+        playerController.OnNewWeaponSet += NewWeaponSet;
         levelManager.OnNewWaveStart += EnemiesLeftHandler;
         levelManager.OnEnemyDeath += EnemiesLeftHandler;
     }
@@ -103,7 +103,7 @@ public class StatTracker : MonoBehaviour
 
     private void NewWeaponSet()
     {
-        weapon = weaponController.currentWeaponScript;
+        weapon = playerController.currentWeaponScript;
         weapon.OnEnemyKilled += EnemyDeathHandler;
         weapon.OnShotFired += ShotFiredHandler;
         weapon.OnEnemyHit += EnemyHitHandler;

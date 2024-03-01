@@ -29,7 +29,6 @@ public class DoubleBarrel : Weapon
             // Place new bullet
             SpawnBullet(location);
         }
-        ShakeCrosshair(1);
         ShakeCamera(1);
     }
 

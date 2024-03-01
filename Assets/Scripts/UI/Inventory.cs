@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     public Player player;
-    public WeaponController weaponController;
+    public PlayerController playerController;
     public GameObject playerStat;
     public GameObject inventoryItem;
 
     private void Awake()
     {
         player.OnUpgradeAdded += RefreshInventory;
-        weaponController.OnNewWeaponSet += UpdateWeapon;
+        playerController.OnNewWeaponSet += UpdateWeapon;
         RefreshInventory();
         gameObject.SetActive(false);
     
@@ -62,7 +62,7 @@ public class Inventory : MonoBehaviour
     public void UpdateWeapon()
     {
         Debug.Log("Updating Weapon Image");
-        transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = weaponController.currentWeaponScript.weaponSprite;
+        transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = playerController.currentWeaponScript.weaponSprite;
     }
 
 }

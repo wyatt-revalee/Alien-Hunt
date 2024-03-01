@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,6 +12,8 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     public Stat maxHealth;
     public int health;
+    public Stat speed;
+    public Stat bulletSpeedModifier;
     public Stat bulletSizeModifer;
     public Stat fireRateModifier;
     public Stat reloadSpeedModifier;

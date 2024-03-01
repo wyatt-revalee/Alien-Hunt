@@ -10,7 +10,6 @@ public class Revolver : Weapon
         // Place new bullet
         SpawnBullet(transform.position);
         ShootWeaponEvent();
-        ShakeCrosshair(1);
         ShakeCamera(1);
     }
 

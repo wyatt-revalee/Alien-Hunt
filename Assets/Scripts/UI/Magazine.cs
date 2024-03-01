@@ -9,13 +9,13 @@ public class Magazine : MonoBehaviour
     public int bulletsInMagazine;
     public Sprite bulletSprite;
     public Player player;
-    public WeaponController weaponController;
+    public PlayerController playerController;
 
     private void Awake()
     {
-        weaponController.OnWeaponFired += UseBullet;
-        weaponController.OnWeaponReloaded += Reload;
-        weaponController.OnNewWeaponSet += SetNewWeapon;
+        playerController.OnWeaponFired += UseBullet;
+        playerController.OnWeaponReloaded += Reload;
+        playerController.OnNewWeaponSet += SetNewWeapon;
         player.OnMagazineSizeChange += SetNewWeapon;
     }
 
@@ -40,8 +40,8 @@ public class Magazine : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        bulletSprite = weaponController.currentWeaponScript.bullet.GetComponent<Bullet>().magazineSprite;
-        magazineSize = (int)(weaponController.currentWeaponScript.magazineSize * player.magazineSizeModifier.value) / weaponController.currentWeaponScript.bulletsPerShot;
+        bulletSprite = playerController.currentWeaponScript.bullet.GetComponent<Bullet>().magazineSprite;
+        magazineSize = (int)(playerController.currentWeaponScript.magazineSize * player.magazineSizeModifier.value) / playerController.currentWeaponScript.bulletsPerShot;
         bulletsInMagazine = magazineSize;
         for (int i = 0; i < magazineSize; i++)
         {
@@ -52,7 +52,7 @@ public class Magazine : MonoBehaviour
             newBullet.transform.localPosition = new Vector3(0, 0, 0);
             newBullet.transform.localScale = new Vector3(1, 1, 1);
         }
-        weaponController.currentWeaponScript.bulletsInMagazine = bulletsInMagazine;
+        playerController.currentWeaponScript.bulletsInMagazine = bulletsInMagazine;
     }
 
 }

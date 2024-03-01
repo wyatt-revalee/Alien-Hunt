@@ -23,7 +23,6 @@ public class QuadBarrel : Weapon
             SpawnBullet(location);
         }
         // Place new bullet
-        ShakeCrosshair(1);
         ShakeCamera(1);
     }
 

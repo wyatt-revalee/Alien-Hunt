@@ -16,7 +16,7 @@ public abstract class Bullet : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(DecayAndDestroy());
+        StartCoroutine(DoMovement());
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -39,19 +39,14 @@ public abstract class Bullet : MonoBehaviour
         weapon.UpdateBulletInfo(enemyHit, pointsGained);
     }
 
-    public IEnumerator DecayAndDestroy()
+    private IEnumerator DoMovement()
     {
-        yield return new WaitForFixedUpdate();
-        GetComponent<Collider2D>().enabled = false;
-        yield return new WaitForSeconds(0.1f);
-        weapon.UpdateBulletInfo(false, 0);
-        yield return new WaitForSeconds(0.1f);
-        GetComponent<SpriteRenderer>().color = new Color(184, 180, 0);
-        yield return new WaitForSeconds(0.1f);
-        GetComponent<SpriteRenderer>().color = new Color(123, 0, 180);
-        yield return new WaitForSeconds(0.1f);
-        GetComponent<SpriteRenderer>().color = new Color(62, 180, 180);
-        yield return new WaitForSeconds(0.1f);
-        Destroy(gameObject);
+        while (true)
+        {
+            Debug.Log("Bullet moving");
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1 *(weapon.bulletSpeed * weapon.player.bulletSpeedModifier.value));
+            yield return new WaitForSeconds(0.01f);
+        }
     }
+
 }
