@@ -50,6 +50,11 @@ Gameplay
   - ~~Introduce more Rogue-Like elements? Perhaps a shop every wave/waves that allow players to upgrade weapons and skills, and purchase new items~~ Done. Shop added.
   - Add perma-unlocks after hitting milestones
   - Perhaps add an 'ending' (final boss?)
+ 
+- Core Gameplay Rework
+  - Switch from point and click to a side-tos-side shooter (like galaga or space invaders)
+  - Allows for more appealing, simpler gameplay that is easy to expand on
+  - Allows for player to have a object to see themselves as, customizable.
 
  UI / Accessibility
  - Add start/pause/settings menus
