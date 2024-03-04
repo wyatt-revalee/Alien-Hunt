@@ -58,12 +58,21 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.GetChild(0).gameObject.SetActive(true);
-        transform.GetChild(3).gameObject.SetActive(false);
-
+        ShowDescription();
     }
 
     public void OnPointerExit(PointerEventData eventData)
+    {
+        HideDescription();
+    }
+
+    public void ShowDescription()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(3).gameObject.SetActive(false);
+    }
+
+    public void HideDescription()
     {
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(3).gameObject.SetActive(true);

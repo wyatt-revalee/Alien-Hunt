@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public event Action OnNewWeaponSet;
     public event Action OnWeaponFired;
     public event Action OnWeaponReloaded;
+    public event Action OnPrimaryButtonClick;
+    public event Action<Vector2> OnMovement;
 
     void Start()
     {
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
+        OnMovement?.Invoke(value.Get<Vector2>());
         if (!isPaused)
         {
             rb.velocity = value.Get<Vector2>() * (player.movementSpeed * player.movementSpeedModifer.value);
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnShoot()
     {
+        OnPrimaryButtonClick?.Invoke();
         if (isPaused)
         {
             return;
