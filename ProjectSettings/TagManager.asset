@@ -46,10 +46,13 @@ TagManager:
   - name: Background
     uniqueID: 2743390955
     locked: 0
+  - name: Menu
+    uniqueID: 3165854607
+    locked: 0
   - name: Enemies
     uniqueID: 3737624421
     locked: 0
-  - name: Cursor
+  - name: Player
     uniqueID: 3609217411
     locked: 0
   - name: HUD

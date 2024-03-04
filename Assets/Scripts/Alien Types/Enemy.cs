@@ -67,7 +67,6 @@ public abstract class Enemy : MonoBehaviour
         {
             Instantiate(itemDrop, transform.position, Quaternion.identity);
         }
-
         var popup = Instantiate(pointPopup, transform.position, Quaternion.identity);
         popup.GetComponent<PointPopup>().SetValue(pointValue);
         OnDeath?.Invoke(true);
