@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public Stat magazineSizeModifier;
     public Stat damageModifierPercentage;
     public Stat damageModiferFlat;
+    public Stat immunityTimeModifier;
     public Dictionary<Item, int> inventory = new Dictionary<Item, int>();
     public Dictionary<string, Stat> stats = new Dictionary<string, Stat>();
     public int coins;
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
+        StartCoroutine(FlashRoutine());
         health -= damage;
         healthBar.SetHealth(health);
         if(health <= 0)
@@ -95,6 +97,21 @@ public class Player : MonoBehaviour
 
         Camera.main.transform.position = new Vector3(xpos, ypos, zpos);
 
+    }
+
+    public IEnumerator FlashRoutine()
+    {
+        Debug.Log("Flashing");
+        GetComponent<BoxCollider2D>().enabled = false;
+        // Flash twice, once every 0.5 seconds
+        for (int flashCount = 0; flashCount < 2; flashCount++)
+        {
+            GetComponent<SpriteRenderer>().color = Color.red;
+            yield return new WaitForSeconds(0.25f); 
+            GetComponent<SpriteRenderer>().color = Color.white;
+            yield return new WaitForSeconds(0.25f);
+        }
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 
     public void SetMaxHealth(int amount)
@@ -180,6 +197,7 @@ public class Player : MonoBehaviour
         SetBaseStatValue(damageModiferFlat, baseStats.damageModiferFlat);
         SetBaseStatValue(damageModifierPercentage, baseStats.damageModifierPercentage);
         SetBaseStatValue(movementSpeedModifer, baseStats.movementSpeed);
+        SetBaseStatValue(immunityTimeModifier, baseStats.immunityTimeModifier);
 
         stats.Add("Speed", movementSpeedModifer);
         stats.Add("BulletSpeed", bulletSpeedModifier);
@@ -190,6 +208,7 @@ public class Player : MonoBehaviour
         stats.Add("DamageFlat", damageModiferFlat);
         stats.Add("DamagePercent", damageModifierPercentage);
         stats.Add("MaxHealth", maxHealth);
+        stats.Add("ImmunityTime", immunityTimeModifier);
         OnUpgradeAdded?.Invoke();
     }
 

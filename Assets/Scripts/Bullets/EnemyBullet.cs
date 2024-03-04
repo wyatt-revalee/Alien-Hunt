@@ -30,7 +30,7 @@ public abstract class EnemyBullet : MonoBehaviour
         }
     }
 
-    private IEnumerator DoMovement()
+    public virtual IEnumerator DoMovement()
     {
         while (true)
         {

@@ -17,7 +17,6 @@ public class Killzone : MonoBehaviour
             {
                 levelManager.AssignMissedPickup(enemy.itemDrop);
             }
-            Debug.Log(enemy.gameObject.name + " has left the screen");
             enemy.parentSpawner.GetComponent<EnemySpawner>().RespawnEnemy(enemy.gameObject.name.Substring(0, enemy.gameObject.name.Length - 7));
 
             Destroy(collider.transform.gameObject);

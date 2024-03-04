@@ -39,7 +39,7 @@ public abstract class Bullet : MonoBehaviour
         weapon.UpdateBulletInfo(enemyHit, pointsGained);
     }
 
-    private IEnumerator DoMovement()
+    public virtual IEnumerator DoMovement()
     {
         while (true)
         {

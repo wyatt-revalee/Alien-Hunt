@@ -17,4 +17,5 @@ public class CharacterStats : ScriptableObject
     public Stat magazineSizeModifier;
     public Stat damageModifierPercentage;
     public Stat damageModiferFlat;
+    public Stat immunityTimeModifier;
 }

@@ -48,3 +48,7 @@ MonoBehaviour:
     name: DamageFlat
     value: 1
     sprite: {fileID: 0}
+  immunityTimeModifier:
+    name: ImmunityTimeModifier
+    value: 3
+    sprite: {fileID: 0}

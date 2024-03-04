@@ -12,6 +12,7 @@ public abstract class Enemy : MonoBehaviour
     public int maxHealth;
     public int health;
     public int speed;
+    public float fireRate;
     public float damageModifier;
     public float bulletSpeedModifier;
     public int pointValue;
@@ -83,11 +84,11 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public IEnumerator Shoot()
+    public virtual IEnumerator Shoot()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f / fireRate);
             GameObject newBullet = Instantiate(bullet.gameObject, transform.position, Quaternion.identity);
             newBullet.GetComponent<EnemyBullet>().enemy = this;
         }
