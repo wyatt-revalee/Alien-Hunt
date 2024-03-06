@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfff15553f5fa7041847ba8b34324164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 1
+  currentLevel: 0
   enemySpawners: []
   enemiesInWave: 0
   enemiesKilled: 0
@@ -4494,6 +4494,64 @@ RectTransform:
   m_AnchoredPosition: {x: -281.14, y: 47.410004}
   m_SizeDelta: {x: 346.16, y: -200.58}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1602445642
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2276084985952506452, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.9776829
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276084985952506452, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.3187
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276084985952506452, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276084985952506452, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276084985952506452, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276084985952506452, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276084985952506452, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276084985952506452, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276084985952506452, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276084985952506452, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786358934675835860, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+      propertyPath: m_Name
+      value: UnlimitedAmmo
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5724455546965321844, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 652f4d504ec434e489ad2188a282c31c, type: 3}
 --- !u!1 &1667241948
 GameObject:
   m_ObjectHideFlags: 0
@@ -6836,3 +6894,4 @@ SceneRoots:
   - {fileID: 580466980}
   - {fileID: 798118552}
   - {fileID: 1689397855897772924}
+  - {fileID: 1602445642}
