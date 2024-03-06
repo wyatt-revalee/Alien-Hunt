@@ -7,9 +7,10 @@ Play online
 
 **DESIGN / GAMEPLAY**
 </br></br>
-Idea: A point and click shooter, sort of like duck hunt or old arcade games. Players will control a crosshair to point and shoot at enemies to earn points.</br>
+Idea: </br>
+A Galaga/Space Invaders style rogue-like. Players will control a character able to move side to side, and slightly up and down. Waves of enemies will come on screen shoot at the player. Player will shoot back while dodging incoming fire</br>
 There will be bonuses to collect, weapon pickups, power-ups to use, and hazards to avoid.</br>
-The goal will be for players to make it through as many increasingly difficult waves as possible while achieving the highest score that they can.</br></br>
+Players will fight through waves of enemies, with bosses every now and then, with the goal of beating a 'final' boss. Though, being a rogue-like, there should be tons of replay value.</br></br>
 Genre : Point and Click Shooter</br></br>
 Style : TBD (Pixel Art - Old Arcade Aesthetic?)</br></br>
 
@@ -25,36 +26,33 @@ I wanted to create a smaller, simpler game so I could see the full process from 
 Gameplay
 - ~~Add magazines and reloading~~
   - ~~Would add extra depth to gameplay and make different weapons feel more unique.~~ Done! Needs polishing.
-- Add a way to lose
-  - Perhaps enemies can attack, or drop bombs that will explode and hurt the player unless destroyed, ~~or even just make the player take damage for each enemy that gets off screen~~ Done
+- ~~Add a way to lose~~ With the rework, enemies will directly shoot at players. Players take damage and die if health reaches 0.
+  - ~~Perhaps enemies can attack, or drop bombs that will explode and hurt the player unless destroyed, or even just make the player take damage for each enemy that gets off screen~~ Done
 - ~~Weapon Pickups~~ Opted to do a shop system instead.
   - ~~Weapon pickups asset already exists and is function, need to work it into the gameplay somehow. Perhaps a random drop once a wave, or from an enemy?~~
-  - ~~Should these be permanent, temporary, or a mix? Either they have unlimited ammo, limited ammo that needs to be replenished, or set amount of ammo, and disappear after they are out.~~
-      - ~~Favoring the inbetween option.~~
+  - Should these be permanent, temporary, or a mix? Either they have unlimited ammo, limited ammo that needs to be replenished, or set amount of ammo, and disappear after they are out.
+      - Currently permanent, might opt for limited ammo in the future.
 - Power ups
   - Maybe things like exploding bullets, or bottomless magazine. These would be similar to pickups but they would only last for a certain time
-- ~~Health pickups
+- ~~Health pickups~~
   - ~~Add health pickups for players to recover health that they've lost~~ Done. A random enemy is assigned a health restoration that drops upon death. If enemy is missed, it is reassigned to a new enemy until player is healed.
   - Needs to be randomized. Player shouldn't just be guaranteed a health drop every time they are low.
 - New enemy types
   - There are already a few but game would benefit from more. Think new enemies should maybe be introduced as the player progresses, rather than all at once
   - Boss waves - perhaps every 5th wave.
-- New bullet types
-  - Exploding : initial shot and then explosive aoe
-  - Scatter : Initial bullet splits into many bullets
-  - High Penetration - More Damage
-  - Incendiary - Enemies are hit, then take damage over time
-  - Electric - Enemy is hit, nearby enemies are shocked
-    
+- ~~New bullet types~~ Tons of new items/upgrades to be added to game still.
+- Add Buffs/Debuffs
+    - Need to add in a buff/debuff system. Enemies and players should have some storage of these that run updates to them, doing whatever they do (give poison damage, movement speed, etc)
+    - This will probably require a rework of how stats are modified, due to multiple objects acting on a single stat.
 - Gameplay Loop Redesign
   - ~~Introduce more Rogue-Like elements? Perhaps a shop every wave/waves that allow players to upgrade weapons and skills, and purchase new items~~ Done. Shop added.
   - Add perma-unlocks after hitting milestones
   - Perhaps add an 'ending' (final boss?)
  
-- Core Gameplay Rework
-  - Switch from point and click to a side-tos-side shooter (like galaga or space invaders)
-  - Allows for more appealing, simpler gameplay that is easy to expand on
-  - Allows for player to have a object to see themselves as, customizable.
+- ~~Core Gameplay Rework~~ Done!
+  - ~~Switch from point and click to a side-tos-side shooter (like galaga or space invaders)~~
+  - ~~Allows for more appealing, simpler gameplay that is easy to expand on~~
+  - ~~Allows for player to have a object to see themselves as, customizable.~~
 
  UI / Accessibility
  - Add start/pause/settings menus
