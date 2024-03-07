@@ -19,3 +19,11 @@ public class CharacterStats : ScriptableObject
     public Stat damageModiferFlat;
     public Stat immunityTimeModifier;
 }
+
+[System.Serializable]
+public class Stat
+{
+    public string name;
+    public float value;
+    public Sprite sprite;
+}

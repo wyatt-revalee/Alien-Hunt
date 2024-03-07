@@ -220,10 +220,3 @@ public class Player : MonoBehaviour
     }
 }
 
-[Serializable]
-public class Stat
-{
-    public string name;
-    public float value;
-    public Sprite sprite;
-}
