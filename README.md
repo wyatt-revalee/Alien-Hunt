@@ -29,6 +29,7 @@ Gameplay
 - ~~Add a way to lose~~ With the rework, enemies will directly shoot at players. Players take damage and die if health reaches 0.
   - ~~Perhaps enemies can attack, or drop bombs that will explode and hurt the player unless destroyed, or even just make the player take damage for each enemy that gets off screen~~ Done
 - ~~Weapon Pickups~~ Opted to do a shop system instead.
+      - Might opt for random drops with a shop element mixed in. Sort of like gungeon with its chests but also shop. Multiple currency types can be fun too.
   - ~~Weapon pickups asset already exists and is function, need to work it into the gameplay somehow. Perhaps a random drop once a wave, or from an enemy?~~
   - Should these be permanent, temporary, or a mix? Either they have unlimited ammo, limited ammo that needs to be replenished, or set amount of ammo, and disappear after they are out.
       - Currently permanent, might opt for limited ammo in the future.
@@ -44,6 +45,7 @@ Gameplay
 - Add Buffs/Debuffs
     - Need to add in a buff/debuff system. Enemies and players should have some storage of these that run updates to them, doing whatever they do (give poison damage, movement speed, etc)
     - This will probably require a rework of how stats are modified, due to multiple objects acting on a single stat.
+    - Potentially separate from player script, make modifiable
 - Gameplay Loop Redesign
   - ~~Introduce more Rogue-Like elements? Perhaps a shop every wave/waves that allow players to upgrade weapons and skills, and purchase new items~~ Done. Shop added.
   - Add perma-unlocks after hitting milestones
