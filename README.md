@@ -24,18 +24,17 @@ I wanted to create a smaller, simpler game so I could see the full process from 
 
 
 Gameplay
-- ~~Add magazines and reloading~~
-  - ~~Would add extra depth to gameplay and make different weapons feel more unique.~~ Done! Needs polishing.
-- ~~Add a way to lose~~ With the rework, enemies will directly shoot at players. Players take damage and die if health reaches 0.
-  - ~~Perhaps enemies can attack, or drop bombs that will explode and hurt the player unless destroyed, or even just make the player take damage for each enemy that gets off screen~~ Done
-- ~~Weapon Pickups~~ Opted to do a shop system instead.
-      - Might opt for random drops with a shop element mixed in. Sort of like gungeon with its chests but also shop. Multiple currency types can be fun too.
-  - ~~Weapon pickups asset already exists and is function, need to work it into the gameplay somehow. Perhaps a random drop once a wave, or from an enemy?~~
-  - Should these be permanent, temporary, or a mix? Either they have unlimited ammo, limited ammo that needs to be replenished, or set amount of ammo, and disappear after they are out.
-      - Currently permanent, might opt for limited ammo in the future.
+- Boss Fights
+    - Should occur maybe every 5 waves, perhaps signifying the end of a stage or area.
+    - Unique bosses, randomized pool (say, 3 different bosses for each level, randomly chosen. 4 regular boss fights per run plus final boss would mean 13 unique bosses)
+    - Reward player with upgrade or better gear, maybe even reward based on performance (gungeon gives you extra health if you don't take damage from a boss, rewards skill but doesn't punish player if they get hurt)
 - Power ups
   - Maybe things like exploding bullets, or bottomless magazine. These would be similar to pickups but they would only last for a certain time
-- ~~Health pickups~~
+- Weapons
+  - Add more, unique weapons. Add limited ammo to them except for starter weapons. Add new ways to receive weapons besides shop.
+
+
+- Health pickups
   - ~~Add health pickups for players to recover health that they've lost~~ Done. A random enemy is assigned a health restoration that drops upon death. If enemy is missed, it is reassigned to a new enemy until player is healed.
   - Needs to be randomized. Player shouldn't just be guaranteed a health drop every time they are low.
 - New enemy types
@@ -50,6 +49,13 @@ Gameplay
   - ~~Introduce more Rogue-Like elements? Perhaps a shop every wave/waves that allow players to upgrade weapons and skills, and purchase new items~~ Done. Shop added.
   - Add perma-unlocks after hitting milestones
   - Perhaps add an 'ending' (final boss?)
+
+- ~~Add magazines and reloading~~
+  - ~~Would add extra depth to gameplay and make different weapons feel more unique.~~ Done! Needs polishing.
+- ~~Add a way to lose~~ With the rework, enemies will directly shoot at players. Players take damage and die if health reaches 0.
+  - ~~Perhaps enemies can attack, or drop bombs that will explode and hurt the player unless destroyed, or even just make the player take damage for each enemy that gets off screen~~ Done
+- ~~Weapon Pickups~~ Opted to do a shop system instead.
+  - ~~Weapon pickups asset already exists and is function, need to work it into the gameplay somehow. Perhaps a random drop once a wave, or from an enemy?~~
  
 - ~~Core Gameplay Rework~~ Done!
   - ~~Switch from point and click to a side-tos-side shooter (like galaga or space invaders)~~
@@ -77,3 +83,4 @@ Music & Sounds
 Data
   - Introduce high scores
       - Perhaps stored on my website, players can upload their scores and see leaderboards
+ 
