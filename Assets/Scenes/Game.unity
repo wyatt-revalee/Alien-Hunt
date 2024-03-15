@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfff15553f5fa7041847ba8b34324164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 2
+  currentLevel: 1
   enemySpawners: []
   enemiesInWave: 0
   enemiesKilled: 0
@@ -5604,6 +5604,7 @@ MonoBehaviour:
   rb: {fileID: 2094888228}
   currentWeaponScript: {fileID: 0}
   isPaused: 0
+  playerInput: {fileID: 0}
 --- !u!61 &2094888227
 BoxCollider2D:
   m_ObjectHideFlags: 0

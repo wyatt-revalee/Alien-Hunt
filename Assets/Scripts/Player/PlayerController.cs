@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Weapon currentWeaponScript;
     public bool isPaused;
+    public PlayerInput playerInput;
 
     public event Action OnNewWeaponSet;
     public event Action OnWeaponFired;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        playerInput = GetComponent<PlayerInput>();
         CreateWeapon();
         Cursor.visible = false;
     }
@@ -41,6 +43,13 @@ public class PlayerController : MonoBehaviour
 
     public void OnShoot()
     {
+        string currentControlScheme =  playerInput.currentControlScheme;
+
+        // If the game is paused and player is using a mouse, don't shoot (to avoid the selected shop item being clicked)
+        if (currentControlScheme == "KBM" && isPaused)
+        {
+            return;
+        }
         OnPrimaryButtonClick?.Invoke();
         if (isPaused)
         {
