@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
@@ -291,6 +292,8 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+
+    
 
     [Serializable]
     public class PickupSpawn

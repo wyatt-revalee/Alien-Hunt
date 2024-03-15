@@ -43,14 +43,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnShoot()
     {
-        string currentControlScheme =  playerInput.currentControlScheme;
-
-        // If the game is paused and player is using a mouse, don't shoot (to avoid the selected shop item being clicked)
-        if (currentControlScheme == "KBM" && isPaused)
-        {
-            return;
-        }
-        OnPrimaryButtonClick?.Invoke();
         if (isPaused)
         {
             return;
@@ -160,6 +152,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             isPaused = !isPaused;
+            SetControlMap();
             pauseMenu.SetActive(isPaused);
             transform.GetChild(0).gameObject.SetActive(!isPaused);
             Cursor.visible = isPaused;
@@ -172,6 +165,7 @@ public class PlayerController : MonoBehaviour
         isPaused = isShopping;
         Cursor.visible = isShopping;
         transform.GetChild(0).gameObject.SetActive(!isShopping);
+        SetControlMap();
         currentWeaponScript.isReloading = isShopping;
         rb.velocity = Vector2.zero;
     }
@@ -185,6 +179,22 @@ public class PlayerController : MonoBehaviour
         inventoryMenu.SetActive(!inventoryMenu.activeSelf);
         PauseGame();
         pauseMenu.SetActive(false);
+    }
+
+    public void OnSelect()
+    {
+        OnPrimaryButtonClick?.Invoke();
+    }
+
+    public void OnMoveSelection(InputValue value)
+    {
+        OnMovement?.Invoke(value.Get<Vector2>());
+    }
+
+    public void SetControlMap()
+    {
+        string newMap = isPaused ? "Menu" : "Main";
+        GetComponent<PlayerInput>().SwitchCurrentActionMap(newMap);
     }
 
 }
