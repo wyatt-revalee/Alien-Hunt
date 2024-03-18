@@ -215,8 +215,8 @@ public class LevelManager : MonoBehaviour
         TextMeshProUGUI waveText = WaveMessenger.GetComponentInChildren<TextMeshProUGUI>();
         waveText.text = string.Format("Wave {0} Complete", currentLevel);
         yield return new WaitForSeconds(1f);
-        waveText.text += string.Format("\nEnemies Killed: {0}/{1}", enemiesKilled, enemiesInWave);
-        yield return new WaitForSeconds(1f);
+        // waveText.text += string.Format("\nEnemies Killed: {0}/{1}", enemiesKilled, enemiesInWave);
+        // yield return new WaitForSeconds(1f);
         waveText.text += string.Format("\nPoints Earned: {0}",pointsEarned);
         yield return new WaitForSeconds(1f);
         float accuracy = GetWaveAccuracy();
