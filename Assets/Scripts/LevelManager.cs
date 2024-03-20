@@ -151,7 +151,7 @@ public class LevelManager : MonoBehaviour
     {
         if(health <= player.maxHealth.value / 3 && !healthPickupAssigned)
         {
-            AssignHealthPickup();
+            StartCoroutine(AssignHealthPickup());
         }
         if(health > player.maxHealth.value / 3 && healthPickupAssigned)
         {
@@ -234,11 +234,21 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public void AssignHealthPickup()
+    public IEnumerator AssignHealthPickup()
     {
-        int random = UnityEngine.Random.Range(0, enemySpawners.Count);
-        enemySpawners[random].dropToAssign = pickups["Health"];
         healthPickupAssigned = true;
+        int random = 100;
+        while (random > 20)
+        {
+            yield return new WaitForSeconds(1f);
+            random = UnityEngine.Random.Range(0, 100);
+            if (random < 20)
+            {
+                int randomSpawnerIndex = UnityEngine.Random.Range(0, enemySpawners.Count);
+                enemySpawners[randomSpawnerIndex].dropToAssign = pickups["Health"];
+                healthPickupAssigned = true;
+            }
+        }
     }
 
     public void AssignMissedPickup(GameObject missedPickup)
