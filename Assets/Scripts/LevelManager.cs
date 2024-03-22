@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
     private bool waitingOnNewWave;
     public StatTracker statTracker;
     public Player player;
+    public GameObject bossSpawner;
 
     [Header("Pickup Settings")]
     [SerializeField]
@@ -105,7 +106,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Tells spawners to start new wave
-    private void StartSpawners()
+    private void StartNormalWave()
     {
         int spawnInterval = UnityEngine.Random.Range(1, Mathf.Max(2, 5 - (currentLevel / 2)));
         foreach (EnemySpawner spawner in enemySpawners)
@@ -188,8 +189,21 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(SetNewWaveText(3));
         yield return new WaitForSeconds(4f);
         WaveMessenger.SetActive(false);
-        StartSpawners();
+
+        if(currentLevel % 5 == 0)
+        {
+            StartBossWave();
+        }
+        else
+        {
+            StartNormalWave();
+        }
         waitingOnNewWave = false;
+    }
+
+    private void StartBossWave()
+    {
+        // Start boss wave
     }
 
 

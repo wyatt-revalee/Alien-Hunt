@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfff15553f5fa7041847ba8b34324164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 0
+  currentLevel: 7
   enemySpawners: []
   enemiesInWave: 0
   enemiesKilled: 0
