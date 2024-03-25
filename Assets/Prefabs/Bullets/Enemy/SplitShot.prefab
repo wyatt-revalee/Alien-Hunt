@@ -49,10 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9981541a87978e04bb45e7989bf07238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletType: {fileID: 8436040867709383906, guid: 4271df0f9661a6e40b977d01a59b689d, type: 3}
   enemy: {fileID: 0}
+  damage: 0
   bulletSpeed: 5
-  bulletSpeedModifier: 0
+  isMovingStraight: 1
+  bulletType: {fileID: 8436040867709383906, guid: 4271df0f9661a6e40b977d01a59b689d, type: 3}
 --- !u!1001 &2358499277716240612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64,6 +65,14 @@ PrefabInstance:
     - target: {fileID: 4242624897227732910, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
       propertyPath: m_Name
       value: SimpleBullet (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.04843266
       objectReference: {fileID: 0}
     - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
       propertyPath: m_SortingLayer
@@ -161,6 +170,14 @@ PrefabInstance:
       value: SimpleBullet
       objectReference: {fileID: 0}
     - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.04843266
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}
@@ -254,6 +271,14 @@ PrefabInstance:
     - target: {fileID: 4242624897227732910, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
       propertyPath: m_Name
       value: SimpleBullet (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.04843266
       objectReference: {fileID: 0}
     - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
       propertyPath: m_SortingLayer
@@ -351,6 +376,14 @@ PrefabInstance:
       value: SimpleBullet (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.04843266
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}
@@ -444,6 +477,14 @@ PrefabInstance:
     - target: {fileID: 4242624897227732910, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
       propertyPath: m_Name
       value: SimpleBullet (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.04843266
       objectReference: {fileID: 0}
     - target: {fileID: 4697123308520441487, guid: 5996a98cfafbd974bb399bcbb53bfae6, type: 3}
       propertyPath: m_SortingLayer

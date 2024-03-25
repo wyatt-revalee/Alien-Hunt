@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public bool isPaused;
     public PlayerInput playerInput;
 
+    public List<GameObject> weapons;
+
     public event Action OnNewWeaponSet;
     public event Action OnWeaponFired;
     public event Action OnWeaponReloaded;
