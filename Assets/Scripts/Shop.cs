@@ -81,7 +81,7 @@ public class Shop : MonoBehaviour
                     player.AddItemToInventory(item);
                     break;
                 case "Weapon":
-                    playerController.SetNewWeapon(item.itemData.weapon);
+                    playerController.AddWeapon(item.itemData.weapon);
                     break;
             }
         }

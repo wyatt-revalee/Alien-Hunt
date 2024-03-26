@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        CreateWeapon();
+        AddWeapon(currentWeapon);
         Cursor.visible = false;
     }
 
@@ -100,6 +100,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnSwapWeapon()
+    {
+        if(weapons.Count > 0)
+        {
+            if(currentWeapon == weapons[0])
+            {
+                SetNewWeapon(weapons[1]);
+            }
+            else
+            {
+                SetNewWeapon(weapons[0]);
+            }
+        }
+    }
+
     public void OnReload()
     {
         currentWeaponScript.bulletsInMagazine = 0;
@@ -111,6 +126,12 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(currentWeaponScript.reloadSpeed * player.reloadSpeedModifier.value);
         OnWeaponReloaded?.Invoke();
+    }
+
+    public void AddWeapon(GameObject newWeapon)
+    {
+        weapons.Add(newWeapon);
+        SetNewWeapon(newWeapon);
     }
 
     public void SetNewWeapon(GameObject newWeapon)
