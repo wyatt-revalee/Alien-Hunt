@@ -13,15 +13,17 @@ public class PlayerController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject settingsMenu;
     public GameObject inventoryMenu;
+    public GameObject weaponSelector;
     public Player player;
     public Rigidbody2D rb;
     public Weapon currentWeaponScript;
     public bool isPaused;
     public PlayerInput playerInput;
 
-    public List<GameObject> weapons;
+    public List<StoredWeaponInfo> weapons;
 
     public event Action OnNewWeaponSet;
+    public event Action OnWeaponsUpdated;
     public event Action OnWeaponFired;
     public event Action OnWeaponReloaded;
     public event Action OnPrimaryButtonClick;
@@ -104,14 +106,9 @@ public class PlayerController : MonoBehaviour
     {
         if(weapons.Count > 0)
         {
-            if(currentWeapon == weapons[0])
-            {
-                SetNewWeapon(weapons[1]);
-            }
-            else
-            {
-                SetNewWeapon(weapons[0]);
-            }
+            isPaused = true;
+            weaponSelector.SetActive(true);
+            weaponSelector.GetComponent<WeaponSelector>().StartWeaponSelection();
         }
     }
 
@@ -130,12 +127,23 @@ public class PlayerController : MonoBehaviour
 
     public void AddWeapon(GameObject newWeapon)
     {
-        weapons.Add(newWeapon);
+        StoredWeaponInfo newWeaponInfo = new StoredWeaponInfo();
+        newWeaponInfo.name = newWeapon.name;
+        newWeaponInfo.weaponObject = newWeapon;
+        newWeaponInfo.currentAmmo = newWeapon.GetComponent<Weapon>().ammoCapacity; ;
+        newWeaponInfo.bulletsInMagazine = newWeapon.GetComponent<Weapon>().magazineSize; ;
+        weapons.Add(newWeaponInfo);
         SetNewWeapon(newWeapon);
+        OnWeaponsUpdated?.Invoke();
     }
 
     public void SetNewWeapon(GameObject newWeapon)
     {
+        if(currentWeaponScript != null)
+        {
+            //Debug.Log("Caching weapon info");
+            CacheWeaponInfo();
+        }
         currentWeapon = newWeapon;
         CreateWeapon();
     }
@@ -149,6 +157,13 @@ public class PlayerController : MonoBehaviour
         weaponInstance = Instantiate(currentWeapon, transform.position, Quaternion.identity);
         weaponInstance.transform.parent = gameObject.transform;
         currentWeaponScript = weaponInstance.GetComponent<Weapon>();
+        StoredWeaponInfo cachedWeaponInfo = FetchWeaponInfo(currentWeaponScript.weaponID);
+        if(cachedWeaponInfo != null)
+        {
+            //Debug.Log(cachedWeaponInfo.bulletsInMagazine);
+            currentWeaponScript.bulletsInMagazine = cachedWeaponInfo.bulletsInMagazine;
+            currentWeaponScript.currentAmmo = cachedWeaponInfo.currentAmmo;
+        }
         currentWeaponScript.player = player;
         weaponInstance.GetComponent<SpriteRenderer>().enabled = false;
         OnNewWeaponSet?.Invoke();
@@ -158,6 +173,35 @@ public class PlayerController : MonoBehaviour
             Cursor.visible = true;
             transform.GetChild(0).gameObject.SetActive(false);
         }
+    }
+
+    private void CacheWeaponInfo()
+    {
+        for(int weaponSlot = 0; weaponSlot < weapons.Count; weaponSlot++)
+        {
+            if(weapons[weaponSlot].weaponObject.GetComponent<Weapon>().weaponID == currentWeaponScript.weaponID)
+            {
+                weapons[weaponSlot].weaponObject = currentWeapon;
+                weapons[weaponSlot].currentAmmo = currentWeaponScript.currentAmmo;
+                weapons[weaponSlot].bulletsInMagazine = currentWeaponScript.bulletsInMagazine;
+
+            }
+        }
+    }
+
+    private StoredWeaponInfo FetchWeaponInfo(int id)
+    {
+        foreach(StoredWeaponInfo info in weapons)
+        {
+            if(info.weaponObject.GetComponent<Weapon>().weaponID == id)
+            {
+                //Debug.Log("Cached weapon info found");
+                return info;
+            }
+        }
+        //Debug.Log("Weapon info does not exist");
+        return null;
+
     }
 
     private void OnPause()
@@ -220,4 +264,13 @@ public class PlayerController : MonoBehaviour
         GetComponent<PlayerInput>().SwitchCurrentActionMap(newMap);
     }
 
+}
+
+[System.Serializable]
+public class StoredWeaponInfo
+{
+    public string name;
+    public GameObject weaponObject;
+    public int currentAmmo;
+    public int bulletsInMagazine;
 }

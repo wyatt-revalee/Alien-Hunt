@@ -7,7 +7,7 @@ public class DoubleBarrel : Weapon
 {
     public override void Shoot()
     {
-        bulletsInMagazine -= bulletsPerShot;
+        bulletsInMagazine--;
         float spread = 0.3f;
 
         // Iterates through all bullets, spawning them with a spread. Ex: [1, -1, 2, -2,... n, -n]

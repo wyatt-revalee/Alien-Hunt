@@ -15,7 +15,7 @@ public class QuadBarrel : Weapon
     };
     public override void Shoot()
     {
-        bulletsInMagazine -= bulletsPerShot;
+        bulletsInMagazine--;
         for (int bulletNum = 1; bulletNum <= bulletsPerShot; bulletNum++)
         {
             Vector2 direction = bulletLocations[bulletNum-1];

@@ -5745,6 +5745,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 463247038}
   settingsMenu: {fileID: 660913984}
   inventoryMenu: {fileID: 195080163}
+  weaponSelector: {fileID: 4893730758097079810}
   player: {fileID: 2094888224}
   rb: {fileID: 2094888228}
   currentWeaponScript: {fileID: 0}
@@ -6968,31 +6969,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1981744727784275086, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1981744727784275086, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1981744727784275086, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1981744727784275086, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1981744727784275086, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 312.25
       objectReference: {fileID: 0}
     - target: {fileID: 1981744727784275086, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -249.51999
       objectReference: {fileID: 0}
     - target: {fileID: 3618168567645226231, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
       propertyPath: m_Name
       value: WeaponSelector
+      objectReference: {fileID: 0}
+    - target: {fileID: 3618168567645226231, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6967639461647559357, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
       propertyPath: m_Pivot.x
@@ -7077,8 +7082,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3618168567645226231, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4893730758097079811}
   m_SourcePrefab: {fileID: 100100000, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
+--- !u!1 &4893730758097079810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3618168567645226231, guid: 316c50714eac95f47a4319a2b4163fa1, type: 3}
+  m_PrefabInstance: {fileID: 4893730758097079809}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4893730758097079811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4893730758097079810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e989f9638d47efc4ba2438edb878f1e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 2094888226}
+  weaponSlot: {fileID: 2485457508031113625, guid: 3f43e2bff10e19b40ad12522a6870870, type: 3}
+  weaponSelected: 0
 --- !u!1001 &7541880462165731263
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 504142529
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8f579d679f3545d4b8f76423a5e4dc4a, type: 3}
   m_Color: {r: 1, g: 0, b: 0.12164402, a: 1}
@@ -99,12 +99,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 4242624897227732910, guid: 9baca4ed239d4744fa93edd4bccb6a16, type: 3}
   bulletsPerShot: 2
+  weaponID: 2
+  ammoCapacity: 64
+  currentAmmo: 64
   damage: 2
   reloadSpeed: 1
   fireRate: 0
-  magazineSize: 8
+  magazineSize: 4
   isAutomatic: 0
-  bulletsInMagazine: 8
+  bulletsInMagazine: 4
   isReloading: 0
   bulletSpeed: 15
   reloadingCrosshair: {fileID: 21300000, guid: a9f58bf8354bf8846b8ec5e3180c7d1d, type: 3}

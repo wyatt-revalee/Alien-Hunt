@@ -13,6 +13,7 @@ public abstract class Weapon : MonoBehaviour
     public int bulletsPerShot;
 
     [Header("Weapon Settings")]
+    public int weaponID;
     public int ammoCapacity;
     public int currentAmmo;
     public int damage;

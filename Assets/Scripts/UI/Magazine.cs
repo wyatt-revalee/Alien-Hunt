@@ -41,8 +41,8 @@ public class Magazine : MonoBehaviour
             Destroy(child.gameObject);
         }
         bulletSprite = playerController.currentWeaponScript.bullet.GetComponent<Bullet>().magazineSprite;
-        magazineSize = (int)(playerController.currentWeaponScript.magazineSize * player.magazineSizeModifier.value) / playerController.currentWeaponScript.bulletsPerShot;
-        bulletsInMagazine = magazineSize;
+        magazineSize = (int)(playerController.currentWeaponScript.magazineSize * player.magazineSizeModifier.value);
+        bulletsInMagazine = playerController.currentWeaponScript.bulletsInMagazine;
         for (int i = 0; i < magazineSize; i++)
         {
             GameObject newBullet = new GameObject();
@@ -51,8 +51,13 @@ public class Magazine : MonoBehaviour
             newBullet.transform.SetParent(transform);
             newBullet.transform.localPosition = new Vector3(0, 0, 0);
             newBullet.transform.localScale = new Vector3(1, 1, 1);
+
+            if(i > bulletsInMagazine -1)
+            {
+                newBullet.GetComponent<Image>().color = new Color(0, 0, 0);
+            }
         }
-        playerController.currentWeaponScript.bulletsInMagazine = bulletsInMagazine;
+        // Show correct bullets missing from magazine on weapon swap
     }
 
 }
