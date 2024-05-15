@@ -9,7 +9,7 @@ Play online
 </br></br>
 Idea: </br>
 A Galaga/Space Invaders style rogue-like. Players will control a character able to move side to side, and slightly up and down. Waves of enemies will come on screen shoot at the player. Player will shoot back while dodging incoming fire</br>
-There will be bonuses to collect, weapon pickups, power-ups to use, and hazards to avoid.</br>
+There will be bonuses to earn, power-ups to use, and items to buy.</br>
 Players will fight through waves of enemies, with bosses every now and then, with the goal of beating a 'final' boss. Though, being a rogue-like, there should be tons of replay value.</br></br>
 Genre : Point and Click Shooter</br></br>
 Style : TBD (Pixel Art - Old Arcade Aesthetic?)</br></br>
@@ -30,8 +30,8 @@ Gameplay
     - Reward player with upgrade or better gear, maybe even reward based on performance (gungeon gives you extra health if you don't take damage from a boss, rewards skill but doesn't punish player if they get hurt)
 - Power ups
   - Maybe things like exploding bullets, or bottomless magazine. These would be similar to pickups but they would only last for a certain time
-- Weapons
-  - Add more, unique weapons. Add limited ammo to them except for starter weapons. Add new ways to receive weapons besides shop.
+~~- Weapons~~
+ ~~b- Add more, unique weapons. Add limited ammo to them except for starter weapons. Add new ways to receive weapons besides shop.~~ Scope creep begone!
 
 
 - Health pickups
@@ -41,10 +41,10 @@ Gameplay
   - There are already a few but game would benefit from more. Think new enemies should maybe be introduced as the player progresses, rather than all at once
   - Boss waves - perhaps every 5th wave.
 - ~~New bullet types~~ Tons of new items/upgrades to be added to game still.
-- Add Buffs/Debuffs
-    - Need to add in a buff/debuff system. Enemies and players should have some storage of these that run updates to them, doing whatever they do (give poison damage, movement speed, etc)
-    - This will probably require a rework of how stats are modified, due to multiple objects acting on a single stat.
-    - Potentially separate from player script, make modifiable
+~~- Add Buffs/Debuffs~~ Reducing scope
+    ~~- Need to add in a buff/debuff system. Enemies and players should have some storage of these that run updates to them, doing whatever they do (give poison damage, movement speed, etc)~~
+    ~~- This will probably require a rework of how stats are modified, due to multiple objects acting on a single stat.~~
+    ~~- Potentially separate from player script, make modifiable~~
 - Gameplay Loop Redesign
   - ~~Introduce more Rogue-Like elements? Perhaps a shop every wave/waves that allow players to upgrade weapons and skills, and purchase new items~~ Done. Shop added.
   - Add perma-unlocks after hitting milestones
@@ -75,7 +75,7 @@ Artwork & Animation</br>
 
 Music & Sounds
 - Main sound track
-- Sounds for different guns being fired / reloaded
+~~- Sounds for different guns being fired / reloaded~~ N/A anymore
 - Sounds for enemies taking damange / dying
 - Menu sounds
 - End of wave / points awarded sounds
