@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameplayTagSystem : MonoBehaviour
 {
 
-    Dictionary<string, int> StackedTags;
+    public Dictionary<string, int> stackedTags = new Dictionary<string, int>();
 
     public void AddTag(string tagToAdd)
     {
@@ -20,24 +20,38 @@ public class GameplayTagSystem : MonoBehaviour
 
     public List<string> GetActiveTags()
     {
-        return StackedTags.Keys.ToList();
+        return stackedTags.Keys.ToList();
     }
 
     public void AddStack(string tagToAdd)
     {
-        StackedTags[tagToAdd]++;
+        if(stackedTags.ContainsKey(tagToAdd))
+        {
+            stackedTags[tagToAdd]++;
+        }
+        else
+        {
+            stackedTags[tagToAdd] = 1;
+        }
     }
 
     public void RemoveStack(string tagToAdd)
     {
-        StackedTags[tagToAdd]--;
+        if (stackedTags[tagToAdd] == 1)
+        {
+            stackedTags.Remove(tagToAdd);
+        }
+        else
+        {
+            stackedTags[tagToAdd]--;
+        }
     }
 
     public bool HasAllTags(List<string> tagsToCheck)
     {
         foreach (string tag in tagsToCheck)
         {
-            if (!StackedTags.ContainsKey(tag))
+            if (!stackedTags.ContainsKey(tag))
             {
                 return false;
             }
@@ -49,7 +63,7 @@ public class GameplayTagSystem : MonoBehaviour
     {
         foreach(string tag in tagsToCheck)
         {
-            if(StackedTags.ContainsKey(tag))
+            if(stackedTags.ContainsKey(tag))
             {
                 return true;
             }

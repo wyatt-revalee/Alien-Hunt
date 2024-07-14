@@ -27,11 +27,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        Debug.Log(value.Get<Vector2>());
         OnMovement?.Invoke(value.Get<Vector2>());
         if (!isPaused)
         {
-            rb.velocity = value.Get<Vector2>() * (player.movementSpeed * player.movementSpeedModifer);
+            rb.velocity = value.Get<Vector2>() * (player.movementSpeed * player.GetComponent<AttributeSystem>().attributes["speed"].GetTrueValue());
         }
     }
 }

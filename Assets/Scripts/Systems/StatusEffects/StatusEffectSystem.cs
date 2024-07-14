@@ -6,8 +6,9 @@ using UnityEngine;
 public class StatusEffectSystem : MonoBehaviour
 {
 
-    List<StatusEffect> ActiveStatusEffects;
+    public List<StatusEffect> ActiveStatusEffects;
     public event Action<StatusEffect> StatusEffectWasRemoved;
+    public event Action<StatusEffect> StatusEffectWasAdded;
 
     public List<StatusEffect> GetStatusEffects()
     {
@@ -16,6 +17,7 @@ public class StatusEffectSystem : MonoBehaviour
 
     public void AddStatusEffect(StatusEffect effectToAdd)
     {
+        //Debug.Log("adding");
         effectToAdd.AttemptApplication();
     }
 
@@ -42,4 +44,8 @@ public class StatusEffectSystem : MonoBehaviour
         }
     }
 
+    public void CallStatusEffectAdded(StatusEffect effectAdded)
+    {
+        StatusEffectWasAdded?.Invoke(effectAdded);
+    }
 }
