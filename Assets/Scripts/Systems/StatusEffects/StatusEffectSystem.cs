@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class StatusEffectSystem : MonoBehaviour
 {
 
     List<StatusEffect> ActiveStatusEffects;
+    public event Action<StatusEffect> StatusEffectWasRemoved;
 
     public List<StatusEffect> GetStatusEffects()
     {
@@ -26,10 +28,10 @@ public class StatusEffectSystem : MonoBehaviour
         }
 
         ActiveStatusEffects.Remove(effectToRemove);
-        //remove tags from player
+        effectToRemove.RemoveTags();
         effectToRemove.ApplyAttributeEffects(false);
         effectToRemove.ClearTimers();
-        //call effect removed
+        StatusEffectWasRemoved?.Invoke(effectToRemove);
     }
 
     public void PrintAllEffects()

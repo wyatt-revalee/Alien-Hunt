@@ -5,7 +5,14 @@ using UnityEngine;
 public class AttributeChange
 {
 
-    string attributeToChange;
-    string changeType;
+    public string attributeName;
+    public string changeType;
+    public float changeAmount;
 
+    public AttributeChange(string name, string type, float amount)
+    {
+        attributeName = name;
+        changeType = type;
+        changeAmount = amount;
+    }
 }

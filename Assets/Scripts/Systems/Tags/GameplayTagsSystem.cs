@@ -13,7 +13,7 @@ public class GameplayTagSystem : MonoBehaviour
         AddStack(tagToAdd);
     }
 
-    public void RemoveTag(GameplayTag tagToRemove)
+    public void RemoveTag(string tagToRemove)
     {
         RemoveStack(tagToRemove);
     }
@@ -28,9 +28,9 @@ public class GameplayTagSystem : MonoBehaviour
         StackedTags[tagToAdd]++;
     }
 
-    public void RemoveStack(GameplayTag tagToAdd)
+    public void RemoveStack(string tagToAdd)
     {
-        StackedTags[tagToAdd.tagName]--;
+        StackedTags[tagToAdd]--;
     }
 
     public bool HasAllTags(List<string> tagsToCheck)

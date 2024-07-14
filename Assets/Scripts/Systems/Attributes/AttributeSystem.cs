@@ -18,21 +18,21 @@ public class AttributeSystem : MonoBehaviour
         return Attributes[attributeName];
     }
 
-    public void ChangeAttributeValue(Attribute attributeToChange, int valueChange, string typeToChange)
+    public void ChangeAttributeValue(string attributeToChange, float valueChange, string typeToChange)
     {
         switch (typeToChange)
         {
             case "baseValue":
-                Attributes[attributeToChange.aName].baseValue += valueChange;
+                Attributes[attributeToChange].baseValue += valueChange;
                 break;
             case "delta":
-                Attributes[attributeToChange.aName].delta += valueChange;
+                Attributes[attributeToChange].delta += valueChange;
                 break;
             case "multiplier":
-                Attributes[attributeToChange.aName].multiplier += valueChange;
+                Attributes[attributeToChange].multiplier += valueChange;
                 break;
             case "max":
-                Attributes[attributeToChange.aName].max += valueChange;
+                Attributes[attributeToChange].max += valueChange;
                 break;
             default:
                 break;

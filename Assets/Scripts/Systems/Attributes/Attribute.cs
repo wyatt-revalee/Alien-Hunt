@@ -6,10 +6,10 @@ using UnityEngine;
 public class Attribute
 {
     public string aName = "Attribute";
-    public int baseValue = 10;
-    public int max = 99;
-    public float multiplier = 1.0f;
-    public int delta = 0;
+    public float baseValue = 10;
+    public float max = 99;
+    public float multiplier = 1;
+    public float delta = 0;
     public Image icon;
     
     public Attribute(string newName, int newBase, int newMax, float newMult, int newDelta){
@@ -20,8 +20,8 @@ public class Attribute
         delta = newDelta;
     }
 
-    public int GetTrueValue()
+    public float GetTrueValue()
     {
-        return (int)(baseValue * multiplier) + delta;
+        return (baseValue * multiplier) + delta;
     }
 }

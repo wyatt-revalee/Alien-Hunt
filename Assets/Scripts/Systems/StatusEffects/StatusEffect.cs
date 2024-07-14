@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
 
-public class StatusEffect : MonoBehaviour
+public abstract class StatusEffect : MonoBehaviour
 {
     public GameObject owner;
     public List<string> requiredTags;
     public List<string> preventingTags;
     public List<string> addingTags;
+    public List<AttributeChange> AttributeEffects;
     void Start()
     {
         
@@ -46,10 +47,22 @@ public class StatusEffect : MonoBehaviour
             Debug.Log(tag + " tag added!");
         }
     }
+    
+    public void RemoveTags()
+    {
+        foreach(string tag in addingTags)
+        {
+            owner.GetComponent<GameplayTagSystem>().RemoveTag(tag);
+        }
+    }
 
     public void ApplyAttributeEffects(bool addEffects)
     {
         float localMult = addEffects ? 1 : 0;
+        foreach(AttributeChange ac in AttributeEffects)
+        {
+            owner.GetComponent<AttributeSystem>().ChangeAttributeValue(ac.attributeName, ac.changeAmount, ac.changeType);
+        }
     }
 
     public void ClearTimers()
