@@ -13,13 +13,12 @@ public class AttributeSystem : MonoBehaviour
     public Dictionary<string, Attribute> attributes = new Dictionary<string, Attribute>
         {
             {"health", new Attribute("health", 10, 99, 1.0f, 0)},
-            {"speed", new Attribute("speed", 5, 99, 1.0f, 0)},
+            {"speed", new Attribute("speed", 1, 99, 1.0f, 0)},
             {"defense", new Attribute("defense", 10, 99, 1.0f, 0)}
         };
 
     void Start()
     {
-        StartCoroutine(PrintAttribute("speed"));
     }
     
     private IEnumerator PrintAttribute(string attributeName)

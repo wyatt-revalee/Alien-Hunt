@@ -11,9 +11,4 @@ public class SE_Freeze : StatusEffect
         statusEffectInfo = new StatusEffectInfo("freeze", 5f, 0f, "Halves speed.", "SE_Freeze", icon);
     }
 
-    void OnTriggerEnter2D(Collider2D collider2D)
-    {
-        collider2D.transform.GetComponent<StatusEffectSystem>().AddStatusEffect(this);
-        return;
-    }
 }

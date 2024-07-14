@@ -30,7 +30,13 @@ public class PlayerController : MonoBehaviour
         OnMovement?.Invoke(value.Get<Vector2>());
         if (!isPaused)
         {
-            rb.velocity = value.Get<Vector2>() * (player.movementSpeed * player.GetComponent<AttributeSystem>().attributes["speed"].GetTrueValue());
+            rb.velocity = value.Get<Vector2>() * (3 * player.GetComponent<AttributeSystem>().attributes["speed"].GetTrueValue());
         }
     }
+
+    private void OnShoot(InputValue value)
+    {
+        Debug.Log("Shooting!");
+    }
+
 }
