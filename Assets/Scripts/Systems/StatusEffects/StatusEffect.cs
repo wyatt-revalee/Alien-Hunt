@@ -14,7 +14,7 @@ public abstract class StatusEffect : MonoBehaviour
     public List<string> requiredTags;
     public List<string> preventingTags;
     public List<string> addingTags;
-    bool applyPeriodicEffects;
+    public bool applyPeriodicEffects;
     public List<AttributeChange> attributeEffects = new List<AttributeChange>();
     public StatusEffectInfo statusEffectInfo;
 
@@ -30,6 +30,11 @@ public abstract class StatusEffect : MonoBehaviour
         StartStatusEffect();
     }
 
+    public virtual void InitializeEffects()
+    {
+
+    }
+
     public bool CheckTagStartConditions()
     {
         if(owner.GetComponent<GameplayTagSystem>().HasAllTags(requiredTags) && !owner.GetComponent<GameplayTagSystem>().HasAnyTags(preventingTags))
@@ -43,6 +48,7 @@ public abstract class StatusEffect : MonoBehaviour
     {
         AddTags();
         ApplyAttributeEffects(true);
+        applyPeriodicEffects = true;
         StartCoroutine(PeriodicEffectApplication(statusEffectInfo.periodicTime));
         StartCoroutine(EndStatusEffect(statusEffectInfo.duration));
     }
@@ -52,7 +58,7 @@ public abstract class StatusEffect : MonoBehaviour
         foreach(string tag in addingTags)
         {
             owner.GetComponent<GameplayTagSystem>().AddTag(tag);
-            Debug.Log(tag + " tag added!");
+            //Debug.Log(tag + " tag added!");
         }
     }
     
@@ -61,6 +67,8 @@ public abstract class StatusEffect : MonoBehaviour
         foreach(string tag in addingTags)
         {
             owner.GetComponent<GameplayTagSystem>().RemoveTag(tag);
+            //Debug.Log(tag + " tag removed!");
+
         }
     }
 
@@ -83,14 +91,17 @@ public abstract class StatusEffect : MonoBehaviour
         while(applyPeriodicEffects)
         {
             //apply effects
+            yield return new WaitForSeconds(seconds);
         }
-        yield return new WaitForSeconds(seconds);
     }
 
     private IEnumerator EndStatusEffect(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         AttemptRemoveStatusEffect();
+        applyPeriodicEffects = false;
+        Destroy(gameObject);
+        Destroy(this);
     }
 
     private void AttemptRemoveStatusEffect()

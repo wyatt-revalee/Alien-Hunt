@@ -16,6 +16,6 @@ public class UI_Attribute : MonoBehaviour
         attributeInfo = infoToSet;
         nameText.text = attributeInfo.aName;
         valueText.text = attributeInfo.GetTrueValue().ToString();
-        Debug.Log(attributeInfo.GetTrueValue().ToString());
+        //Debug.Log(attributeInfo.GetTrueValue().ToString());
     }
 }

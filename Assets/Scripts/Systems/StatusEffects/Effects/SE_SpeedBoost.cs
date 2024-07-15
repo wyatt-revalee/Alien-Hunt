@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SE_SpeedBoost : StatusEffect
 {
-    void Start()
+    public override void InitializeEffects()
     {
         attributeEffects.Add(new AttributeChange("speed", "multiplier", 0.5f));
         statusEffectInfo = new StatusEffectInfo("Speed Boost", 5f, 0f, "Increases speed by 50%.", "SE_SpeedBoost", icon);

@@ -18,7 +18,7 @@ public class AttributesDisplay : MonoBehaviour
             GameObject attribute = Instantiate(attributeBase);
             attribute.GetComponent<UI_Attribute>().SetAttributeInfo(kvp.Value);
             attribute.transform.SetParent(this.transform);
-            attribute.transform.localScale = new Vector3(1, 1, 1);
+            attribute.transform.localScale = new Vector3(0.3f, 0.3f, 1);
 
             displayedAttributes.Add(kvp.Key, attribute);
         }

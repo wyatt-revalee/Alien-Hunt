@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3280994992967625563
+--- !u!1 &626717487694955658
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8810172796881876929}
-  - component: {fileID: 6728944488050935582}
+  - component: {fileID: 7174169670544488695}
+  - component: {fileID: 1144131745217995168}
   m_Layer: 0
-  m_Name: SE_SpeedBoost
+  m_Name: SE_RapidFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8810172796881876929
+--- !u!4 &7174169670544488695
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3280994992967625563}
+  m_GameObject: {fileID: 626717487694955658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.0920305, y: 1.8171067, z: 69.344345}
+  m_LocalPosition: {x: 0.424023, y: -0.07434483, z: 0.011196591}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6728944488050935582
+--- !u!114 &1144131745217995168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3280994992967625563}
+  m_GameObject: {fileID: 626717487694955658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7bb7aa4c62b40743a7533c7bf997633, type: 3}
+  m_Script: {fileID: 11500000, guid: c65303bd76c744a44a57929aacf36a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   icon: {fileID: 0}
   requiredTags: []
-  preventingTags:
-  - SpeedBoost
-  addingTags:
-  - SpeedBoost
+  preventingTags: []
+  addingTags: []
+  applyPeriodicEffects: 0

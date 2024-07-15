@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
-    public StatusEffect currentEffect;
-    public List<StatusEffect> statusEffects = new List<StatusEffect>();
+    public GameObject currentEffect;
+    private StatusEffect effectScript;
+    public List<GameObject> statusEffects = new List<GameObject>();
     void Start()
     {
         ChooseRandomEffect();
@@ -15,12 +16,18 @@ public class Powerup : MonoBehaviour
     private void ChooseRandomEffect()
     {
         currentEffect = statusEffects[Random.Range(0, statusEffects.Count)];
+        currentEffect = Instantiate(currentEffect);
+        effectScript = currentEffect.GetComponent<StatusEffect>();
+        effectScript.InitializeEffects();
     }
 
     void OnTriggerEnter2D(Collider2D collider2D)
     {
-        currentEffect.owner = collider2D.transform.gameObject;
-        currentEffect.owner.GetComponent<StatusEffectSystem>().AddStatusEffect(currentEffect);
-        Destroy(gameObject);
+        if(collider2D.gameObject.layer == 6)
+        {
+            effectScript.owner = collider2D.transform.gameObject;
+            effectScript.owner.GetComponent<StatusEffectSystem>().AddStatusEffect(effectScript);
+            Destroy(gameObject);
+        }
     }
 }

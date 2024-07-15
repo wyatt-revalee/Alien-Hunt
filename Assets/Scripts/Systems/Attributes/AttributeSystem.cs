@@ -10,12 +10,7 @@ public class AttributeSystem : MonoBehaviour
 
     public Action<Attribute> attributeValueChanged;
 
-    public Dictionary<string, Attribute> attributes = new Dictionary<string, Attribute>
-        {
-            {"health", new Attribute("health", 10, 99, 1.0f, 0)},
-            {"speed", new Attribute("speed", 1, 99, 1.0f, 0)},
-            {"defense", new Attribute("defense", 10, 99, 1.0f, 0)}
-        };
+    public Dictionary<string, Attribute> attributes;
 
     void Start()
     {
