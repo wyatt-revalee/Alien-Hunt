@@ -7,15 +7,15 @@ public class SE_RapidFire : StatusEffect
 {
     public override void InitializeEffects()
     {
-        attributeEffects.Add(new AttributeChange("speed", "multiplier", 0.5f));
-        statusEffectInfo = new StatusEffectInfo("Speed Boost", 5f, 1f, "Increases speed by 50%.", "SE_SpeedBoost", icon);
+        attributeEffects.Add(new AttributeChange("fireRate", "multiplier", -0.9f));
+        statusEffectInfo = new StatusEffectInfo("Rapdi Fire", 5f, 1f, "Allows for automatic fire", "SE_RapidFire", icon);
     }
 
     override public IEnumerator PeriodicEffectApplication(float seconds)
     {
         while (applyPeriodicEffects)
         {
-            Debug.Log("Effect!");
+            //Debug.Log("Effect!");
             yield return new WaitForSeconds(seconds);
         }
     }

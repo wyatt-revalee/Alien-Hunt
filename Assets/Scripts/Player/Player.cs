@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
 
     public event Action<Vector2> OnMovement;
+    public event Action OnWeaponFired;
     public bool isPaused;
     public Rigidbody2D rb;
     public Bullet bullet;
@@ -49,12 +50,60 @@ public class Player : MonoBehaviour
 
 
 
-    private void OnShoot(InputValue value)
+    private void OnShoot()
+    {
+        Debug.Log("Fire Rate: " + GetAttributeValue("fireRate"));
+        if (GetAttributeValue("fireRate") < 1)
+        {
+            // If the weapon is automatic, start a coroutine that repeatedly calls Shoot
+            StartCoroutine(AutomaticFire());
+        }
+        else
+        {
+            // If the weapon is not automatic, just call Shoot once
+            ShootBullet();
+            OnWeaponFired?.Invoke();
+        }
+    }
+
+    private void ShootBullet()
     {
         Bullet newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
         newBullet.owner = gameObject;
         newBullet.SetBulletStats(GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"));
         newBullet.StartMovement();
+    }
+
+    private IEnumerator AutomaticFire()
+    {
+
+        Debug.Log("Automatic fire started");
+        while (GetComponent<PlayerInput>().actions["Shoot"].IsPressed())
+        {
+            if (GetAttributeValue("fireRate") < 1)
+            {
+                ShootBullet();
+                OnWeaponFired?.Invoke();
+                yield return new WaitForSeconds(GetAttributeValue("fireRate"));
+            }
+            else
+            {
+                break;
+            }
+
+            // if (currentWeaponScript.bulletsInMagazine > 0)
+            // {
+            //     currentWeaponScript.Shoot();
+            //     OnWeaponFired?.Invoke();
+            //     yield return new WaitForSeconds(1f / (currentWeaponScript.fireRate * player.fireRateModifier.value));
+            // }
+            // else
+            // {
+            //     currentWeaponScript.Reload();
+            //     StartCoroutine(DoReload());
+            //     break;
+            // }
+        }
     }
 
 }

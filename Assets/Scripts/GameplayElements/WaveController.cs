@@ -18,7 +18,7 @@ public class WaveController : MonoBehaviour
         enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
         foreach(GameObject spawner in enemySpawners)
         {
-            Debug.Log(spawner.name);
+            //Debug.Log(spawner.name);
         }
     }
 
