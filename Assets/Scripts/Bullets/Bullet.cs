@@ -24,13 +24,24 @@ public class Bullet : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = Vector2.up * speed;
     }
 
+    // If colliding object is an enemy, then hurt it and destroy bullet
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.layer == 9)
         {
-            collider.GetComponent<Enemy>().TakeDamage((int)damage);
+            bool enemyKilled = collider.GetComponent<Enemy>().TakeDamage((int)damage);
+            int pointsEarned = 0;
+            if(enemyKilled)
+            {
+                pointsEarned = (int)collider.GetComponent<Enemy>().GetAttributeValue("pointValue");
+            }
+            owner.GetComponent<Player>().CallShotHit(true, enemyKilled, pointsEarned);
             Destroy(gameObject);
             Destroy(this);
+        }
+        else if(collider.gameObject.layer == 10)
+        {
+            owner.GetComponent<Player>().CallShotHit(false);
         }
     }
 }
