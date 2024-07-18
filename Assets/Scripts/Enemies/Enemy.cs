@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     public AttributeSystem attributeSystem;
+    public int cost = 1;
     // Start is called before the first frame update
     public virtual void Awake()
     {
@@ -18,7 +19,7 @@ public abstract class Enemy : MonoBehaviour
         };
     }
 
-    private float GetAttributeValue(string attribute)
+    public float GetAttributeValue(string attribute)
     {
         return GetComponent<AttributeSystem>().attributes[attribute].GetTrueValue();
     }
