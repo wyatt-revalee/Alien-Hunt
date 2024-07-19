@@ -11,8 +11,8 @@ public class KillZone : MonoBehaviour
         // If object is an enemy, destroy it and send back to spawner to be respawned
         if(collider.gameObject.layer == 9)
         {
-            Destroy(collider.gameObject);
             collider.GetComponent<Enemy>().parentSpawner.GetComponent<EnemySpawner>().RespawnEnemy(collider.gameObject);
+            Destroy(collider.gameObject);
         }
     }
 

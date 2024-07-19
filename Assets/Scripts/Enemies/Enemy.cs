@@ -49,8 +49,10 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual IEnumerator DeathSequence()
     {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(1f);
+        parentSpawner.GetComponent<EnemySpawner>().EnemyDied();
         Destroy(gameObject);
         Destroy(this);
     }
