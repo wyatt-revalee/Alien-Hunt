@@ -50,7 +50,10 @@ public abstract class StatusEffect : MonoBehaviour
         ApplyAttributeEffects(true);
         applyPeriodicEffects = true;
         StartCoroutine(PeriodicEffectApplication(statusEffectInfo.periodicTime));
-        StartCoroutine(EndStatusEffect(statusEffectInfo.duration));
+        if(statusEffectInfo.duration > 0)
+        {
+            StartCoroutine(EndStatusEffect(statusEffectInfo.duration));
+        }
     }
 
     private void AddTags()

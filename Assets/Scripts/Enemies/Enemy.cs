@@ -5,12 +5,9 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     public AttributeSystem attributeSystem;
-    // Cost to spawn
-    public int cost = 1;
-    // Index of enemy in waveController's list
-    public int index;
     public GameObject parentSpawner;
-    // Start is called before the first frame update
+    public int index;
+    public int cost = 1;
     public virtual void Awake()
     {
         attributeSystem = GetComponent<AttributeSystem>();
@@ -49,6 +46,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual IEnumerator DeathSequence()
     {
+        GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(1f);

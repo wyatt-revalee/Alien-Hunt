@@ -37,11 +37,11 @@ public class Bullet : MonoBehaviour
             }
             owner.GetComponent<Player>().CallShotHit(true, enemyKilled, pointsEarned);
             Destroy(gameObject);
-            Destroy(this);
         }
         else if(collider.gameObject.layer == 10)
         {
             owner.GetComponent<Player>().CallShotHit(false);
+            Destroy(gameObject);
         }
     }
 }

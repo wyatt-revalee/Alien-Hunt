@@ -60,6 +60,14 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void PrintAllStats()
+    {
+        foreach (KeyValuePair<string, Stat> kvp in stats)
+        {
+            Debug.Log(string.Format("{0}: (Current: {1}, Total: {2})", kvp.Key, kvp.Value.current, kvp.Value.total));
+        }
+    }
+
 }
 
 

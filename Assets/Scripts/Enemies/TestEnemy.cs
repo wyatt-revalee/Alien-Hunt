@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TestEnemy : Enemy
 {
+
     public override void Awake()
     {
         attributeSystem = GetComponent<AttributeSystem>();
