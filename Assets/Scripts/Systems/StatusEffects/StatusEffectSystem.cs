@@ -18,6 +18,7 @@ public class StatusEffectSystem : MonoBehaviour
     public void AddStatusEffect(StatusEffect effectToAdd)
     {
         //Debug.Log("adding");
+        effectToAdd.owner = gameObject;
         effectToAdd.AttemptApplication();
     }
 
@@ -33,7 +34,20 @@ public class StatusEffectSystem : MonoBehaviour
         effectToRemove.RemoveTags();
         effectToRemove.ApplyAttributeEffects(false);
         effectToRemove.ClearTimers();
+        Destroy(effectToRemove.gameObject);
         StatusEffectWasRemoved?.Invoke(effectToRemove);
+    }
+
+    public void RemoveEffectByID(string effectID)
+    {
+        foreach(StatusEffect effect in ActiveStatusEffects)
+        {
+            if(effect.statusEffectInfo.ID == effectID)
+            {
+                RemoveStatusEffect(effect);
+                break;
+            }
+        }
     }
 
     public void PrintAllEffects()

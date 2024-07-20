@@ -26,7 +26,7 @@ public class PowerupRemover : MonoBehaviour
         if(collider2D.gameObject.layer == 6)
         {
             effectScript.owner = collider2D.transform.gameObject;
-            effectScript.owner.GetComponent<StatusEffectSystem>().RemoveStatusEffect(effectScript);
+            effectScript.owner.GetComponent<StatusEffectSystem>().RemoveEffectByID(effectScript.statusEffectInfo.ID);
             Destroy(gameObject);
         }
     }

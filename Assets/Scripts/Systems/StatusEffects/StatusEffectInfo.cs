@@ -11,8 +11,9 @@ public class StatusEffectInfo
     public Sprite icon;
     public string description;
     public string ID;
+    public bool isDebuff;
 
-    public StatusEffectInfo(string name, float dur, float perTime, string desc, string newID, Sprite newIcon)
+    public StatusEffectInfo(string name, float dur, float perTime, string desc, string newID, bool newIsDebuff, Sprite newIcon)
     {
         effectName = name;
         duration = dur;
@@ -22,7 +23,7 @@ public class StatusEffectInfo
         icon = newIcon;
     }
 
-    public StatusEffectInfo(string name, float dur, float perTime, string desc, string newID)
+    public StatusEffectInfo(string name, float dur, float perTime, string desc, bool newIsDebuff, string newID)
     {
         effectName = name;
         duration = dur;

@@ -105,7 +105,7 @@ public class WaveController : MonoBehaviour
 
     public IEnumerator EndWaveSequence()
     {
-        playerStats.PrintAllStats();
+        //playerStats.PrintAllStats();
         OnwaveEnded?.Invoke(currentWave);
         yield return new WaitForSeconds(1f);
         string waveInfo = string.Format("Points Earned: {0}", playerStats.stats["Points"].current);
@@ -126,6 +126,7 @@ public class WaveController : MonoBehaviour
     public void OpenShop()
     {
         shop.gameObject.SetActive(true);
+        shop.RefreshShop();
     }
 
     public void CloseShop()

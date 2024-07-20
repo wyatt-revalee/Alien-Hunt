@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using System.Runtime.InteropServices;
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     public event Action<bool> OnShotHit;
     public event Action<int> OnEnemyKilled;
     public bool isPaused;
+    public int coins;
     public Rigidbody2D rb;
     public Bullet bullet;
 
@@ -101,6 +103,16 @@ public class Player : MonoBehaviour
         {
             OnEnemyKilled?.Invoke(pointValue);
         }
+    }
+
+    public void AddCoins(int amount)
+    {
+        coins += amount;
+    }
+
+    public void RemoveCoins(int amount)
+    {
+        coins -= amount;
     }
 
 }

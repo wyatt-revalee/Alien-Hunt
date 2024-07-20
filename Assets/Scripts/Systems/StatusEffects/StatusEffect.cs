@@ -87,6 +87,7 @@ public abstract class StatusEffect : MonoBehaviour
     public void ClearTimers()
     {
         applyPeriodicEffects = false;
+        StopAllCoroutines();
     }
 
     virtual public IEnumerator PeriodicEffectApplication(float seconds)
@@ -96,6 +97,11 @@ public abstract class StatusEffect : MonoBehaviour
             //apply effects
             yield return new WaitForSeconds(seconds);
         }
+    }
+
+    public void ForceRemoveStatusEffect()
+    {
+        StartCoroutine(EndStatusEffect(0));
     }
 
     private IEnumerator EndStatusEffect(float seconds)

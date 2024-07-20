@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour
+public class Item : MonoBehaviour
 {
-    public Image image;
+    public Sprite icon;
     public string itemName;
+    public string type;
     public int cost;
-    public string rarity;
+    public int rarity;
     public GameObject statusEffect;
 }
+
+// Rarity Chart
+//  1  common
+//  2  uncommon
+//  3  rare
+//  4  very rare
+//  5  legendary

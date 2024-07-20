@@ -58,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
     // Respawns an enemy if they were not killed by the player
     public void RespawnEnemy(int enemyIndex)
     {
-        Debug.Log(enemyIndex);
+        //Debug.Log(enemyIndex);
         enemiesToSpawn.Add(enemyTypes[enemyIndex]);
     }
 
