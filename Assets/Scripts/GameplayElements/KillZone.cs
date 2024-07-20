@@ -14,6 +14,11 @@ public class KillZone : MonoBehaviour
             collider.GetComponent<Enemy>().parentSpawner.GetComponent<EnemySpawner>().RespawnEnemy(collider.GetComponent<Enemy>().index);
             Destroy(collider.gameObject);
         }
+
+        if (collider.gameObject.layer == 12)
+        {
+            Destroy(collider.gameObject);
+        }
     }
 
 }

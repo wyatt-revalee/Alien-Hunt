@@ -103,6 +103,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributeSystem: {fileID: 0}
+  parentSpawner: {fileID: 0}
+  bullet: {fileID: 5383467082854491629, guid: be57dcf2aa536c84abaa54634ed9b9da, type: 3}
+  index: 0
+  cost: 1
 --- !u!114 &6121587202196209154
 MonoBehaviour:
   m_ObjectHideFlags: 0

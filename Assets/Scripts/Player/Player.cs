@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using System.Runtime.InteropServices;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
 
     public event Action<Vector2> OnMovement;
+    public event Action<Attribute> OnHealthChanged;
     public event Action OnWeaponFired;
     public event Action<bool> OnShotHit;
     public event Action<int> OnEnemyKilled;
@@ -18,12 +20,14 @@ public class Player : MonoBehaviour
     public int coins;
     public Rigidbody2D rb;
     public Bullet bullet;
+    public AttributeSystem attributeSystem;
 
     void Awake()
     {
-        GetComponent<AttributeSystem>().attributes = new Dictionary<string, Attribute>
+        attributeSystem = GetComponent<AttributeSystem>();
+        attributeSystem.attributes = new Dictionary<string, Attribute>
         {
-            {"health", new Attribute("health", 10, 99, 1.0f, 0)},
+            {"health", new Attribute("health", 10, 10, 1.0f, 0)},
             {"speed", new Attribute("speed", 1, 99, 1.0f, 0)},
             {"defense", new Attribute("defense", 10, 99, 1.0f, 0)},
             {"bulletSpeed", new Attribute("bulletSpeed", 10, 99, 1.0f, 0)},
@@ -31,6 +35,7 @@ public class Player : MonoBehaviour
             {"bulletSizeModifier", new Attribute("bulletSizeModifier", 1, 99, 1.0f, 0)},
             {"fireRate", new Attribute("fireRate", 1, 99, 1.0f, 0)}
         };
+        OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
     }
 
     // Update is called once per frame
@@ -39,7 +44,7 @@ public class Player : MonoBehaviour
         
     }
 
-    private float GetAttributeValue(string attribute)
+    public float GetAttributeValue(string attribute)
     {
         return GetComponent<AttributeSystem>().attributes[attribute].GetTrueValue();
     }
@@ -96,6 +101,17 @@ public class Player : MonoBehaviour
             {
                 break;
             }
+        }
+    }
+
+    public void Damage(int amount)
+    {
+        float currentHealth = GetComponent<AttributeSystem>().attributes["health"].baseValue -= amount;
+        OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
+
+        if(currentHealth <= 0)
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
