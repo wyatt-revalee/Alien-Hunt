@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Shop : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Shop : MonoBehaviour
     public Player player;
     public int itemsInShop;
     public int refreshCost = 0;
-    //public TextMeshProUGUI refreshCostText;
+    public TextMeshProUGUI refreshCostText;
     public List<GameObject> shopItems;
     public GameObject shopItemPrefab;
     public GameObject itemHolder;
@@ -39,7 +40,7 @@ public class Shop : MonoBehaviour
         {
             player.RemoveCoins(refreshCost);
             refreshCost++;
-            //refreshCostText.text = "-" + refreshCost;
+            refreshCostText.text = "-" + refreshCost;
         }
         else
         {
@@ -91,6 +92,7 @@ public class Shop : MonoBehaviour
                     player.GetComponent<StatusEffectSystem>().AddStatusEffect(i_item.GetComponent<StatusEffect>());
                     break;
             }
+            player.inventory.AddItemToInventory(item.gameObject);
             Destroy(shopItem.gameObject);
         }
         else

@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public event Action OnWeaponFired;
     public event Action<bool> OnShotHit;
     public event Action<int> OnEnemyKilled;
+    public Inventory inventory;
     public bool isPaused;
     public int coins;
     public Rigidbody2D rb;
@@ -52,7 +53,10 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    private void OnInventory()
+    {
+        inventory.gameObject.SetActive(!inventory.gameObject.activeSelf);
+    }
 
     private void OnShoot()
     {

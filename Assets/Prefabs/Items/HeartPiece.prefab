@@ -47,6 +47,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 05b058084ccdf1e4bb3d67665cc3f78e, type: 3}
   itemName: Heart Piece
   type: Status Effect
+  id: healthBoost
   cost: 5
-  rarity: 0
+  rarity: 1
   statusEffect: {fileID: 3280994992967625563, guid: 13365b7095e75c543843ca409b156945, type: 3}

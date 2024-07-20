@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
     public Sprite icon;
     public string itemName;
     public string type;
+    public string id;
     public int cost;
     public int rarity;
     public GameObject statusEffect;
