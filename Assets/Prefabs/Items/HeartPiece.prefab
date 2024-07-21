@@ -48,6 +48,7 @@ MonoBehaviour:
   itemName: Heart Piece
   type: Status Effect
   id: healthBoost
+  description: Increases health by 10%
   cost: 5
   rarity: 1
   statusEffect: {fileID: 3280994992967625563, guid: 13365b7095e75c543843ca409b156945, type: 3}

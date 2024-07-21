@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
     public string itemName;
     public string type;
     public string id;
+    public string description;
     public int cost;
     public int rarity;
     public GameObject statusEffect;

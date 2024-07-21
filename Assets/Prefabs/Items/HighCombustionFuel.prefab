@@ -48,6 +48,7 @@ MonoBehaviour:
   itemName: High Combustion Fuel
   type: Status Effect
   id: highCombustionFuel
+  description: Increases speed by 20%
   cost: 10
   rarity: 2
   statusEffect: {fileID: 3280994992967625563, guid: 053bc0f3964d59445b6939d3d1fa4d98, type: 3}
