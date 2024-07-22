@@ -87,9 +87,13 @@ public class Shop : MonoBehaviour
             switch (item.type)
             {
                 case "Status Effect":
-                    GameObject i_item = Instantiate(item.statusEffect, player.transform);
-                    i_item.GetComponent<StatusEffect>().InitializeEffects();
-                    player.GetComponent<StatusEffectSystem>().AddStatusEffect(i_item.GetComponent<StatusEffect>());
+                    GameObject i_statusEffect = Instantiate(item.statusEffect, player.transform);
+                    i_statusEffect.GetComponent<StatusEffect>().InitializeEffects();
+                    player.GetComponent<StatusEffectSystem>().AddStatusEffect(i_statusEffect.GetComponent<StatusEffect>());
+                    break;
+
+                case "Active Equipment":
+                    player.AddEquipment(item.gameObject);
                     break;
             }
             player.inventory.AddItemToInventory(item.gameObject);

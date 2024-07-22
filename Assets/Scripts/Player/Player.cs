@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
     public event Action<Vector2> OnMovement;
     public event Action<Attribute> OnHealthChanged;
+    public event Action<GameObject> OnEquipmentAdded;
+    public event Action<GameObject> OnEquipmentRemoved;
     public event Action OnWeaponFired;
     public event Action<bool> OnShotHit;
     public event Action<int> OnEnemyKilled;
@@ -21,6 +23,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb;
     public Bullet bullet;
     public AttributeSystem attributeSystem;
+    public GameObject activeEquipment;
 
     void Awake()
     {
@@ -61,6 +64,11 @@ public class Player : MonoBehaviour
     private void OnInventory()
     {
         inventory.gameObject.SetActive(!inventory.gameObject.activeSelf);
+    }
+
+    private void OnActiveEquipment()
+    {
+        activeEquipment.GetComponent<ActiveEquipment>().UseEquipment();
     }
 
     private void OnShoot()
@@ -133,6 +141,26 @@ public class Player : MonoBehaviour
     public void RemoveCoins(int amount)
     {
         coins -= amount;
+    }
+
+    public void AddEquipment(GameObject equipmentItem)
+    {
+        GameObject equipment = Instantiate(equipmentItem.GetComponent<Item>().activeEquipment, transform);
+        equipment.GetComponent<ActiveEquipment>().player = this;
+        OnEquipmentAdded?.Invoke(equipment);
+
+        if(activeEquipment != null)
+        {
+            RemoveEquipment(equipmentItem);
+        }
+        activeEquipment = equipment;
+    }
+
+    public void RemoveEquipment(GameObject equipmentItem)
+    {
+        OnEquipmentRemoved?.Invoke(equipmentItem.GetComponent<Item>().activeEquipment);
+        inventory.RemoveItemFromInventory(equipmentItem);
+        Destroy(activeEquipment.gameObject);
     }
 
 }

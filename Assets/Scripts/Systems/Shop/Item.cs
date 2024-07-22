@@ -13,6 +13,7 @@ public class Item : MonoBehaviour
     public int cost;
     public int rarity;
     public GameObject statusEffect;
+    public GameObject activeEquipment;
 }
 
 // Rarity Chart

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1310284131267627065}
   - component: {fileID: 4635992368298395756}
   m_Layer: 0
-  m_Name: HighCombustionFuel
+  m_Name: NitroBurst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,12 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4b35d8199969e34badbb5cec28858c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 04e132bf71434c94693865d3be702172, type: 3}
-  itemName: High Combustion Fuel
-  type: Status Effect
-  id: highCombustionFuel
-  description: Increases speed by 20%
-  cost: 10
-  rarity: 2
-  statusEffect: {fileID: 3280994992967625563, guid: 053bc0f3964d59445b6939d3d1fa4d98, type: 3}
-  activeEquipment: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3ff2136dae914c24c8be5bd1cbc26102, type: 3}
+  itemName: Nitro Burst
+  type: Active Equipment
+  id: nitroBurst
+  description: Increases speed by 200% for 10 seconds
+  cost: 20
+  rarity: 3
+  statusEffect: {fileID: 0}
+  activeEquipment: {fileID: 3376081946279360386, guid: 60606164691235240bdb57850ad73076, type: 3}

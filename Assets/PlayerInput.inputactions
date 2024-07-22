@@ -15,6 +15,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ActiveEquipment",
+                    "type": "Button",
+                    "id": "9a274db5-32bb-4be9-9d8a-27d25c563d44",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Reload",
                     "type": "Button",
                     "id": "89c8d808-4335-4dd8-9341-6afe5910284a",
@@ -49,24 +58,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "SwapWeapon",
-                    "type": "Button",
-                    "id": "8912d9fc-b8f1-4ab1-9159-c77e5d8f5844",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SwapWeaponDirect",
-                    "type": "Value",
-                    "id": "40fd7703-728a-4211-a864-d5e82152dccd",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -87,7 +78,7 @@
                     "path": "*/{PrimaryAction}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -98,7 +89,7 @@
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "KBM;Keyboard Only",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -109,7 +100,7 @@
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "KBM;Keyboard Only",
                     "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -131,7 +122,7 @@
                     "path": "<Gamepad>/{Menu}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -142,7 +133,7 @@
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "KBM;Keyboard Only",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -153,7 +144,7 @@
                     "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -164,7 +155,7 @@
                     "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "KBM;Keyboard Only",
                     "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -186,7 +177,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "KBM;Keyboard Only",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -197,7 +188,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "KBM;Keyboard Only",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -208,7 +199,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "KBM;Keyboard Only",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -219,7 +210,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "KBM;Keyboard Only",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -241,7 +232,7 @@
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -252,7 +243,7 @@
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -263,7 +254,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -274,7 +265,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -296,7 +287,7 @@
                     "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -307,7 +298,7 @@
                     "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -318,7 +309,7 @@
                     "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -329,74 +320,30 @@
                     "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
+                    "groups": "Controller",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "aa24386e-6aa5-4752-af2f-e09a7c0d13e8",
-                    "path": "<Keyboard>/x",
+                    "id": "d4146385-0d07-4b82-982b-5b5968b98b8c",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
-                    "action": "SwapWeapon",
+                    "groups": "KBM;Keyboard Only",
+                    "action": "ActiveEquipment",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "19faf61f-2540-44b4-8681-8b91c6016fc7",
-                    "path": "<Keyboard>/1",
+                    "id": "7f853718-1842-4614-90c5-69ee3e2745ea",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KBM",
-                    "action": "SwapWeaponDirect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7aa47a32-3fd0-492b-b20e-6a9dc53908cb",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KBM",
-                    "action": "SwapWeaponDirect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2744e051-c107-475a-8c88-ab06ab85159f",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KBM",
-                    "action": "SwapWeaponDirect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f81fc060-bb5e-482f-ad6b-224ee743e4ab",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KBM",
-                    "action": "SwapWeaponDirect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7b6827a5-b3b3-4a6c-bb1d-cc78ad664a0c",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KBM",
-                    "action": "SwapWeaponDirect",
+                    "groups": "Controller",
+                    "action": "ActiveEquipment",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -419,6 +366,16 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "Controller",
+            "bindingGroup": "Controller",
+            "devices": []
+        },
+        {
+            "name": "Keyboard Only",
+            "bindingGroup": "Keyboard Only",
+            "devices": []
         }
     ]
 }
