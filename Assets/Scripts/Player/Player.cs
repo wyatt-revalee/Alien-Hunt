@@ -33,13 +33,15 @@ public class Player : MonoBehaviour
         attributeSystem = GetComponent<AttributeSystem>();
         attributeSystem.attributes = new Dictionary<string, Attribute>
         {
-            {"health", new Attribute("health", 10, 10, 1.0f, 0)},
-            {"speed", new Attribute("speed", 1, 99, 1.0f, 0)},
-            {"defense", new Attribute("defense", 10, 99, 1.0f, 0)},
-            {"bulletSpeed", new Attribute("bulletSpeed", 10, 99, 1.0f, 0)},
-            {"damageModifier", new Attribute("damageModifier", 1, 99, 1.0f, 0)},
-            {"bulletSizeModifier", new Attribute("bulletSizeModifier", 1, 99, 1.0f, 0)},
-            {"fireRate", new Attribute("fireRate", 1, 99, 1.0f, 0)}
+            {"health", new Attribute("health", 10, 10, 1.0f, 0)},                                       // Player hp
+            {"speed", new Attribute("speed", 1, 99, 1.0f, 0)},                                          // Player move speed
+            {"defense", new Attribute("defense", 10, 99, 1.0f, 0)},                                     // How much damage is reduced when player is hit
+            {"bulletSpeed", new Attribute("bulletSpeed", 10, 99, 1.0f, 0)},                             // How fast bullets travel
+            {"damageModifier", new Attribute("damageModifier", 1, 99, 1.0f, 0)},                        // How much damage player does
+            {"bulletSizeModifier", new Attribute("bulletSizeModifier", 1, 99, 1.0f, 0)},                // How big player's bullets are
+            {"fireRate", new Attribute("fireRate", 1, 99, 1.0f, 0)},                                    // How fast player can shoot
+            {"equipmentCooldownModifier", new Attribute("equipmentCooldownModifier", 1, 99, 1.0f, 0)},  // Effects how long equipment cooldown is. Lower value = smaller cooldown
+            {"equipmentUseTimeModifier", new Attribute("equipmentUseTimeModifier", 1, 99, 1.0f, 0)},    // Effects how long an equipment is active. Higher value = longer effect
         };
         OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
     }
@@ -69,6 +71,8 @@ public class Player : MonoBehaviour
         inventory.gameObject.SetActive(!inventory.gameObject.activeSelf);
     }
 
+    // Uses equipment if it exists and is not on cooldown
+    // Then starts the 'use' period, then the cooldown period afterwards
     private void OnActiveEquipment()
     {
         if(activeEquipment == null || equipmentOnCooldown)
@@ -82,9 +86,10 @@ public class Player : MonoBehaviour
 
     public IEnumerator StartEquipmentUseBuffer()
     {
-        int cooldown = activeEquipment.GetComponent<ActiveEquipment>().cooldown;
-        onUseEquipment?.Invoke(activeEquipment.GetComponent<ActiveEquipment>().cooldownBuffer);
-        yield return new WaitForSeconds(activeEquipment.GetComponent<ActiveEquipment>().cooldownBuffer);
+        int cooldown = (int)(activeEquipment.GetComponent<ActiveEquipment>().cooldown * GetAttributeValue("equipmentCooldownModifier"));
+        int cooldownBuffer = (int)(activeEquipment.GetComponent<ActiveEquipment>().cooldownBuffer * GetAttributeValue("equipmentUseTimeModifier"));
+        onUseEquipment?.Invoke(cooldownBuffer);
+        yield return new WaitForSeconds(cooldownBuffer);
         StartCoroutine(DoEquipmentCooldown(cooldown));
     }
 

@@ -14,18 +14,13 @@ public class ActiveEquipment : MonoBehaviour
     public Player player;
     public Sprite icon;
     public string id;
-    bool onCooldown;
 
     public void UseEquipment()
     {
-        if(onCooldown)
-        {
-            return;
-        }
         GameObject i_effect = Instantiate(statusEffect, player.transform);
         StatusEffect effectScript = i_effect.GetComponent<StatusEffect>();
-        effectScript.owner = player.gameObject;
         effectScript.InitializeEffects();
+        effectScript.owner = player.gameObject;
         effectScript.AttemptApplication();
     }
 

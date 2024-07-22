@@ -9,7 +9,8 @@ using UnityEngine.InputSystem.LowLevel;
 
 public abstract class StatusEffect : MonoBehaviour
 {
-    public GameObject owner;
+    public GameObject applier; // Object that applied effect (player/enemy)
+    public GameObject owner;  // Owner of the object (who it will apply to)
     public Sprite icon;
     public List<string> requiredTags;
     public List<string> preventingTags;
@@ -17,6 +18,7 @@ public abstract class StatusEffect : MonoBehaviour
     public bool applyPeriodicEffects;
     public List<AttributeChange> attributeEffects = new List<AttributeChange>();
     public StatusEffectInfo statusEffectInfo;
+    public string type;
 
     public void AttemptApplication()
     {
@@ -49,9 +51,13 @@ public abstract class StatusEffect : MonoBehaviour
         AddTags();
         ApplyAttributeEffects(true);
         applyPeriodicEffects = true;
-        StartCoroutine(PeriodicEffectApplication(statusEffectInfo.periodicTime));
+        if(statusEffectInfo.periodicTime > 0)
+        {
+            StartCoroutine(PeriodicEffectApplication(statusEffectInfo.periodicTime));
+        }
         if(statusEffectInfo.duration > 0)
         {
+            // add logic concering buff/debuff attribute effects here
             StartCoroutine(EndStatusEffect(statusEffectInfo.duration));
         }
     }
