@@ -23,15 +23,16 @@ public class UI_ActiveEquipment : MonoBehaviour
     void SetNewEquipment(GameObject newEquipment)
     {
         currentEquipment = newEquipment.GetComponent<ActiveEquipment>();
-        currentEquipment.onUseEquipment += StartItemUse;
-        currentEquipment.onStartCooldown += StartCooldown;
+        player.onUseEquipment += StartItemUse;
+        player.onStartEquipmentCooldown += StartCooldown;
 
         image.sprite = newEquipment.GetComponent<ActiveEquipment>().icon;
     }
 
     void RemoveEquipment(GameObject equipment)
     {
-
+        currentEquipment = null;
+        image.sprite = null;
     }
 
     void StartItemUse(int cooldownBuffer)

@@ -49,4 +49,4 @@ MonoBehaviour:
   requiredTags: []
   preventingTags: []
   addingTags: []
-  applyPeriodicEffects: 0
+  applyPeriodicEffects: 1

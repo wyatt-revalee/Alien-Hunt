@@ -5,7 +5,7 @@ using UnityEngine;
 public class EquipmentPickup : MonoBehaviour
 {
 
-    public Item equipmentItem;
+    public GameObject equipmentItem;
 
     void OnTriggerEnter2D(Collider2D collider2D)
     {
@@ -13,9 +13,10 @@ public class EquipmentPickup : MonoBehaviour
         {
             Player player = collider2D.GetComponent<Player>();
 
-            // Add item to inventory
-            player.inventory.AddItemToInventory(gameObject);
-            player.AddEquipment(gameObject);
+            // Instantiate and equipment to inventory
+            GameObject i_Equipment = Instantiate(equipmentItem);
+            player.inventory.AddItemToInventory(i_Equipment);
+            player.AddEquipment(i_Equipment);
             Destroy(gameObject);
         }
     }

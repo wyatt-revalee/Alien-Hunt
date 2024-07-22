@@ -25,9 +25,9 @@ public class Inventory : MonoBehaviour
     }
 
 
-    public void RemoveItemFromInventory(GameObject itemToRemove)
+    public void RemoveItemFromInventory(string itemID)
     {
-        Destroy(items[itemToRemove.GetComponent<Item>().id].gameObject);
-        items.Remove(itemToRemove.GetComponent<Item>().id);
+        Destroy(items[itemID].gameObject);
+        items.Remove(itemID);
     }
 }

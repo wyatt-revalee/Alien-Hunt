@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public event Action OnWeaponFired;
     public event Action<bool> OnShotHit;
     public event Action<int> OnEnemyKilled;
+    public Action<int> onStartEquipmentCooldown;
+    public Action<int> onUseEquipment;
     public Inventory inventory;
     public bool isPaused;
     public int coins;
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
     public Bullet bullet;
     public AttributeSystem attributeSystem;
     public GameObject activeEquipment;
+    public bool equipmentOnCooldown;
 
     void Awake()
     {
@@ -68,7 +71,29 @@ public class Player : MonoBehaviour
 
     private void OnActiveEquipment()
     {
+        if(activeEquipment == null || equipmentOnCooldown)
+        {
+            return;
+        }
         activeEquipment.GetComponent<ActiveEquipment>().UseEquipment();
+        StartCoroutine(StartEquipmentUseBuffer());
+        equipmentOnCooldown = true;
+    }
+
+    public IEnumerator StartEquipmentUseBuffer()
+    {
+        int cooldown = activeEquipment.GetComponent<ActiveEquipment>().cooldown;
+        onUseEquipment?.Invoke(activeEquipment.GetComponent<ActiveEquipment>().cooldownBuffer);
+        yield return new WaitForSeconds(activeEquipment.GetComponent<ActiveEquipment>().cooldownBuffer);
+        StartCoroutine(DoEquipmentCooldown(cooldown));
+    }
+
+    public IEnumerator DoEquipmentCooldown(int cooldown)
+    {
+        onStartEquipmentCooldown?.Invoke(cooldown);
+        equipmentOnCooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        equipmentOnCooldown = false;
     }
 
     private void OnShoot()
@@ -151,16 +176,16 @@ public class Player : MonoBehaviour
 
         if(activeEquipment != null)
         {
-            RemoveEquipment(equipmentItem);
+            RemoveEquipment();
         }
         activeEquipment = equipment;
     }
 
-    public void RemoveEquipment(GameObject equipmentItem)
+    public void RemoveEquipment()
     {
-        OnEquipmentRemoved?.Invoke(equipmentItem.GetComponent<Item>().activeEquipment);
-        inventory.RemoveItemFromInventory(equipmentItem);
-        Destroy(activeEquipment.gameObject);
+        OnEquipmentRemoved?.Invoke(activeEquipment);
+        inventory.RemoveItemFromInventory(activeEquipment.GetComponent<ActiveEquipment>().id);
+        Destroy(activeEquipment);
     }
 
 }
