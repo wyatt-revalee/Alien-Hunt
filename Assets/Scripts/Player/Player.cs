@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         {
             {"health", new Attribute("health", 10, 10, 1.0f, 0)},                                       // Player hp
             {"speed", new Attribute("speed", 1, 99, 1.0f, 0)},                                          // Player move speed
-            {"defense", new Attribute("defense", 10, 99, 1.0f, 0)},                                     // How much damage is reduced when player is hit
+            {"defense", new Attribute("defense", 10, 99, 1.0f, 0)},                                     // How much damage is reduced when player is hit, cannot reduce damange below 1
             {"bulletSpeed", new Attribute("bulletSpeed", 10, 99, 1.0f, 0)},                             // How fast bullets travel
             {"damageModifier", new Attribute("damageModifier", 1, 99, 1.0f, 0)},                        // How much damage player does
             {"bulletSizeModifier", new Attribute("bulletSizeModifier", 1, 99, 1.0f, 0)},                // How big player's bullets are
@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
             {"equipmentUseTimeModifier", new Attribute("equipmentUseTimeModifier", 1, 99, 1.0f, 0)},    // Effects how long an equipment is active. Higher value = longer effect
         };
         OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
+        attributeSystem.StartAttributePrint("defense");
     }
 
     // Update is called once per frame
@@ -144,7 +145,9 @@ public class Player : MonoBehaviour
 
     public void Damage(int amount)
     {
-        float currentHealth = GetComponent<AttributeSystem>().attributes["health"].baseValue -= amount;
+        int damageToTake = Math.Max(amount - (int)GetAttributeValue("defense"), 1);
+        Debug.Log(damageToTake);
+        float currentHealth = GetComponent<AttributeSystem>().attributes["health"].baseValue -= damageToTake;
         OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
 
         if(currentHealth <= 0)
@@ -181,6 +184,7 @@ public class Player : MonoBehaviour
 
         if(activeEquipment != null)
         {
+            Debug.Log("Removing equipment: " + activeEquipment);
             RemoveEquipment();
         }
         activeEquipment = equipment;

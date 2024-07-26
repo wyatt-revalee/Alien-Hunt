@@ -11,7 +11,10 @@ public class RemoveEquipment : MonoBehaviour
         {
             Player player = collider2D.GetComponent<Player>();
 
-            player.RemoveEquipment();
+            if(player.activeEquipment != null)
+            {
+                player.RemoveEquipment();
+            }
             Destroy(gameObject);
         }
     }

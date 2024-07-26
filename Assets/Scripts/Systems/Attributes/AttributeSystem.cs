@@ -12,8 +12,9 @@ public class AttributeSystem : MonoBehaviour
 
     public Dictionary<string, Attribute> attributes;
 
-    void Start()
+    public void StartAttributePrint(string attributeName)
     {
+        StartCoroutine(PrintAttribute(attributeName));
     }
     
     private IEnumerator PrintAttribute(string attributeName)
@@ -21,7 +22,7 @@ public class AttributeSystem : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(1f);
-            Debug.Log(attributes[attributeName].aName + attributes[attributeName].baseValue + attributes[attributeName].multiplier);
+            Debug.Log(string.Format(" Name : {0}\n Base Value : {1}\n Multiplier {2}",attributes[attributeName].aName, attributes[attributeName].baseValue, attributes[attributeName].multiplier));
         }
     }
 

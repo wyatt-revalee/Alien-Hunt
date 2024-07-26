@@ -1275,8 +1275,8 @@ Transform:
   m_GameObject: {fileID: 1356526704}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 14.389999, y: 0.060000077, z: 0}
-  m_LocalScale: {x: 17, y: 1, z: 1}
+  m_LocalPosition: {x: 14.2426, y: 0.06, z: 0}
+  m_LocalScale: {x: 17, y: 0.7050632, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2138,7 +2138,7 @@ PrefabInstance:
       objectReference: {fileID: 1016027851}
     - target: {fileID: 4365023122759188926, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
       propertyPath: shopItems.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4365023122759188926, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
       propertyPath: shopItems.Array.data[1]
@@ -2148,6 +2148,10 @@ PrefabInstance:
       propertyPath: shopItems.Array.data[2]
       value: 
       objectReference: {fileID: 3648839523125401, guid: 220a839ecff285447a55cea1aa7f9abf, type: 3}
+    - target: {fileID: 4365023122759188926, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
+      propertyPath: shopItems.Array.data[3]
+      value: 
+      objectReference: {fileID: 3648839523125401, guid: 299f21600df00324886f5d762843d473, type: 3}
     - target: {fileID: 4955374429526157699, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 4.8707886
