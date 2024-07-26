@@ -17,10 +17,11 @@ public class Player : MonoBehaviour
     public event Action OnWeaponFired;
     public event Action<bool> OnShotHit;
     public event Action<int> OnEnemyKilled;
+    public event Action<bool> OnGamePaused;
     public Action<int> onStartEquipmentCooldown;
     public Action<int> onUseEquipment;
     public Inventory inventory;
-    public bool isPaused;
+    public PauseMenu pauseMenu;
     public int coins;
     public Rigidbody2D rb;
     public Bullet bullet;
@@ -44,7 +45,7 @@ public class Player : MonoBehaviour
             {"equipmentUseTimeModifier", new Attribute("equipmentUseTimeModifier", 1, 99, 1.0f, 0)},    // Effects how long an equipment is active. Higher value = longer effect
         };
         OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
-        attributeSystem.StartAttributePrint("defense");
+        //attributeSystem.StartAttributePrint("defense");
     }
 
     // Update is called once per frame
@@ -58,13 +59,15 @@ public class Player : MonoBehaviour
         return GetComponent<AttributeSystem>().attributes[attribute].GetTrueValue();
     }
 
+    void OnPause()
+    {
+        pauseMenu.PauseHit();   
+    }
+
     public void OnMove(InputValue value)
     {
         OnMovement?.Invoke(value.Get<Vector2>());
-        if (!isPaused)
-        {
-            rb.velocity = value.Get<Vector2>() * (3 * GetComponent<AttributeSystem>().attributes["speed"].GetTrueValue());
-        }
+        rb.velocity = value.Get<Vector2>() * (3 * GetComponent<AttributeSystem>().attributes["speed"].GetTrueValue());
     }
 
     private void OnInventory()
@@ -180,13 +183,13 @@ public class Player : MonoBehaviour
     {
         GameObject equipment = Instantiate(equipmentItem.GetComponent<Item>().activeEquipment, transform);
         equipment.GetComponent<ActiveEquipment>().player = this;
-        OnEquipmentAdded?.Invoke(equipment);
 
         if(activeEquipment != null)
         {
             Debug.Log("Removing equipment: " + activeEquipment);
             RemoveEquipment();
         }
+        OnEquipmentAdded?.Invoke(equipment);
         activeEquipment = equipment;
     }
 
