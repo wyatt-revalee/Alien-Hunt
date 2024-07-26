@@ -18,3 +18,5 @@ Style : TBD (Pixel Art - Old Arcade Aesthetic?)</br></br>
 This project is sort of a sidestep from my bigger project, Prismatic Depths.</br></br>
 I wanted to create a smaller, simpler game so I could see the full process from start to finish, as well as to just have a finished product under my belt.
 
+**LINKS**</br></br>
+[Trello board](https://trello.com/invite/b/669cfb0ef1b3ef477d0ed036/ATTI3ca6ee9679bbeb5d53c7d2246501e2565D41DA79/alien-hunt)
