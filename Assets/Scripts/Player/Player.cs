@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     public AttributeSystem attributeSystem;
     public GameObject activeEquipment;
     public bool equipmentOnCooldown;
+    private float lastShotTime;
+    private float baseShootTime = 0.25f;
 
     void Awake()
     {
@@ -40,7 +42,7 @@ public class Player : MonoBehaviour
             {"bulletSpeed", new Attribute("bulletSpeed", 10, 99, 1.0f, 0)},                             // How fast bullets travel
             {"damageModifier", new Attribute("damageModifier", 1, 99, 1.0f, 0)},                        // How much damage player does
             {"bulletSizeModifier", new Attribute("bulletSizeModifier", 1, 99, 1.0f, 0)},                // How big player's bullets are
-            {"fireRate", new Attribute("fireRate", 1, 99, 1.0f, 0)},                                    // How fast player can shoot
+            {"fireRate", new Attribute("fireRate", 1, 99, 1.0f, 0)},                                    // Modifer for how fast player can shoot
             {"equipmentCooldownModifier", new Attribute("equipmentCooldownModifier", 1, 99, 1.0f, 0)},  // Effects how long equipment cooldown is. Lower value = smaller cooldown
             {"equipmentUseTimeModifier", new Attribute("equipmentUseTimeModifier", 1, 99, 1.0f, 0)},    // Effects how long an equipment is active. Higher value = longer effect
         };
@@ -107,15 +109,11 @@ public class Player : MonoBehaviour
 
     private void OnShoot()
     {
-        if (GetAttributeValue("fireRate") < 1)
-        {
-            // If the weapon is automatic, start a coroutine that repeatedly calls Shoot
-            StartCoroutine(AutomaticFire());
-        }
-        else
+        if(Time.time - lastShotTime > (baseShootTime / GetAttributeValue("fireRate")))
         {
             // If the weapon is not automatic, just call Shoot once
             ShootBullet();
+            lastShotTime = Time.time;
         }
     }
 
