@@ -115,9 +115,12 @@ public class WaveController : MonoBehaviour
         waveUI.SetWaveInfoText(waveInfo);
         yield return new WaitForSeconds(3f);
         waveUI.HidePanel();
-
+        playerStats.stats["Enemies Killed"].current = 0;
+        playerStats.stats["Points"].current = 0;
         currentEnemiesKilled = 0;
         currentEnemyCount = 0;
+
+
         //Debug.Log("All enemies Killed!");
         isShopping = true;
         OpenShop();

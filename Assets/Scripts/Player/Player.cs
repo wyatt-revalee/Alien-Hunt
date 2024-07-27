@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
             {"equipmentUseTimeModifier", new Attribute("equipmentUseTimeModifier", 1, 99, 1.0f, 0)},    // Effects how long an equipment is active. Higher value = longer effect
         };
         OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
-        //attributeSystem.StartAttributePrint("defense");
+        //attributeSystem.StartAttributePrint("health");
     }
 
     // Update is called once per frame
@@ -157,6 +157,11 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+    }
+
+    public void UpdateHealth()
+    {
+        OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
     }
 
     public void CallShotHit(bool hit, bool enemyKilled = false, int pointValue = 0)

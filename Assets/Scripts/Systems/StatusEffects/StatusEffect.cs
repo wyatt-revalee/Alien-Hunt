@@ -20,7 +20,7 @@ public abstract class StatusEffect : MonoBehaviour
     public StatusEffectInfo statusEffectInfo;
     public string type;
 
-    public void AttemptApplication()
+    public virtual void AttemptApplication()
     {
         if(!CheckTagStartConditions())
         {
@@ -46,7 +46,7 @@ public abstract class StatusEffect : MonoBehaviour
         return false;
     }
 
-    private void StartStatusEffect()
+    public void StartStatusEffect()
     {
         AddTags();
         ApplyAttributeEffects(true);

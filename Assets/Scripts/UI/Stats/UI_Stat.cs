@@ -11,6 +11,6 @@ public class UI_Stat : MonoBehaviour
     public void SetStatInfo(string name, Stat statInfo)
     {
         nameText.text = name;
-        valueText.text = statInfo.current.ToString();
+        valueText.text = statInfo.total.ToString();
     }
 }
