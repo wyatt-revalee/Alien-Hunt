@@ -9,7 +9,7 @@ public class EffectsDisplay : MonoBehaviour
     public GameObject effectUI;
     public Player player;
 
-    Dictionary<StatusEffect, GameObject> effects = new Dictionary<StatusEffect, GameObject>();
+    Dictionary<string, GameObject> effects = new Dictionary<string, GameObject>();
 
     void Awake()
     {
@@ -19,25 +19,25 @@ public class EffectsDisplay : MonoBehaviour
 
     private void AddEffect(StatusEffect effectToAdd)
     {
-        if(effects.ContainsKey(effectToAdd))
+        if(effects.ContainsKey(effectToAdd.statusEffectInfo.ID))
         {
-            effects[effectToAdd].GetComponent<Effect_UI>().AddToStack();
+            effects[effectToAdd.statusEffectInfo.ID].GetComponent<Effect_UI>().AddToStack();
         }
         else
         {
             GameObject newEffect = Instantiate(effectUI, transform);
             newEffect.GetComponent<Effect_UI>().image.sprite = effectToAdd.icon;
-            effects.Add(effectToAdd, newEffect);
+            effects.Add(effectToAdd.statusEffectInfo.ID, newEffect);
         }
     }
 
     private void RemoveEffect(StatusEffect effectToRemove)
     {
-        effects[effectToRemove].GetComponent<Effect_UI>().RemoveFromStack();
-        if(effects[effectToRemove].GetComponent<Effect_UI>().stackSize <= 0)
+        effects[effectToRemove.statusEffectInfo.ID].GetComponent<Effect_UI>().RemoveFromStack();
+        if(effects[effectToRemove.statusEffectInfo.ID].GetComponent<Effect_UI>().stackSize <= 0)
         {
-            Destroy(effects[effectToRemove]);
-            effects.Remove(effectToRemove);
+            Destroy(effects[effectToRemove.statusEffectInfo.ID]);
+            effects.Remove(effectToRemove.statusEffectInfo.ID);
         }
     }
 

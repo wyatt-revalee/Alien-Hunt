@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a1175227795d4988d31fd81e1dce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applier: {fileID: 0}
   owner: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3ff2136dae914c24c8be5bd1cbc26102, type: 3}
   requiredTags: []
   preventingTags: []
   addingTags: []
   applyPeriodicEffects: 0
+  type: 
