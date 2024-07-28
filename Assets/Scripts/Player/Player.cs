@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
             {"bulletSizeModifier", new Attribute("bulletSizeModifier", 1, 99, 1.0f, 0)},                // How big player's bullets are
             {"fireRate", new Attribute("fireRate", 1, 99, 1.0f, 0)},                                    // Modifer for how fast player can shoot
             {"equipmentCooldownModifier", new Attribute("equipmentCooldownModifier", 1, 99, 1.0f, 0)},  // Effects how long equipment cooldown is. Lower value = smaller cooldown
-            {"equipmentUseTimeModifier", new Attribute("equipmentUseTimeModifier", 1, 99, 1.0f, 0)},    // Effects how long an equipment is active. Higher value = longer effect
+            {"buffTime", new Attribute("buffTime", 1, 99, 1.0f, 0)},                                    // Effects how long buffs stay applied
         };
         OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
         //attributeSystem.StartAttributePrint("health");
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
     public void OnMove(InputValue value)
     {
         OnMovement?.Invoke(value.Get<Vector2>());
-        rb.velocity = value.Get<Vector2>() * (3 * GetComponent<AttributeSystem>().attributes["speed"].GetTrueValue());
+        rb.velocity = value.Get<Vector2>() * (10 * GetComponent<AttributeSystem>().attributes["speed"].GetTrueValue());
     }
 
     private void OnInventory()

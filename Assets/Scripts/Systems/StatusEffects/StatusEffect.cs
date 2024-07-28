@@ -58,7 +58,14 @@ public abstract class StatusEffect : MonoBehaviour
         if(statusEffectInfo.duration > 0)
         {
             // add logic concering buff/debuff attribute effects here
-            StartCoroutine(EndStatusEffect(statusEffectInfo.duration));
+            if(statusEffectInfo.isDebuff)
+            {
+                StartCoroutine(EndStatusEffect(statusEffectInfo.duration));
+            }
+            else
+            {
+                StartCoroutine(EndStatusEffect(statusEffectInfo.duration + owner.GetComponent<AttributeSystem>().attributes["buffTime"].baseValue));
+            }
         }
     }
 
