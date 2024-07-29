@@ -46,7 +46,7 @@ public abstract class StatusEffect : MonoBehaviour
         return false;
     }
 
-    public void StartStatusEffect()
+    public virtual void StartStatusEffect()
     {
         AddTags();
         ApplyAttributeEffects(true);
@@ -69,7 +69,7 @@ public abstract class StatusEffect : MonoBehaviour
         }
     }
 
-    private void AddTags()
+    public void AddTags()
     {
         foreach(string tag in addingTags)
         {
@@ -126,7 +126,7 @@ public abstract class StatusEffect : MonoBehaviour
         Destroy(this);
     }
 
-    private void AttemptRemoveStatusEffect()
+    public void AttemptRemoveStatusEffect()
     {
         owner.GetComponent<StatusEffectSystem>().RemoveStatusEffect(this);
     }

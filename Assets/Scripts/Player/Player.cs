@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public int coins;
     public Rigidbody2D rb;
     public Bullet bullet;
+    public Color32 bulletColor;
     public AttributeSystem attributeSystem;
     public GameObject activeEquipment;
     public bool equipmentOnCooldown;
@@ -39,10 +40,10 @@ public class Player : MonoBehaviour
             {"health", new Attribute("health", 10, 10, 1.0f, 0)},                                       // Player hp
             {"speed", new Attribute("speed", 1, 99, 1.0f, 0)},                                          // Player move speed
             {"defense", new Attribute("defense", 10, 99, 1.0f, 0)},                                     // How much damage is reduced when player is hit, cannot reduce damange below 1
-            {"bulletSpeed", new Attribute("bulletSpeed", 10, 99, 1.0f, 0)},                             // How fast bullets travel
+            {"bulletSpeed", new Attribute("bulletSpeed", 20, 99, 1.0f, 0)},                             // How fast bullets travel
             {"damageModifier", new Attribute("damageModifier", 1, 99, 1.0f, 0)},                        // How much damage player does
             {"bulletSizeModifier", new Attribute("bulletSizeModifier", 1, 99, 1.0f, 0)},                // How big player's bullets are
-            {"fireRate", new Attribute("fireRate", 1, 99, 1.0f, 0)},                                    // Modifer for how fast player can shoot
+            {"fireRate", new Attribute("fireRate", 10, 99, 1.0f, 0)},                                    // Modifer for how fast player can shoot
             {"equipmentCooldownModifier", new Attribute("equipmentCooldownModifier", 1, 99, 1.0f, 0)},  // Effects how long equipment cooldown is. Lower value = smaller cooldown
             {"buffTime", new Attribute("buffTime", 1, 99, 1.0f, 0)},                                    // Effects how long buffs stay applied
         };
@@ -93,7 +94,13 @@ public class Player : MonoBehaviour
     public IEnumerator StartEquipmentUseBuffer()
     {
         int cooldown = (int)(activeEquipment.GetComponent<ActiveEquipment>().cooldown * GetAttributeValue("equipmentCooldownModifier"));
-        int cooldownBuffer = (int)(activeEquipment.GetComponent<ActiveEquipment>().cooldownBuffer * GetAttributeValue("equipmentUseTimeModifier"));
+        int cooldownBuffer = activeEquipment.GetComponent<ActiveEquipment>().cooldownBuffer;
+
+        if(activeEquipment.GetComponent<ActiveEquipment>().isBuff)
+        {
+            cooldownBuffer += (int)GetAttributeValue("buffTime");
+        }
+
         onUseEquipment?.Invoke(cooldownBuffer);
         yield return new WaitForSeconds(cooldownBuffer);
         StartCoroutine(DoEquipmentCooldown(cooldown));
@@ -109,17 +116,17 @@ public class Player : MonoBehaviour
 
     private void OnShoot()
     {
-        if(Time.time - lastShotTime > (baseShootTime / GetAttributeValue("fireRate")))
+        if (Time.time - lastShotTime > (baseShootTime / GetAttributeValue("fireRate")))
         {
             // If the weapon is not automatic, just call Shoot once
-            ShootBullet();
-            lastShotTime = Time.time;
+            StartCoroutine(AutomaticFire());
         }
     }
 
     private void ShootBullet()
     {
         Bullet newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+        newBullet.GetComponent<SpriteRenderer>().color = bulletColor;
         newBullet.owner = gameObject;
         newBullet.SetBulletStats(GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"));
         newBullet.StartMovement();
@@ -132,10 +139,10 @@ public class Player : MonoBehaviour
         Debug.Log("Automatic fire started");
         while (GetComponent<PlayerInput>().actions["Shoot"].IsPressed())
         {
-            if (GetAttributeValue("fireRate") < 1)
+            if (Time.time - lastShotTime > (baseShootTime / GetAttributeValue("fireRate")))
             {
                 ShootBullet();
-                yield return new WaitForSeconds(GetAttributeValue("fireRate"));
+                yield return new WaitForSeconds(baseShootTime / GetAttributeValue("fireRate"));
             }
             else
             {
@@ -155,6 +162,12 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+    }
+
+    public void Heal(int amount)
+    {
+        float currentHealth = Math.Min(GetComponent<AttributeSystem>().attributes["health"].baseValue += amount, GetComponent<AttributeSystem>().attributes["health"].max);
+        OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
     }
 
     public void UpdateHealth()

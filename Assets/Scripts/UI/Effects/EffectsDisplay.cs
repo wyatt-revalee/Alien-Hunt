@@ -19,6 +19,10 @@ public class EffectsDisplay : MonoBehaviour
 
     private void AddEffect(StatusEffect effectToAdd)
     {
+        if(effectToAdd.statusEffectInfo.duration <= 0)
+        {
+            return;
+        }
         if(effects.ContainsKey(effectToAdd.statusEffectInfo.ID))
         {
             effects[effectToAdd.statusEffectInfo.ID].GetComponent<Effect_UI>().AddToStack();
@@ -33,6 +37,10 @@ public class EffectsDisplay : MonoBehaviour
 
     private void RemoveEffect(StatusEffect effectToRemove)
     {
+        if (effectToRemove.statusEffectInfo.duration <= 0)
+        {
+            return;
+        }
         effects[effectToRemove.statusEffectInfo.ID].GetComponent<Effect_UI>().RemoveFromStack();
         if(effects[effectToRemove.statusEffectInfo.ID].GetComponent<Effect_UI>().stackSize <= 0)
         {

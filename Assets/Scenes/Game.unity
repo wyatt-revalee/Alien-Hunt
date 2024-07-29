@@ -2466,7 +2466,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2091314919493783708, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -54.95793
+      value: -54.957928
       objectReference: {fileID: 0}
     - target: {fileID: 3962887894909964532, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
       propertyPath: m_IsActive
@@ -2478,7 +2478,7 @@ PrefabInstance:
       objectReference: {fileID: 1016027851}
     - target: {fileID: 4365023122759188926, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
       propertyPath: shopItems.Array.size
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4365023122759188926, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
       propertyPath: shopItems.Array.data[1]
@@ -2496,6 +2496,18 @@ PrefabInstance:
       propertyPath: shopItems.Array.data[4]
       value: 
       objectReference: {fileID: 3648839523125401, guid: 546ff4146b9f75649ab89ce72c7306ac, type: 3}
+    - target: {fileID: 4365023122759188926, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
+      propertyPath: shopItems.Array.data[5]
+      value: 
+      objectReference: {fileID: 3648839523125401, guid: a58928820e3793446a2468a7547327c6, type: 3}
+    - target: {fileID: 4365023122759188926, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
+      propertyPath: shopItems.Array.data[6]
+      value: 
+      objectReference: {fileID: 3648839523125401, guid: a026b001abcef414faebb2338763c874, type: 3}
+    - target: {fileID: 4365023122759188926, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
+      propertyPath: shopItems.Array.data[7]
+      value: 
+      objectReference: {fileID: 3648839523125401, guid: bce53e7c331522748a2b7e6ca41042ee, type: 3}
     - target: {fileID: 4955374429526157699, guid: 6c7b04f5d0b82094d98aaea25ee80ede, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 4.8707886
@@ -2996,6 +3008,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 161840521}
+    - target: {fileID: 4263467052472401528, guid: c93ee1162ad6c0744bb86c1fb137e35f, type: 3}
+      propertyPath: bulletColor.rgba
+      value: 4278251263
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -14,6 +14,7 @@ public class ActiveEquipment : MonoBehaviour
     public Player player;
     public Sprite icon;
     public string id;
+    public bool isBuff;
 
     public void UseEquipment()
     {
