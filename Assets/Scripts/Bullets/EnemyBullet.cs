@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    float speed;
+    public float speed;
     float damage;
     float sizeModifier;
 
@@ -17,9 +17,9 @@ public class EnemyBullet : MonoBehaviour
         transform.localScale *= sizeModifier;
     }
 
-    public void StartMovement()
+    public void StartMovement(Vector2 direction)
     {
-        GetComponent<Rigidbody2D>().velocity = Vector2.down * speed;
+        GetComponent<Rigidbody2D>().velocity = direction * speed;
     }
 
     // If colliding object is an enemy, then hurt it and destroy bullet
