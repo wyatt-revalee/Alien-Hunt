@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 
 public class PlayerStats : MonoBehaviour
@@ -24,6 +25,11 @@ public class PlayerStats : MonoBehaviour
             {"Enemies Killed", new Stat()},
             {"Points", new Stat()},
         };
+    }
+
+    public void AddPoints(int amount)
+    {
+        UpdateStat("Points", amount);
     }
 
     public void ShotFired(bool hitTarget)

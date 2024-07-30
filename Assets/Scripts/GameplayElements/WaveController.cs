@@ -20,6 +20,7 @@ public class WaveController : MonoBehaviour
     public Shop shop;
     public WaveUI waveUI;
     public PlayerStats playerStats;
+    public Player player;
 
     public event Action<int> OnWaveStarted;
     public event Action<int> OnwaveEnded;
@@ -103,16 +104,39 @@ public class WaveController : MonoBehaviour
         
     }
 
+    private void AwardPlayerCoins()
+    {
+        int amountToAward = 0;
+        player.AddCoins(amountToAward);
+    }
+
     public IEnumerator EndWaveSequence()
     {
         //playerStats.PrintAllStats();
         OnwaveEnded?.Invoke(currentWave);
+
         yield return new WaitForSeconds(1f);
         string waveInfo = string.Format("Points Earned: {0}", playerStats.stats["Points"].current);
         waveUI.SetWaveInfoText(waveInfo);
+
         yield return new WaitForSeconds(1f);
         waveInfo += string.Format("\nEnemies Killed: {0}", playerStats.stats["Enemies Killed"].current);
         waveUI.SetWaveInfoText(waveInfo);
+
+        int accuracy = (int)(100 * (((float)playerStats.stats["Shots Hit"].current) / ((float)playerStats.stats["Shots Fired"].current)));
+        if(accuracy > 50)
+        {
+            yield return new WaitForSeconds(1f);
+            waveInfo += string.Format("\nAccuracy Bonus: +{1} points", accuracy * currentWave);
+            playerStats.AddPoints(accuracy * currentWave);
+            waveUI.SetWaveInfoText(waveInfo);
+        }
+
+        yield return new WaitForSeconds(1f);
+        waveInfo += string.Format("\nMoney Earned: {0}", playerStats.stats["Points"].current/10);
+        waveUI.SetWaveInfoText(waveInfo);
+        player.AddCoins(playerStats.stats["Points"].current / 10);
+
         yield return new WaitForSeconds(3f);
         waveUI.HidePanel();
         playerStats.stats["Enemies Killed"].current = 0;

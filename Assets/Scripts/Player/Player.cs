@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public event Action<bool> OnShotHit;
     public event Action<int> OnEnemyKilled;
     public event Action<bool> OnGamePaused;
+    public Action<int> onCoinsChanged;
     public Action<int> onStartEquipmentCooldown;
     public Action<int> onUseEquipment;
     public Inventory inventory;
@@ -51,12 +52,6 @@ public class Player : MonoBehaviour
         //attributeSystem.StartAttributePrint("health");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public float GetAttributeValue(string attribute)
     {
         return GetComponent<AttributeSystem>().attributes[attribute].GetTrueValue();
@@ -65,6 +60,7 @@ public class Player : MonoBehaviour
     void OnPause()
     {
         pauseMenu.PauseHit();   
+        AddCoins(5);
     }
 
     public void OnMove(InputValue value)
@@ -188,11 +184,13 @@ public class Player : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
+        onCoinsChanged?.Invoke(coins);
     }
 
     public void RemoveCoins(int amount)
     {
         coins -= amount;
+        onCoinsChanged?.Invoke(coins);
     }
 
     public void AddEquipment(GameObject equipmentItem)
