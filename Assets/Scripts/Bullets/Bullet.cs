@@ -29,11 +29,19 @@ public class Bullet : MonoBehaviour
     {
         if(collider.gameObject.layer == 9)
         {
-            bool enemyKilled = collider.GetComponent<Enemy>().TakeDamage((int)damage);
+            string hitStatus = collider.GetComponent<Enemy>().TakeDamage((int)damage);
+            bool enemyKilled = false;
+            if(hitStatus == "none")
+            {
+                owner.GetComponent<Player>().CallShotHit(false);
+                Destroy(gameObject);
+                return;
+            }
             int pointsEarned = 0;
-            if(enemyKilled)
+            if(hitStatus == "kill")
             {
                 pointsEarned = (int)collider.GetComponent<Enemy>().GetAttributeValue("pointValue");
+                enemyKilled = true;
             }
             owner.GetComponent<Player>().CallShotHit(true, enemyKilled, pointsEarned);
             Destroy(gameObject);

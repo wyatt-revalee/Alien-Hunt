@@ -31,8 +31,13 @@ public abstract class Enemy : MonoBehaviour
         return GetComponent<AttributeSystem>().attributes[attribute].GetTrueValue();
     }
 
-    public virtual bool TakeDamage(int damage)
+    public virtual string TakeDamage(int damage)
     {
+        if(GetAttributeValue("health") <= 0)
+        {
+            return "none";
+        }
+
         attributeSystem.attributes["health"].delta -= damage;
         //Debug.Log("Took " + damage + " damage!");
         //Debug.Log("Current health: " + GetAttributeValue("health"));
@@ -40,9 +45,9 @@ public abstract class Enemy : MonoBehaviour
         if(GetAttributeValue("health") <= 0)
         {
             StartCoroutine(DeathSequence());
-            return true;
+            return "kill";
         }
-        return false;
+        return "hit";
     }
 
     public virtual void StartMovement(int direction)
