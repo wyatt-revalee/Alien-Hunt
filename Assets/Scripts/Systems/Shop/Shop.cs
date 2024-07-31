@@ -58,16 +58,15 @@ public class Shop : MonoBehaviour
         {
             int rarity = GetRarity();
             Item item;
-            // while (true)
-            // {
-            //     item = shopItems[UnityEngine.Random.Range(0, shopItems.Count)].GetComponent<Item>();
-            //     if (item.rarity == rarity && !currentItemsInShop.Contains(item))
-            //     {
-            //         break;
-            //     }
-            //     rarity = GetRarity();
-            // }
-            item = shopItems[UnityEngine.Random.Range(0, shopItems.Count)].GetComponent<Item>();
+            while (true)
+            {
+                item = shopItems[UnityEngine.Random.Range(0, shopItems.Count)].GetComponent<Item>();
+                if (item.rarity == rarity && !currentItemsInShop.Contains(item))
+                {
+                    break;
+                }
+                rarity = GetRarity();
+            }
             currentItemsInShop.Add(item);
             GameObject newItem = Instantiate(shopItemPrefab, transform);
             newItem.GetComponent<ShopItem>().SetItemInfo(item);

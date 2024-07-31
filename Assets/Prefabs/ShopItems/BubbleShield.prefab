@@ -49,7 +49,7 @@ MonoBehaviour:
   type: Status Effect
   id: bubbleShield
   description: Prevents damage. Regenerates.
-  cost: 10
-  rarity: 2
+  cost: 15
+  rarity: 3
   statusEffect: {fileID: 3280994992967625563, guid: 51a7e1bd1fb9a4a4385931c3a7ecbff8, type: 3}
   activeEquipment: {fileID: 0}

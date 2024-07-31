@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 public class WaveController : MonoBehaviour
 {
 
-    private int enemyCurrencyMultipler = 1;
+    public int enemyCurrencyMultipler; // default 5?
     public int waveCountdown = 3;
     public int currentWave = 0;
     public int bossWave = 5;

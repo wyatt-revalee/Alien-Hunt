@@ -8,7 +8,6 @@ using UnityEngine;
 public class SE_DeflectBullet : StatusEffect
 {
     public int stacks = 1;
-    private float baseCooldown = 10;
     public override void InitializeEffects()
     {
         statusEffectInfo = new StatusEffectInfo("Deflect Bullet", 0f, 0f, "Adds a chance to reflect a bullet back at an enemy.", "SE_DeflectBullet", false, icon);

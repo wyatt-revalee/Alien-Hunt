@@ -49,7 +49,7 @@ MonoBehaviour:
   type: Status Effect
   id: armorPlating
   description: Increases defense by 1
-  cost: 10
-  rarity: 2
+  cost: 5
+  rarity: 1
   statusEffect: {fileID: 3280994992967625563, guid: 790a535edd280454db6174556de32305, type: 3}
   activeEquipment: {fileID: 0}

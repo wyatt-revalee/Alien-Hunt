@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     public event Action OnWeaponFired;
     public event Action<bool> OnShotHit;
     public event Action<int> OnEnemyKilled;
-    public event Action<bool> OnGamePaused;
     public Action<int> onCoinsChanged;
     public Action<int> onStartEquipmentCooldown;
     public Action<int> onUseEquipment;

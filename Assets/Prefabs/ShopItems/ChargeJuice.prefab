@@ -49,7 +49,7 @@ MonoBehaviour:
   type: Status Effect
   id: chargeJuice
   description: Increases Fire Rate by 10%
-  cost: 10
-  rarity: 2
+  cost: 5
+  rarity: 1
   statusEffect: {fileID: 3280994992967625563, guid: 7380f030ed65d2f4e9df9a063929762e, type: 3}
   activeEquipment: {fileID: 0}

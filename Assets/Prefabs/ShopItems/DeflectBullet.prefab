@@ -49,7 +49,7 @@ MonoBehaviour:
   type: Status Effect
   id: bulletDeflector
   description: Chance to reflect bullet on hit.
-  cost: 10
-  rarity: 2
+  cost: 25
+  rarity: 5
   statusEffect: {fileID: 3280994992967625563, guid: 1c45e96969cb8fa4a9b6bb75a02a260d, type: 3}
   activeEquipment: {fileID: 0}

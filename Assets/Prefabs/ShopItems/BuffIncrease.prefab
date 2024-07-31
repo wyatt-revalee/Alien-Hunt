@@ -49,7 +49,7 @@ MonoBehaviour:
   type: Status Effect
   id: buffIncrease
   description: Extends buffs by 1 second
-  cost: 15
-  rarity: 3
+  cost: 10
+  rarity: 2
   statusEffect: {fileID: 3280994992967625563, guid: 74552f2609c578349993a86b87ccbdc1, type: 3}
   activeEquipment: {fileID: 0}

@@ -49,7 +49,7 @@ MonoBehaviour:
   type: Active Equipment
   id: nitroBurst
   description: Increases speed by 200% for 10 seconds
-  cost: 20
+  cost: 15
   rarity: 3
   statusEffect: {fileID: 0}
   activeEquipment: {fileID: 3376081946279360386, guid: 60606164691235240bdb57850ad73076, type: 3}
