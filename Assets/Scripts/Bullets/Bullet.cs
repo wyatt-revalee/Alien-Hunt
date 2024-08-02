@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     float speed;
     float damage;
     float sizeModifier;
+    public List<StatusEffect> effectsToAdd;
 
     public void SetBulletStats(float newSpeed, float newDamage, float newSizeMod)
     {
@@ -30,6 +31,12 @@ public class Bullet : MonoBehaviour
         if(collider.gameObject.layer == 9)
         {
             string hitStatus = collider.GetComponent<Enemy>().TakeDamage((int)damage);
+            foreach(StatusEffect effect in effectsToAdd)
+            {
+                effect.InitializeEffects();
+                collider.GetComponent<StatusEffectSystem>().AddStatusEffect(effect);
+            }
+            collider.GetComponent<Enemy>().TakeDamage((int)damage);
             bool enemyKilled = false;
             if(hitStatus == "none")
             {

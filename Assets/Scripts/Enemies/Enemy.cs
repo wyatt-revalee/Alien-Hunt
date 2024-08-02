@@ -10,6 +10,8 @@ public abstract class Enemy : MonoBehaviour
     public EnemyBullet bullet;
     public int index;
     public int cost = 1;
+    bool isMoving;
+    int direction;
     public virtual void Awake()
     {
         attributeSystem = GetComponent<AttributeSystem>();
@@ -24,6 +26,12 @@ public abstract class Enemy : MonoBehaviour
             {"damageModifier", new Attribute("damageModifier", 1, 99, 1.0f, 0)},
             {"bulletSizeModifier", new Attribute("bulletSizeModifier", 1, 99, 1.0f, 0)},
         };
+    }
+
+    void Update()
+    {
+        float speed = GetAttributeValue("speed") > 0 ? GetAttributeValue("speed") : 0.1f;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(direction * speed, 0);
     }
 
     public float GetAttributeValue(string attribute)
@@ -52,7 +60,8 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void StartMovement(int direction)
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(direction * GetAttributeValue("speed"), 0);
+        this.direction = direction;
+        isMoving = true;
         StartCoroutine(StartShooting());
     }
 
