@@ -11,8 +11,18 @@ public class KillZone : MonoBehaviour
         // If object is an enemy, destroy it and send back to spawner to be respawned
         if(collider.gameObject.layer == 9)
         {
-            collider.GetComponent<Enemy>().parentSpawner.GetComponent<EnemySpawner>().RespawnEnemy(collider.GetComponent<Enemy>().index);
-            Destroy(collider.gameObject);
+            Enemy enemy = collider.GetComponent<Enemy>();
+
+            if(enemy.enteredBarrier)
+            {
+                enemy.StartMovement(enemy.direction * -1); // reverse enemy direction, so they go back towards other end of screen
+            }
+            else
+            {
+                enemy.enteredBarrier = true;
+            }
+            // collider.GetComponent<Enemy>().parentSpawner.GetComponent<EnemySpawner>().RespawnEnemy(collider.GetComponent<Enemy>().index);
+            // Destroy(collider.gameObject);
         }
 
         if (collider.gameObject.layer == 12)

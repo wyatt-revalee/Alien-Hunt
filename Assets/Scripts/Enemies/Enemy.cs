@@ -11,7 +11,8 @@ public abstract class Enemy : MonoBehaviour
     public int index;
     public int cost = 1;
     bool isMoving;
-    int direction;
+    public int direction;
+    public bool enteredBarrier;
     public virtual void Awake()
     {
         attributeSystem = GetComponent<AttributeSystem>();
@@ -30,8 +31,11 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
-        float speed = GetAttributeValue("speed") > 0 ? GetAttributeValue("speed") : 0.1f;
-        GetComponent<Rigidbody2D>().velocity = new Vector2(direction * speed, 0);
+        if(isMoving)
+        {
+            float speed = GetAttributeValue("speed") > 0 ? GetAttributeValue("speed") : 0.1f;
+            GetComponent<Rigidbody2D>().velocity = new Vector2(direction * speed, 0);
+        }
     }
 
     public float GetAttributeValue(string attribute)
@@ -52,6 +56,7 @@ public abstract class Enemy : MonoBehaviour
 
         if(GetAttributeValue("health") <= 0)
         {
+            isMoving = false;
             StartCoroutine(DeathSequence());
             return "kill";
         }
