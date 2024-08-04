@@ -1659,7 +1659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '100
+  m_text: '0
 
 '
   m_isRightToLeft: 0
@@ -3535,8 +3535,28 @@ PrefabInstance:
       objectReference: {fileID: 1016027861}
     - target: {fileID: 6783619194201951002, guid: 23407ef23e702314c941d9534417b44d, type: 3}
       propertyPath: enemyCurrencyMultipler
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6783619194201951002, guid: 23407ef23e702314c941d9534417b44d, type: 3}
+      propertyPath: availableEnemies.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6783619194201951002, guid: 23407ef23e702314c941d9534417b44d, type: 3}
+      propertyPath: availableEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 8928192152703754629, guid: 5609ee42275b1a24bab77d3f859d4a0b, type: 3}
+    - target: {fileID: 6783619194201951002, guid: 23407ef23e702314c941d9534417b44d, type: 3}
+      propertyPath: availableEnemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 8928192152703754629, guid: 47f311f17adf678488e409a8b202f9f1, type: 3}
+    - target: {fileID: 6783619194201951002, guid: 23407ef23e702314c941d9534417b44d, type: 3}
+      propertyPath: availableEnemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 8928192152703754629, guid: 921d45a2bc042d24098b7c2c41730ca7, type: 3}
+    - target: {fileID: 6783619194201951002, guid: 23407ef23e702314c941d9534417b44d, type: 3}
+      propertyPath: availableEnemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 8928192152703754629, guid: b6b1a97c25a51d6488664ddf5470911b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

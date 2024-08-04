@@ -10,9 +10,11 @@ public abstract class Enemy : MonoBehaviour
     public EnemyBullet bullet;
     public int index;
     public int cost = 1;
-    bool isMoving;
-    public int direction;
+    public bool isMoving;
+    public int horizontalDirection;
+    public int verticalDirection;
     public bool enteredBarrier;
+    public bool moveSignalSent;
     public virtual void Awake()
     {
         attributeSystem = GetComponent<AttributeSystem>();
@@ -29,12 +31,12 @@ public abstract class Enemy : MonoBehaviour
         };
     }
 
-    void Update()
+    public virtual void Update()
     {
         if(isMoving)
         {
             float speed = GetAttributeValue("speed") > 0 ? GetAttributeValue("speed") : 0.1f;
-            GetComponent<Rigidbody2D>().velocity = new Vector2(direction * speed, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(horizontalDirection * speed, 0);
         }
     }
 
@@ -57,15 +59,17 @@ public abstract class Enemy : MonoBehaviour
         if(GetAttributeValue("health") <= 0)
         {
             isMoving = false;
+            StopAllCoroutines();
             StartCoroutine(DeathSequence());
             return "kill";
         }
         return "hit";
     }
 
-    public virtual void StartMovement(int direction)
+    public virtual void StartMovement(int horizontal, int vertical)
     {
-        this.direction = direction;
+        horizontalDirection = horizontal;
+        verticalDirection = vertical;
         isMoving = true;
         StartCoroutine(StartShooting());
     }

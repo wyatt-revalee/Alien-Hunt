@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 GameObject newEnemy = Instantiate(enemiesToSpawn[0], transform.position, Quaternion.identity);
                 newEnemy.GetComponent<Enemy>().parentSpawner = gameObject;
-                newEnemy.GetComponent<Enemy>().StartMovement(direction);
+                newEnemy.GetComponent<Enemy>().StartMovement(direction, direction);
                 enemiesToSpawn.RemoveAt(0);
             }
             yield return new WaitForSeconds(spawnDelay);
