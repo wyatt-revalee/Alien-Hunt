@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     public bool equipmentOnCooldown;
     private float lastShotTime;
     private float baseShootTime = 0.25f;
+    public Dictionary<GameObject, int> bulletEffects = new Dictionary<GameObject, int>();
 
     void Awake()
     {
@@ -123,7 +124,7 @@ public class Player : MonoBehaviour
         Bullet newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
         newBullet.GetComponent<SpriteRenderer>().color = bulletColor;
         newBullet.owner = gameObject;
-        newBullet.SetBulletStats(GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"));
+        newBullet.SetBulletStats(GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"), bulletEffects);
         newBullet.StartMovement();
         OnWeaponFired?.Invoke();
     }
@@ -211,6 +212,25 @@ public class Player : MonoBehaviour
         OnEquipmentRemoved?.Invoke(activeEquipment);
         inventory.RemoveItemFromInventory(activeEquipment.GetComponent<ActiveEquipment>().id);
         Destroy(activeEquipment);
+    }
+
+    public void AddBulletEffect(GameObject effectToAdd)
+    {
+        bool effectFound = false;
+        foreach (KeyValuePair<GameObject, int> kvp in bulletEffects)
+        {
+            if (kvp.Key.GetComponent<StatusEffect>().statusEffectInfo.ID == effectToAdd.GetComponent<StatusEffect>().statusEffectInfo.ID)
+            {
+                bulletEffects[kvp.Key]++;
+                effectFound = true;
+                break;
+            }
+        }
+        if (!effectFound)
+        {
+            bulletEffects.Add(effectToAdd, 1);
+            effectToAdd.GetComponent<StatusEffect>().InitializeEffects();
+        }
     }
 
 }

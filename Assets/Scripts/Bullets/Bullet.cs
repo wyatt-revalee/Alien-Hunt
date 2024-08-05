@@ -9,16 +9,20 @@ public class Bullet : MonoBehaviour
     float speed;
     float damage;
     float sizeModifier;
-    public List<StatusEffect> effectsToAdd;
+    Dictionary<GameObject, int> effectsToAdd;
 
-    public void SetBulletStats(float newSpeed, float newDamage, float newSizeMod)
+    public void SetBulletStats(float newSpeed, float newDamage, float newSizeMod, Dictionary<GameObject, int> effects)
     {
         speed = newSpeed;
         damage = newDamage;
         sizeModifier = newSizeMod;
 
         transform.localScale *= sizeModifier;
+
+        effectsToAdd = new Dictionary<GameObject, int>(effects);
     }
+
+    
 
     public void StartMovement()
     {
@@ -31,10 +35,13 @@ public class Bullet : MonoBehaviour
         if(collider.gameObject.layer == 9)
         {
             string hitStatus = collider.GetComponent<Enemy>().TakeDamage((int)damage);
-            foreach(StatusEffect effect in effectsToAdd)
+            foreach(KeyValuePair<GameObject, int> kvp in effectsToAdd)
             {
-                effect.InitializeEffects();
-                collider.GetComponent<StatusEffectSystem>().AddStatusEffect(effect);
+                GameObject i_effect = Instantiate(kvp.Key, collider.gameObject.transform);
+                i_effect.GetComponent<StatusEffect>().stacks = kvp.Value;
+                i_effect.GetComponent<StatusEffect>().InitializeEffects();
+                i_effect.GetComponent<StatusEffect>().applier = owner;
+                collider.GetComponent<StatusEffectSystem>().AddStatusEffect(i_effect.GetComponent<StatusEffect>());
             }
             collider.GetComponent<Enemy>().TakeDamage((int)damage);
             bool enemyKilled = false;

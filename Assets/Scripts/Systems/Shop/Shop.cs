@@ -92,7 +92,7 @@ public class Shop : MonoBehaviour
                     break;
 
                 case "Bullet Effect":
-                    player.GetComponent<Player>().bullet.GetComponent<Bullet>().effectsToAdd.Add(item.statusEffect.GetComponent<StatusEffect>());
+                    player.GetComponent<Player>().AddBulletEffect(item.statusEffect);
                     break;
 
                 case "Active Equipment":

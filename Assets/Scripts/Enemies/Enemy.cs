@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+
+    public Action onDeath;
     public AttributeSystem attributeSystem;
     public GameObject parentSpawner;
     public EnemyBullet bullet;
@@ -84,6 +87,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual IEnumerator DeathSequence()
     {
+        onDeath?.Invoke();
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         GetComponent<SpriteRenderer>().color = Color.red;

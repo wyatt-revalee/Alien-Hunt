@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class SE_BubbleShield : StatusEffect
 {
-    public int stacks = 1;
     private float baseCooldown = 10;
     public override void InitializeEffects()
     {

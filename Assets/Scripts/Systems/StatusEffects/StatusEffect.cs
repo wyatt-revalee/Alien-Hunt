@@ -19,6 +19,7 @@ public abstract class StatusEffect : MonoBehaviour
     public List<AttributeChange> attributeEffects = new List<AttributeChange>();
     public StatusEffectInfo statusEffectInfo;
     public string type;
+    public int stacks = 1;
 
     public virtual void AttemptApplication()
     {
