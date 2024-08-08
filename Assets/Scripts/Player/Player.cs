@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
             {"fireRate", new Attribute("fireRate", 10, 99, 1.0f, 0)},                                    // Modifer for how fast player can shoot
             {"equipmentCooldownModifier", new Attribute("equipmentCooldownModifier", 1, 99, 1.0f, 0)},  // Effects how long equipment cooldown is. Lower value = smaller cooldown
             {"buffTime", new Attribute("buffTime", 1, 99, 1.0f, 0)},                                    // Effects how long buffs stay applied
+            {"enemyHealthMultiplier", new Attribute("enemyHealthMultiplier", 1, 99, 2.0f, 0)},          // Effects enemy health
         };
         OnHealthChanged?.Invoke(attributeSystem.attributes["health"]);
         //attributeSystem.StartAttributePrint("health");
@@ -216,6 +217,7 @@ public class Player : MonoBehaviour
 
     public void AddBulletEffect(GameObject effectToAdd)
     {
+        effectToAdd.GetComponent<StatusEffect>().InitializeEffects();
         bool effectFound = false;
         foreach (KeyValuePair<GameObject, int> kvp in bulletEffects)
         {
@@ -229,7 +231,6 @@ public class Player : MonoBehaviour
         if (!effectFound)
         {
             bulletEffects.Add(effectToAdd, 1);
-            effectToAdd.GetComponent<StatusEffect>().InitializeEffects();
         }
     }
 
