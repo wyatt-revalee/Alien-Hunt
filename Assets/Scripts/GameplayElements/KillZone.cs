@@ -15,8 +15,8 @@ public class KillZone : MonoBehaviour
 
             if(enemy.enteredBarrier)
             {
-                enemy.StartMovement(enemy.horizontalDirection * -1, enemy.verticalDirection * -1); // reverse enemy direction, so they go back towards other end of screen
                 enemy.StopAllCoroutines();
+                enemy.StartMovement(enemy.horizontalDirection * -1, enemy.verticalDirection * -1); // reverse enemy direction, so they go back towards other end of screen
                 enemy.moveSignalSent = false;
             }
             else

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using System;
 using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class Player : MonoBehaviour
 {
@@ -157,7 +158,7 @@ public class Player : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            SceneManager.LoadScene(0);
+            StartCoroutine(EndGame());
         }
     }
 
@@ -232,6 +233,12 @@ public class Player : MonoBehaviour
         {
             bulletEffects.Add(effectToAdd, 1);
         }
+    }
+
+    public IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(0);
+        SceneManager.LoadScene(2);
     }
 
 }
