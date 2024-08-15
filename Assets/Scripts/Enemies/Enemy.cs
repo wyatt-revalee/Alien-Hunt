@@ -18,6 +18,7 @@ public abstract class Enemy : MonoBehaviour
     public int verticalDirection;
     public bool enteredBarrier;
     public bool moveSignalSent;
+    public bool isBoss;
     public virtual void Awake()
     {
         attributeSystem = GetComponent<AttributeSystem>();
@@ -69,7 +70,7 @@ public abstract class Enemy : MonoBehaviour
         return "hit";
     }
 
-    public virtual void StartMovement(int horizontal, int vertical)
+    public virtual void StartMovement(int horizontal = 0, int vertical = 0)
     {
         horizontalDirection = horizontal;
         verticalDirection = vertical;

@@ -13,6 +13,7 @@ public class WaveController : MonoBehaviour
     public int spawnDelay = 1;
     private int currentEnemyCount;
     private int currentEnemiesKilled;
+    public GameObject bossSpawner;
     public GameObject[] enemySpawners;
     public List<GameObject> availableEnemies;
     public List<GameObject> enemiesToSpawn;
@@ -29,6 +30,7 @@ public class WaveController : MonoBehaviour
     {
         shop.onShopEnd += CloseShop;
         shop.gameObject.SetActive(false);
+        bossSpawner.GetComponent<BossSpawner>().OnBossDeath += BossDied;
         GetEnemySpawners();
         StartNewWave();
     }
@@ -67,22 +69,33 @@ public class WaveController : MonoBehaviour
 
     public void StartNewWave()
     {
-        StartCoroutine(NewWaveSequence());
+        Debug.Log(string.Format("Current wave: {0}, Boss Wave: {1}, Value: {2}", currentWave + 1, bossWave, (currentWave+1)%bossWave));
+        bool isBossWave = (currentWave + 1) % bossWave == 0 ? true : false; // Check if next wave lines up as a boss wave. Ex: boss wave = 5, so waves would be 5, 10, 15...25...50. etc.
+        StartCoroutine(NewWaveSequence(isBossWave));
     }
 
-    public IEnumerator NewWaveSequence()
+    public IEnumerator NewWaveSequence(bool bossWave)
     {
         waveUI.StartWaveCountdown(waveCountdown);
         yield return new WaitForSeconds(waveCountdown);
         currentWave++;
         yield return new WaitForSeconds(1f);
         OnWaveStarted?.Invoke(currentWave);
-        GenerateEnemies();
-        foreach (GameObject spawner in enemySpawners)
+
+        if(bossWave)
         {
-            spawner.GetComponent<EnemySpawner>().StartWave(spawnDelay);
+            bossSpawner.GetComponent<BossSpawner>().SpawnBoss(currentWave);
+        }
+        else
+        {
+            GenerateEnemies();
+            foreach (GameObject spawner in enemySpawners)
+            {
+                spawner.GetComponent<EnemySpawner>().StartWave(spawnDelay);
+            }
         }
     }
+
 
     public void EnemyDied()
     {
@@ -94,6 +107,12 @@ public class WaveController : MonoBehaviour
         }
     }
 
+    public void BossDied()
+    {
+        //do boss death stuff
+        StartCoroutine(EndWaveSequence());
+    }
+
     public void EndWave()
     {
         foreach (GameObject spawner in enemySpawners)
@@ -101,7 +120,6 @@ public class WaveController : MonoBehaviour
             spawner.GetComponent<EnemySpawner>().EndWave();
         }
         StartCoroutine(EndWaveSequence());
-        
     }
 
     private void AwardPlayerCoins()
@@ -127,7 +145,7 @@ public class WaveController : MonoBehaviour
         if(accuracy > 50)
         {
             yield return new WaitForSeconds(1f);
-            waveInfo += string.Format("\nAccuracy Bonus: +{1} points", accuracy * currentWave);
+            waveInfo += string.Format("\nAccuracy Bonus: + {0} points", accuracy * currentWave);
             playerStats.AddPoints(accuracy * currentWave);
             waveUI.SetWaveInfoText(waveInfo);
         }
