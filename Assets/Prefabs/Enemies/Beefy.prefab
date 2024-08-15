@@ -214,8 +214,8 @@ MonoBehaviour:
   attributeSystem: {fileID: 0}
   parentSpawner: {fileID: 0}
   bullet: {fileID: 5383467082854491629, guid: be57dcf2aa536c84abaa54634ed9b9da, type: 3}
-  index: 0
-  cost: 1
+  index: 4
+  cost: 2
   isMoving: 0
   horizontalDirection: 0
   verticalDirection: 0

@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "DamageTest",
+                    "type": "Button",
+                    "id": "cf652122-cd01-4808-87a9-f8bb45b5ee30",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -344,6 +353,17 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "ActiveEquipment",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "736cf209-c926-48a2-bc28-6e4cde916531",
+                    "path": "<Keyboard>/numpad0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KBM",
+                    "action": "DamageTest",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

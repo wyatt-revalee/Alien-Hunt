@@ -241,4 +241,9 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    void OnDamageTest()
+    {
+        Damage(2);
+    }
+
 }
