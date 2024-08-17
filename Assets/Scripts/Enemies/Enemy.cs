@@ -80,10 +80,13 @@ public abstract class Enemy : MonoBehaviour
 
     public IEnumerator StartShooting()
     {
-        yield return new WaitForSeconds(GetAttributeValue("shootDelay"));
-        EnemyBullet newBullet = Instantiate(bullet, transform.position, quaternion.identity);
-        newBullet.SetBulletStats(GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"));
-        newBullet.StartMovement(Vector2.down);
+        while(true)
+        {
+            yield return new WaitForSeconds(GetAttributeValue("shootDelay"));
+            EnemyBullet newBullet = Instantiate(bullet, transform.position, quaternion.identity);
+            newBullet.SetBulletStats(GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"));
+            newBullet.StartMovement(Vector2.down);
+        }
     }
 
     public virtual IEnumerator DeathSequence()

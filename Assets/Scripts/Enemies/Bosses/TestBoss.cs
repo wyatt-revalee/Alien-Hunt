@@ -17,7 +17,7 @@ public class TestBoss : Enemy
             {"speed", new Attribute("speed", 5, 99, 1.0f, 0)},
             {"defense", new Attribute("defense", 0, 99, 1.0f, 0)},
             {"pointValue", new Attribute("pointValue", 10, 1000, 1.0f, 0)},
-            {"shootDelay", new Attribute("shootDelay", 1, 10, 1.0f, 0)},
+            {"shootDelay", new Attribute("shootDelay", 1, 1, 1.0f, 0)},
             {"bulletSpeed", new Attribute("bulletSpeed", 10, 99, 1.0f, 0)},
             {"damageModifier", new Attribute("damageModifier", 1, 99, 1.0f, 0)},
             {"bulletSizeModifier", new Attribute("bulletSizeModifier", 1, 99, 1.0f, 0)},
@@ -41,6 +41,7 @@ public class TestBoss : Enemy
             yield return null;
         }
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        StartCoroutine(StartShooting());
     }
 
     public override IEnumerator DeathSequence()
