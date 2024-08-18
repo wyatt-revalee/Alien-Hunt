@@ -113,6 +113,11 @@ MonoBehaviour:
   enteredBarrier: 0
   moveSignalSent: 0
   isBoss: 0
+  isPerformingSequence: 0
+  currentSequence: 
+  sequences:
+  - SideSide
+  - UpDown
 --- !u!114 &6279969676642375381
 MonoBehaviour:
   m_ObjectHideFlags: 0
