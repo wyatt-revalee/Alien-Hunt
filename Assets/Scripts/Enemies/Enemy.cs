@@ -78,7 +78,7 @@ public abstract class Enemy : MonoBehaviour
         StartCoroutine(StartShooting());
     }
 
-    public IEnumerator StartShooting()
+    public virtual IEnumerator StartShooting()
     {
         while(true)
         {

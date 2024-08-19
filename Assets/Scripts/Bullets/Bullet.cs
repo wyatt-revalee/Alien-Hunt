@@ -62,8 +62,11 @@ public class Bullet : MonoBehaviour
         }
         else if(collider.gameObject.layer == 10)
         {
-            owner.GetComponent<Player>().CallShotHit(false);
-            Destroy(gameObject);
+            if(collider.GetComponent<KillZone>().blockBullets)
+            {
+                owner.GetComponent<Player>().CallShotHit(false);
+                Destroy(gameObject);
+            }
         }
     }
 }

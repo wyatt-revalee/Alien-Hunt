@@ -6,6 +6,8 @@ using UnityEngine;
 public class KillZone : MonoBehaviour
 {
 
+    public bool blockBullets;
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         // If object is an enemy, destroy it and send back to spawner to be respawned
@@ -30,7 +32,7 @@ public class KillZone : MonoBehaviour
             // Destroy(collider.gameObject);
         }
 
-        if (collider.gameObject.layer == 12)
+        if (collider.gameObject.layer == 12 && blockBullets)
         {
             Destroy(collider.gameObject);
         }
