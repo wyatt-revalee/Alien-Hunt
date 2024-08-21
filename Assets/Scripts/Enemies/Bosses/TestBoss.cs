@@ -14,6 +14,8 @@ public class TestBoss : Enemy
     public string currentSequence;
     bool atStartPosition;
     public List<string> sequences = new List<string>();
+
+    public GameObject secondaryBullet;
     public override void Awake()
     {
         isBoss = true;
@@ -72,10 +74,12 @@ public class TestBoss : Enemy
         switch (sequenceNumber)
         {
             case 0:
+                currentBullet = primaryBullet;
                 int direction = UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1;
                 GetComponent<Rigidbody2D>().velocity = new Vector2(GetAttributeValue("speed") * direction, 0);
                 break;
             case 1:
+                currentBullet = secondaryBullet;
                 //Debug.Log(string.Format("Is performing sequence? {0}", isPerformingSequence));
                 if(GetComponent<Rigidbody2D>().velocity.y == 0)
                 {
@@ -115,9 +119,9 @@ public class TestBoss : Enemy
         while (true)
         {
             yield return new WaitForSeconds(GetAttributeValue("shootDelay"));
-            EnemyBullet newBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y - 2, transform.position.z), quaternion.identity);
-            newBullet.SetBulletStats(GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"));
-            newBullet.StartMovement(Vector2.down);
+            GameObject newBullet = Instantiate(currentBullet, new Vector3(transform.position.x, transform.position.y - 2, transform.position.z), quaternion.identity);
+            newBullet.GetComponent<Bullet>().SetBulletStats(false, GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"));
+            newBullet.GetComponent<Bullet>().StartMovement(Vector2.down);
         }
     }
 

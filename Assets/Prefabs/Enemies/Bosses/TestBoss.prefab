@@ -104,7 +104,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attributeSystem: {fileID: 0}
   parentSpawner: {fileID: 0}
-  bullet: {fileID: 1290152346710262827, guid: 43bb0f37422ce5d4d8d72bd33925cf8d, type: 3}
+  primaryBullet: {fileID: 379500599328430049, guid: 43bb0f37422ce5d4d8d72bd33925cf8d, type: 3}
+  currentBullet: {fileID: 0}
   index: 0
   cost: 1
   isMoving: 0
@@ -118,6 +119,7 @@ MonoBehaviour:
   sequences:
   - SideSide
   - UpDown
+  secondaryBullet: {fileID: 982418739786824433, guid: 723eebce51eecb143bd4c2a8222102b9, type: 3}
 --- !u!114 &6279969676642375381
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -104,9 +104,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attributeSystem: {fileID: 0}
   parentSpawner: {fileID: 0}
-  bullet: {fileID: 5383467082854491629, guid: be57dcf2aa536c84abaa54634ed9b9da, type: 3}
+  primaryBullet: {fileID: 8928192152703754629}
+  currentBullet: {fileID: 0}
   index: 0
   cost: 1
+  isMoving: 0
+  horizontalDirection: 0
+  verticalDirection: 0
+  enteredBarrier: 0
+  moveSignalSent: 0
+  isBoss: 0
 --- !u!114 &6121587202196209154
 MonoBehaviour:
   m_ObjectHideFlags: 0

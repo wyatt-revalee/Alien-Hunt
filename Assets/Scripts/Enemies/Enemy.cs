@@ -10,7 +10,8 @@ public abstract class Enemy : MonoBehaviour
     public Action onDeath;
     public AttributeSystem attributeSystem;
     public GameObject parentSpawner;
-    public EnemyBullet bullet;
+    public GameObject primaryBullet;
+    public GameObject currentBullet;
     public int index;
     public int cost = 1;
     public bool isMoving;
@@ -21,6 +22,7 @@ public abstract class Enemy : MonoBehaviour
     public bool isBoss;
     public virtual void Awake()
     {
+        currentBullet = primaryBullet;
         attributeSystem = GetComponent<AttributeSystem>();
         attributeSystem.attributes = new Dictionary<string, Attribute>
         {
@@ -83,9 +85,9 @@ public abstract class Enemy : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(GetAttributeValue("shootDelay"));
-            EnemyBullet newBullet = Instantiate(bullet, transform.position, quaternion.identity);
-            newBullet.SetBulletStats(GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"));
-            newBullet.StartMovement(Vector2.down);
+            GameObject newBullet = Instantiate(currentBullet, transform.position, quaternion.identity);
+            newBullet.GetComponent<Bullet>().SetBulletStats(false, GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"));
+            newBullet.GetComponent<Bullet>().StartMovement(Vector2.down);
         }
     }
 

@@ -126,8 +126,8 @@ public class Player : MonoBehaviour
         Bullet newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
         newBullet.GetComponent<SpriteRenderer>().color = bulletColor;
         newBullet.owner = gameObject;
-        newBullet.SetBulletStats(GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"), bulletEffects);
-        newBullet.StartMovement();
+        newBullet.SetBulletStats(true, GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"), bulletEffects);
+        newBullet.StartMovement(Vector2.up);
         OnWeaponFired?.Invoke();
     }
 

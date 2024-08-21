@@ -55,7 +55,8 @@ public class SE_DeflectBullet : StatusEffect
 
     void DeflectBullet(GameObject bullet)
     {
-        bullet.GetComponent<EnemyBullet>().StartMovement(Vector2.up);
+        bullet.GetComponent<Bullet>().StartMovement(Vector2.up);
+        bullet.GetComponent<Bullet>().isPlayerBullet = true;
     }
 
 }
