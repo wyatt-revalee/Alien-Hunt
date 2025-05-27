@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
             {"bulletSpeed", new Attribute("bulletSpeed", 20, 99, 1.0f, 0)},                             // How fast bullets travel
             {"damageModifier", new Attribute("damageModifier", 1, 99, 1.0f, 0)},                        // How much damage player does
             {"bulletSizeModifier", new Attribute("bulletSizeModifier", 1, 99, 1.0f, 0)},                // How big player's bullets are
-            {"fireRate", new Attribute("fireRate", 10, 99, 1.0f, 0)},                                    // Modifer for how fast player can shoot
+            {"fireRate", new Attribute("fireRate", 1, 99, 1.0f, 0)},                                    // Modifer for how fast player can shoot
             {"equipmentCooldownModifier", new Attribute("equipmentCooldownModifier", 1, 99, 1.0f, 0)},  // Effects how long equipment cooldown is. Lower value = smaller cooldown
             {"buffTime", new Attribute("buffTime", 1, 99, 1.0f, 0)},                                    // Effects how long buffs stay applied
             {"enemyHealthMultiplier", new Attribute("enemyHealthMultiplier", 1, 99, 2.0f, 0)},          // Effects enemy health
