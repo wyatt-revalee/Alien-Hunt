@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     public GameObject activeEquipment;
     public bool equipmentOnCooldown;
     private float lastShotTime;
+    private bool isShooting;
     private float baseShootTime = 0.25f;
     public Dictionary<GameObject, int> bulletEffects = new Dictionary<GameObject, int>();
 
@@ -62,7 +63,6 @@ public class Player : MonoBehaviour
     void OnPause()
     {
         pauseMenu.PauseHit();   
-        AddCoins(5);
     }
 
     public void OnMove(InputValue value)
@@ -114,11 +114,16 @@ public class Player : MonoBehaviour
 
     private void OnShoot()
     {
+        if (isShooting)
+        {
+            return; // Prevents shooting if already shooting
+        }
         if (Time.time - lastShotTime > (baseShootTime / GetAttributeValue("fireRate")))
         {
-            // If the weapon is not automatic, just call Shoot once
+            isShooting = true;
             StartCoroutine(AutomaticFire());
         }
+        
     }
 
     private void ShootBullet()
@@ -131,10 +136,12 @@ public class Player : MonoBehaviour
         OnWeaponFired?.Invoke();
     }
 
+    // This method is called when the player presses the shoot button
+    // Name is a bit oudated, since it now handles both single and automatic fire
     private IEnumerator AutomaticFire()
     {
 
-        Debug.Log("Automatic fire started");
+        Debug.Log("Shooting started");
         while (GetComponent<PlayerInput>().actions["Shoot"].IsPressed())
         {
             if (Time.time - lastShotTime > (baseShootTime / GetAttributeValue("fireRate")))
@@ -147,6 +154,7 @@ public class Player : MonoBehaviour
                 break;
             }
         }
+        isShooting = false;
     }
 
     public void Damage(int amount)

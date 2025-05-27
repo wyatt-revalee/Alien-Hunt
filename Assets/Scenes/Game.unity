@@ -3749,7 +3749,7 @@ PrefabInstance:
       objectReference: {fileID: 1413929649}
     - target: {fileID: 6783619194201951002, guid: 23407ef23e702314c941d9534417b44d, type: 3}
       propertyPath: currentWave
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6783619194201951002, guid: 23407ef23e702314c941d9534417b44d, type: 3}
       propertyPath: playerStats

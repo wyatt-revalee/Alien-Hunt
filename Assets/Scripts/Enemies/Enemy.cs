@@ -86,6 +86,7 @@ public abstract class Enemy : MonoBehaviour
         {
             yield return new WaitForSeconds(GetAttributeValue("shootDelay"));
             GameObject newBullet = Instantiate(currentBullet, transform.position, quaternion.identity);
+            newBullet.gameObject.layer = LayerMask.NameToLayer("EnemyBullet");
             newBullet.GetComponent<Bullet>().SetBulletStats(false, GetAttributeValue("bulletSpeed"), GetAttributeValue("damageModifier"), GetAttributeValue("bulletSizeModifier"));
             newBullet.GetComponent<Bullet>().StartMovement(Vector2.down);
         }
