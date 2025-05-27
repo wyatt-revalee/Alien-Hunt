@@ -212,10 +212,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributeSystem: {fileID: 0}
-  parentSpawner: {fileID: 982418739786824433, guid: 723eebce51eecb143bd4c2a8222102b9, type: 3}
-  primaryBullet: {fileID: 0}
+  parentSpawner: {fileID: 0}
+  primaryBullet: {fileID: 982418739786824433, guid: 723eebce51eecb143bd4c2a8222102b9, type: 3}
   currentBullet: {fileID: 0}
-  index: 0
+  index: 3
   cost: 1
   isMoving: 0
   horizontalDirection: 0

@@ -9,6 +9,7 @@ public class Runner : Enemy
 
     public override void Awake()
     {
+        currentBullet = primaryBullet;
         attributeSystem = GetComponent<AttributeSystem>();
         attributeSystem.attributes = new Dictionary<string, Attribute>
         {

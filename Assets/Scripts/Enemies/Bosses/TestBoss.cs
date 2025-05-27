@@ -45,6 +45,26 @@ public class TestBoss : Enemy
         }
     }
 
+    public IEnumerator MoveToStartPosition()
+    {
+        while (transform.position.y > 5)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetAttributeValue("speed") * -1);
+            if (transform.position.y <= 5)
+            {
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                break;
+            }
+            yield return null;
+        }
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        atStartPosition = true;
+        yield return new WaitForSeconds(2);
+        StartCoroutine(StartShooting());
+        StartCoroutine(DoMovement());
+    }
+
+// this needs a proper cleanup, but it works for now
     public IEnumerator DoMovement()
     {
          while(true)
@@ -93,25 +113,6 @@ public class TestBoss : Enemy
                 }
                 break;
         }
-    }
-
-    public IEnumerator MoveToStartPosition()
-    {
-        while (transform.position.y > 5)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetAttributeValue("speed") * -1);
-            if (transform.position.y <= 5)
-            {
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                break;
-            }
-            yield return null;
-        }
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        atStartPosition = true;
-        yield return new WaitForSeconds(2);
-        StartCoroutine(StartShooting());
-        StartCoroutine(DoMovement());
     }
 
     public override IEnumerator StartShooting()
