@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlsMenu: {fileID: 0}
+  settingsMenu: {fileID: 0}
 --- !u!1 &2748070649500069476
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +829,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1784743411702547729}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: Continue
+        m_MethodName: Settings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

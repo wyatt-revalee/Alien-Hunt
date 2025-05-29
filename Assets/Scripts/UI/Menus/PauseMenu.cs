@@ -8,6 +8,8 @@ public class PauseMenu : MonoBehaviour
 
     bool isPaused;
     public GameObject controlsMenu;
+    public GameObject settingsMenu;
+    private GameObject otherMenu; // Reference to another menu that's open (i.e. controls or settings)
 
     public void PauseHit()
     {
@@ -28,6 +30,13 @@ public class PauseMenu : MonoBehaviour
     public void Controls()
     {
         controlsMenu.SetActive(true);
+        gameObject.SetActive(false);
+    }
+
+    public void Settings()
+    {
+        Debug.Log("Opening Settings Menu");
+        settingsMenu.SetActive(true);
         gameObject.SetActive(false);
     }
     
