@@ -17,7 +17,7 @@ public class WaveUI : MonoBehaviour
     void Awake()
     {
         waveController.OnWaveStarted += NewWaveStarted;
-        waveController.OnwaveEnded += WaveEnded;
+        waveController.OnWaveEnded += WaveEnded;
         cornerWaveText.text = "Wave " + waveController.currentWave.ToString();
     }
 

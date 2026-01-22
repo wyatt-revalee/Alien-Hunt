@@ -57,6 +57,7 @@ public class SE_DeflectBullet : StatusEffect
     {
         bullet.GetComponent<Bullet>().StartMovement(Vector2.up);
         bullet.GetComponent<Bullet>().isPlayerBullet = true;
+        bullet.GetComponent<Bullet>().owner = owner;
     }
 
 }
