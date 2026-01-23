@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     public AttributeSystem attributeSystem;
     public GameObject activeEquipment;
     public bool equipmentOnCooldown;
+    private bool canTakeDamage = true;
     private float lastShotTime;
     private bool isShooting;
     private float baseShootTime = 0.25f;
@@ -159,6 +160,10 @@ public class Player : MonoBehaviour
 
     public void Damage(int amount)
     {
+        if(!canTakeDamage)
+        {
+            return;
+        }
         int damageToTake = Math.Max(amount - (int)GetAttributeValue("defense"), 1);
         Debug.Log(damageToTake);
         float currentHealth = GetComponent<AttributeSystem>().attributes["health"].baseValue -= damageToTake;
@@ -168,6 +173,22 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(EndGame());
         }
+
+        else
+        {
+            StartCoroutine(IframeFlash());
+        }
+
+    }
+
+    public IEnumerator IframeFlash()
+    {
+        Color32 currentColor = GetComponent<SpriteRenderer>().color;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<Collider2D>().enabled = true;
+        GetComponent<SpriteRenderer>().color = currentColor;
     }
 
     public void Heal(int amount)

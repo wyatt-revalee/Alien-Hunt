@@ -104,9 +104,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c11a7a005cbf24c887f16c08eed390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPaused: 0
+  inventory: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  coins: 0
   rb: {fileID: 4066258723926193945}
+  collider2D: {fileID: 1781022287406270981}
   bullet: {fileID: 1243937583585949539, guid: 723eebce51eecb143bd4c2a8222102b9, type: 3}
+  bulletColor:
+    serializedVersion: 2
+    rgba: 0
+  attributeSystem: {fileID: 0}
+  activeEquipment: {fileID: 0}
+  equipmentOnCooldown: 0
 --- !u!50 &4066258723926193945
 Rigidbody2D:
   serializedVersion: 4
