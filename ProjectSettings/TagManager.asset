@@ -55,3 +55,6 @@ TagManager:
   - name: Menu
     uniqueID: 3624304533
     locked: 0
+  - name: OverlayUI
+    uniqueID: 1133054219
+    locked: 0

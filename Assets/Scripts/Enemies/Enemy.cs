@@ -12,6 +12,7 @@ public abstract class Enemy : MonoBehaviour
     public GameObject parentSpawner;
     public GameObject primaryBullet;
     public GameObject currentBullet;
+    public GameObject pointDrop;
     public int index;
     public int cost = 1;
     public bool isMoving;
@@ -100,6 +101,8 @@ public abstract class Enemy : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(1f);
         parentSpawner.GetComponent<EnemySpawner>().EnemyDied();
+        GameObject newPointDrop = Instantiate(pointDrop, transform.position, quaternion.identity);
+        newPointDrop.GetComponent<PointDrop>().pointDropText.text = GetAttributeValue("pointValue").ToString();
         Destroy(gameObject);
         Destroy(this);
     }
